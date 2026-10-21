@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#d9530a">
 <meta property="og:title" content="Gladys · Bienestar natural">
 <meta property="og:description" content="Mira los productos, beneficios y precios. Pide por WhatsApp y paga al recibir.">
-<meta property="og:image" content="https://vidanatural-co.github.io/gladys/icono-512.png">
+<meta property="og:image" content="https://vidanatural-co.github.io/gladys/portada.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icono-192.png">
 <link rel="apple-touch-icon" href="icono-192.png">
@@ -33,6 +33,7 @@ header .sym{width:70px;height:70px}
 .sig{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--ac);color:var(--acfg);border-radius:14px;padding:9px 14px;margin:2px 0 12px}
 .sig small{font-weight:700;font-size:12px;opacity:.95}
 .sig b{font-family:var(--display);font-size:20px;font-weight:800;line-height:1}
+.shcat{display:block;width:100%;border:2px dashed var(--ac);background:var(--surface);color:var(--ac);border-radius:14px;padding:11px;font-weight:800;font-size:15px;cursor:pointer;margin:-4px 0 12px}
 .search{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:inherit;font-size:16px}
 .cats{display:flex;gap:8px;overflow-x:auto;padding:10px 0 12px;scrollbar-width:none;margin:0 -2px}
 .cats::-webkit-scrollbar{display:none}
@@ -126,6 +127,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-o
 <div class="wrap">
   <header><svg class="sym" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 94V14" stroke="#3f9b4f" stroke-width="5" stroke-linecap="round"/><path d="M50 88c-14-2-22-12-22-22 12 2 20 10 22 22z" fill="#3f9b4f"/><g fill="#f06d1f"><ellipse cx="50" cy="20" rx="7" ry="9"/><ellipse cx="40" cy="34" rx="10" ry="8"/><ellipse cx="60" cy="44" rx="10" ry="8"/><ellipse cx="40" cy="56" rx="11" ry="9"/><ellipse cx="60" cy="68" rx="11" ry="9"/></g><g fill="#f4b400"><circle cx="42" cy="34" r="2.5"/><circle cx="58" cy="44" r="2.5"/><circle cx="42" cy="56" r="2.5"/><circle cx="58" cy="68" r="2.5"/></g></svg></header>
   <div class="sig"><small>Te atiende tu asesora</small><b>Gladys</b></div>
+  <button class="shcat" id="shcat">📲 Compartir mi catálogo</button>
   <input id="q" class="search" type="search" placeholder="Escribe lo que buscas…" aria-label="Buscar producto">
   <div class="cats" id="cats"></div>
   <p class="trust"><b>Pagas cuando lo recibes.</b> Elige tus productos y te atiendo por WhatsApp.</p>
@@ -212,6 +214,11 @@ async function share(id){const p=byId[id];const link=CFG.sitio+'/p/'+id+'.html';
   await navigator.share(files.length?{files,text}:{text,url:link});return}}catch(e){if(e&&e.name==='AbortError')return}
  try{await navigator.clipboard.writeText(text);toast('Enlace copiado')}catch(e){prompt('Copia este enlace:',link)}}
 
+async function shareCat(){const link=CFG.sitio+'/';const n=P.length?Math.floor(P.length/10)*10:60;
+ const text=`🌿 Te invito a ver mi catálogo de productos naturales: más de ${n} productos para energía, defensas, descanso, belleza y más.\nElige lo que te guste y pídelo por WhatsApp. Pagas cuando lo recibes.\n👉 ${link}`;
+ try{if(navigator.share){let files=[];try{const b=await (await fetch('portada.jpg')).blob();const f=new File([b],'catalogo.jpg',{type:'image/jpeg'});if(navigator.canShare&&navigator.canShare({files:[f]}))files=[f]}catch(e){}
+  await navigator.share(files.length?{files,text}:{text,url:link});return}}catch(e){if(e&&e.name==='AbortError')return}
+ try{await navigator.clipboard.writeText(text);toast('Invitación copiada')}catch(e){prompt('Copia esta invitación:',text)}}
 /* ---- Panel de asesores ---- */
 let clave=null,PD=null;
 async function api(body){const r=await fetch(CFG.api,{method:'POST',body:JSON.stringify(Object.assign({v:CFG.v},body))});return r.json()}
@@ -244,6 +251,7 @@ async function panelSave(b){const cambios=[...document.querySelectorAll('[data-f
 
 document.addEventListener('click',e=>{const b=e.target.closest('button,img[data-f],a');if(!b)return;
  if(b.id==='soy')return panelLogin();
+ if(b.id==='shcat')return shareCat();
  if(b.id==='tLog'||b.id==='tNew'){const n=b.id==='tNew';$('#fNew').hidden=!n;$('#fLog').hidden=n;$('#tNew').className=n?'btn':'btn alt';$('#tLog').className=n?'btn alt':'btn';return}
  if(b.id==='kGo')return panelGo();
  if(b.id==='pSave')return panelSave(b);
