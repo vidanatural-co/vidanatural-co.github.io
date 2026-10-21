@@ -199,7 +199,9 @@ function showF(id){open=id;ficha();$('#ficha').hidden=false;$('#ficha').scrollTo
  try{history.replaceState(null,'','?p='+id)}catch(e){}}
 function closeF(){open=null;$('#ficha').hidden=true;try{history.replaceState(null,'',location.pathname)}catch(e){}}
 function render(){if(!D)return;cats();grid();bar();ficha();repeat()}
-function toast(t){const e=document.createElement('div');e.className='toast';e.textContent=t;document.body.appendChild(e);setTimeout(()=>e.remove(),2500)}
+function toast(t,ms){const e=document.createElement('div');e.className='toast';e.textContent=t;document.body.appendChild(e);setTimeout(()=>e.remove(),ms||2500)}
+const COPIADO='✅ Tu enlace quedó copiado. En Facebook o Instagram, mantén presionado donde se escribe y toca Pegar.';
+function precopia(t){let ok=false;try{navigator.clipboard.writeText(t).then(()=>ok=true,()=>{})}catch(e){}return()=>ok}
 function msg(t,num){return 'Hola '+CFG.nombre+', me interesan:\n'+t.lines.map(([k,p])=>`• ${k} ${p.n} (${cop(k*p.p)})`).join('\n')+(t.d?`\nDescuento: –${cop(t.d)}`:'')+`\nTotal: ${cop(t.tot)}`+(num?`\nPedido #${num}`:'')}
 function summary(){const t=totals();
  $('#sumin').innerHTML='<h2>Tu pedido</h2>'+t.lines.map(([k,p])=>`<div class="row"><span>${k} × ${esc(p.n)}</span><span>${cop(k*p.p)}</span></div>`).join('')+(t.d?`<div class="row disc"><span>Descuento por ${t.u>=3?'3 o más':'2'} unidades</span><span>–${cop(t.d)}</span></div>`:'')+`<div class="row tot"><span>Total</span><span>${cop(t.tot)}</span></div><p class="sub" style="font-size:13px">Pagas cuando lo recibes. Al enviar, se abre WhatsApp con tu pedido listo.</p><button class="go" id="send"><span>Enviar a WhatsApp</span><span>→</span></button>`;
@@ -210,15 +212,15 @@ async function send(btn){const t=totals();if(!t.u)return;btn.disabled=true;btn.f
  const url=wa(msg(t,num));if(!ls.get('vendedor',false))ls.set('ultimo_'+CFG.v,cart);
  if(w&&!w.closed)w.location.href=url;else location.href=url;
  cart={};$('#sum').hidden=true;render();btn.disabled=false}
-async function share(id){const p=byId[id];const link=CFG.sitio+'/p/'+id+'.html';const text=`${p.n} – ${cop(p.p)}. Mira los beneficios y pide aquí: ${link}`;
+async function share(id){const p=byId[id];const link=CFG.sitio+'/p/'+id+'.html';const text=`${p.n} – ${cop(p.p)}. Mira los beneficios y pide aquí: ${link}`;const cp=precopia(text);
  try{if(navigator.share){let files=[];try{const b=await (await fetch('../img/'+p.img)).blob();const f=new File([b],p.img,{type:b.type||'image/jpeg'});if(navigator.canShare&&navigator.canShare({files:[f]}))files=[f]}catch(e){}
-  await navigator.share(files.length?{files,text}:{text,url:link});return}}catch(e){if(e&&e.name==='AbortError')return}
+  await navigator.share(files.length?{files,text}:{text,url:link});if(cp())toast(COPIADO,6000);return}}catch(e){if(e&&e.name==='AbortError')return}
  try{await navigator.clipboard.writeText(text);toast('Enlace copiado')}catch(e){prompt('Copia este enlace:',link)}}
 
 async function shareCat(){const link=CFG.sitio+'/';const n=P.length?Math.floor(P.length/10)*10:60;
- const text=`🌿 Te invito a ver mi catálogo de productos naturales: más de ${n} productos para energía, defensas, descanso, belleza y más.\nElige lo que te guste y pídelo por WhatsApp. Pagas cuando lo recibes.\n👉 ${link}`;
+ const text=`🌿 Te invito a ver mi catálogo de productos naturales: más de ${n} productos para energía, defensas, descanso, belleza y más.\nElige lo que te guste y pídelo por WhatsApp. Pagas cuando lo recibes.\n👉 ${link}`;const cp=precopia(text);
  try{if(navigator.share){let files=[];try{const b=await (await fetch('historia.jpg')).blob();const f=new File([b],'catalogo.jpg',{type:'image/jpeg'});if(navigator.canShare&&navigator.canShare({files:[f]}))files=[f]}catch(e){}
-  await navigator.share(files.length?{files,text}:{text,url:link});return}}catch(e){if(e&&e.name==='AbortError')return}
+  await navigator.share(files.length?{files,text}:{text,url:link});if(cp())toast(COPIADO,6000);return}}catch(e){if(e&&e.name==='AbortError')return}
  try{await navigator.clipboard.writeText(text);toast('Invitación copiada')}catch(e){prompt('Copia esta invitación:',text)}}
 /* ---- Panel de asesores ---- */
 let clave=null,PD=null;
