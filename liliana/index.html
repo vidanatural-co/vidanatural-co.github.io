@@ -42,6 +42,7 @@ header .sym{width:70px;height:70px}
 .trust{font-size:13px;color:var(--muted);margin:0 0 12px;text-align:center}
 .trust b{color:var(--fg)}
 .rep{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--surface);border:1.5px solid var(--gold);border-radius:14px;padding:10px 12px;margin-bottom:12px;font-size:14px}
+.rep .x{background:none;color:var(--muted,#888);font-size:18px;padding:4px 6px;font-weight:400}
 .rep button{border:0;border-radius:10px;background:var(--fg);color:var(--bg);font-weight:800;font-size:13px;padding:9px 14px;cursor:pointer;flex:none}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 @media (min-width:640px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
@@ -174,10 +175,10 @@ function bar(){const t=totals();$('#bar').hidden=!t.u;if(!t.u)return;
  $('#tot').innerHTML=t.d?`<s>${cop(t.sub)}</s>${cop(t.tot)}`:cop(t.tot);
  const d2=D.desc2||0,d3=D.desc3||0;
  $('#nudge').textContent=t.u===1&&d2?`Agrega otro y ahorra ${cop(d2)}`:t.u===2&&d3>d2?`Agrega uno más y ahorra ${cop(d3)}`:t.d?`Ya ahorras ${cop(t.d)} 🎉`:''}
-function repeat(){const o=ls.get('ultimo_'+CFG.v,null),el=$('#rep');
+function repeat(){const o=ls.get('vendedor',false)?null:ls.get('ultimo_'+CFG.v,null),el=$('#rep');
  const ok=o&&Object.keys(o).some(id=>byId[id]);if(!ok||Object.keys(cart).length){el.hidden=true;return}
  const n=Object.entries(o).filter(([id])=>byId[id]).reduce((a,[,k])=>a+k,0);el.hidden=false;
- el.innerHTML=`<span><b>¿Se te acabó?</b> Repite tu último pedido (${n} producto${n>1?'s':''}).</span><button data-rep>Repetir</button>`}
+ el.innerHTML=`<span><b>¿Se te acabó?</b> Repite tu último pedido (${n} producto${n>1?'s':''}).</span><button data-rep>Repetir</button><button class="x" data-norep aria-label="Cerrar">✕</button>`}
 function combo(p){const c=p.w.map(n=>byName[n.toLowerCase()]).filter(y=>y&&y.s!=='agotado'&&y.id!==p.id).slice(0,2);if(!c.length)return'';
  return '<h3>Se combina con</h3>'+c.map(y=>`<div class="combo"><img src="../img/${esc(y.img)}" alt="" data-f="${y.id}"><div class="combo-t"><b>${esc(y.n)}</b><span class="price" style="font-size:16px">${cop(y.p)}</span>${D.desc2?`<span class="save">Llévalos juntos y ahorra ${cop(D.desc2)}</span>`:''}</div>${cart[y.id]?'<span class="in">✓ Agregado</span>':`<button class="add" data-p="${y.id}" style="margin:0;flex:none;padding:10px 14px">Agregar</button>`}</div>`).join('')}
 function wa(t){return 'https://wa.me/'+D.whatsapp+'?text='+encodeURIComponent(t)}
@@ -206,7 +207,7 @@ function summary(){const t=totals();
 async function send(btn){const t=totals();if(!t.u)return;btn.disabled=true;btn.firstElementChild.textContent='Enviando…';
  const w=window.open('','_blank');let num=null;
  try{const ac=new AbortController();setTimeout(()=>ac.abort(),8000);const r=await fetch(CFG.api,{method:'POST',signal:ac.signal,body:JSON.stringify({accion:'pedido',v:CFG.v,items:Object.entries(cart).map(([id,k])=>({id,k}))})});const d=await r.json();if(d.ok)num=d.numero}catch(e){}
- const url=wa(msg(t,num));ls.set('ultimo_'+CFG.v,cart);
+ const url=wa(msg(t,num));if(!ls.get('vendedor',false))ls.set('ultimo_'+CFG.v,cart);
  if(w&&!w.closed)w.location.href=url;else location.href=url;
  cart={};$('#sum').hidden=true;render();btn.disabled=false}
 async function share(id){const p=byId[id];const link=CFG.sitio+'/p/'+id+'.html';const text=`${p.n} – ${cop(p.p)}. Mira los beneficios y pide aquí: ${link}`;
@@ -231,7 +232,7 @@ function panelLogin(err){$('#pin').innerHTML=`<h2>Panel de ${esc(CFG.nombre)}</h
 async function panelGo(){const nuevo=!$('#fNew').hidden;const b=$('#kGo');b.disabled=true;b.textContent='Revisando…';
  try{if(nuevo){const k=$('#kNueva').value;const d=await api({accion:'entrar',codigo:$('#kCod').value,clave:k});if(!d.ok)return panelLogin(d.error);clave=k}
   else{clave=$('#kClave').value}
-  const d=await api({accion:'panel',clave});if(!d.ok){clave=null;return panelLogin(d.error)}PD=d;panelShow()}catch(e){panelLogin('No hay conexión. Intenta de nuevo.')}}
+  const d=await api({accion:'panel',clave});if(!d.ok){clave=null;return panelLogin(d.error)}PD=d;ls.set('vendedor',true);ls.set('ultimo_'+CFG.v,null);repeat();panelShow()}catch(e){panelLogin('No hay conexión. Intenta de nuevo.')}}
 function panelShow(){const d=PD;$('#pin').innerHTML=`<h2>Hola, ${esc(d.asesor)}</h2>
  <p class="sub">Cambia tus precios y descuentos. Si dejas un precio vacío, ese producto no aparece en tu tienda.</p>
  <label>Buscar pedido por número<input id="bPed" inputmode="numeric" placeholder="Ej: 1043"></label><div id="rPed"></div>
@@ -264,6 +265,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('button,img[data-
  if(ds.f){showF(ds.f);return}
  if(ds.v){$('#vimg').src=ds.v;$('#viewer').hidden=false;return}
  if(ds.share){share(ds.share);return}
+ if(ds.norep!==undefined){ls.set('ultimo_'+CFG.v,null);repeat();return}
  if(ds.rep!==undefined){const o=ls.get('ultimo_'+CFG.v,{});for(const id in o){const p=byId[id];if(p&&p.s!=='agotado')cart[id]=o[id]}render();return}
  if(ds.close!==undefined){const o=b.parentElement;if(o.id==='ficha')closeF();else o.hidden=true}});
 document.addEventListener('input',e=>{if(e.target.id==='q')grid();
