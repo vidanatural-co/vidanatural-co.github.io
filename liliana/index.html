@@ -217,7 +217,7 @@ async function share(id){const p=byId[id];const link=CFG.sitio+'/p/'+id+'.html';
 
 async function shareCat(){const link=CFG.sitio+'/';const n=P.length?Math.floor(P.length/10)*10:60;
  const text=`🌿 Te invito a ver mi catálogo de productos naturales: más de ${n} productos para energía, defensas, descanso, belleza y más.\nElige lo que te guste y pídelo por WhatsApp. Pagas cuando lo recibes.\n👉 ${link}`;
- try{if(navigator.share){let files=[];try{const b=await (await fetch('portada.jpg')).blob();const f=new File([b],'catalogo.jpg',{type:'image/jpeg'});if(navigator.canShare&&navigator.canShare({files:[f]}))files=[f]}catch(e){}
+ try{if(navigator.share){let files=[];try{const b=await (await fetch('historia.jpg')).blob();const f=new File([b],'catalogo.jpg',{type:'image/jpeg'});if(navigator.canShare&&navigator.canShare({files:[f]}))files=[f]}catch(e){}
   await navigator.share(files.length?{files,text}:{text,url:link});return}}catch(e){if(e&&e.name==='AbortError')return}
  try{await navigator.clipboard.writeText(text);toast('Invitación copiada')}catch(e){prompt('Copia esta invitación:',text)}}
 /* ---- Panel de asesores ---- */
