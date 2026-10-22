@@ -37,17 +37,17 @@ async function go(){const b=$('#go');b.disabled=true;b.textContent='Cargando fot
  catch(e){$('#e').textContent='No hay conexión. Intenta de nuevo.';b.disabled=false;b.textContent='Ver fotos'}}
 let F=[],O=[],Y=[];
 function build(){const byK={};D.leal.forEach(l=>byK[l.k]=l);const usados={};
- D.cat.forEach(c=>{c.k.forEach(k=>{usados[k]=usados[k]||c.vis});if(c.vis)Y.push(c)});
- D.leal.forEach(l=>{if(!(l.k in usados))F.push(l);else if(!usados[l.k])O.push(l)});
+ D.cat.forEach(c=>{c.k.forEach(k=>{usados[k]=usados[k]||c.vis});(c.vis?Y:O).push(c)});
+ D.leal.forEach(l=>{if(!(l.k in usados))F.push(l)});
  F.sort((a,b)=>b.q-a.q);D.byK=byK}
 const img=(src,cap)=>`<figure>${src?`<img loading="lazy" src="${esc(src)}" alt="">`:'<div class="none">Sin foto</div>'}<figcaption>${cap}</figcaption></figure>`;
 function render(){let h=`<div class="tabs"><button data-t="faltan" class="${tab==='faltan'?'on':''}">No están (${F.length})</button><button data-t="ocultos" class="${tab==='ocultos'?'on':''}">Ocultos (${O.length})</button><button data-t="ya" class="${tab==='ya'?'on':''}">Ya están (${Y.length})</button></div>`;
- if(tab==='faltan'||tab==='ocultos'){const L=tab==='faltan'?F:O;
-  h+=`<p class="sub">${tab==='faltan'?'Productos del inventario de Leal que no están en el catálogo, de más a menos unidades en bodega.':'Están en el catálogo pero ocultos.'}</p><div class="grid">`+
-  L.map((l,i)=>`<div class="c"><div class="ph">${img(l.f,'Leal')}</div><div class="t"><span class="n">${tab==='faltan'?'F':'O'}${i+1}</span><span class="nm">${esc(l.n)}</span><span class="q">${l.q} en bodega</span></div></div>`).join('')+'</div>'}
- else{h+=`<p class="sub">Cada producto del catálogo con su foto de Leal al lado. Confirma que sean el mismo producto.</p><div class="grid">`+
-  Y.map((c,i)=>{const ls=c.k.map(k=>D.byK[k]).filter(Boolean);const l=ls[0];
-   return `<div class="c pair"><div class="ph">${img(l&&l.f,'Leal')}${img('../img/'+c.img,'Catálogo')}</div><div class="t"><span class="n">C${i+1}</span><span class="nm">${esc(c.n)}</span><span class="q">Leal: ${ls.length?esc(ls.map(x=>x.n).join(' + ')):'<span class="tag bad">no encontrado</span>'}${l?` · ${ls.map(x=>x.q).join('/')} en bodega`:''}</span>${ls.length>1?'<span class="tag">Combo</span>':''}</div></div>`}).join('')+'</div>'}
+ if(tab==='faltan'){const L=F;
+  h+=`<p class="sub">Productos del inventario de Leal que no están en el catálogo, de más a menos unidades en bodega.</p><div class="grid">`+
+  L.map((l,i)=>`<div class="c"><div class="ph">${img(l.f,'Leal')}</div><div class="t"><span class="n">F${i+1}</span><span class="nm">${esc(l.n)}</span><span class="q">${l.q} en bodega</span></div></div>`).join('')+'</div>'}
+ else{const L=tab==='ya'?Y:O,P=tab==='ya'?'C':'O';h+=`<p class="sub">${tab==='ya'?'Cada producto del catálogo con su foto de Leal al lado. Confirma que sean el mismo producto.':'Productos que están en el catálogo pero ocultos (los clientes no los ven). Si Leal no lo tiene en su inventario, sale "Sin foto".'}</p><div class="grid">`+
+  L.map((c,i)=>{const ls=c.k.map(k=>D.byK[k]).filter(Boolean);const l=ls[0];
+   return `<div class="c pair"><div class="ph">${img(l&&l.f,'Leal')}${img('../img/'+c.img,'Catálogo')}</div><div class="t"><span class="n">${P}${i+1}</span><span class="nm">${esc(c.n)}</span><span class="q">Leal: ${ls.length?esc(ls.map(x=>x.n).join(' + ')):'<span class="tag bad">no está en su inventario</span>'}${l?` · ${ls.map(x=>x.q).join('/')} en bodega`:''}</span>${ls.length>1?'<span class="tag">Combo</span>':''}</div></div>`}).join('')+'</div>'}
  $('#app').innerHTML=h}
 document.addEventListener('click',e=>{if(e.target.id==='go')go();const t=e.target.dataset&&e.target.dataset.t;if(t){tab=t;render();scrollTo(0,0)}});
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='k')go()});
