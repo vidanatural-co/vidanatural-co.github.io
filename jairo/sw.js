@@ -1,6 +1,6 @@
 // Ayudante interno: guarda una copia de la tienda en el celular.
 // Precios y existencias (script.google.com) NUNCA se guardan aquí: siempre llegan frescos.
-const C='tienda-1792721983';
+const C='tienda-1792795678';
 self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['./','manifest.webmanifest','icono-192.png','icono-512.png']).catch(()=>{})));self.skipWaiting()});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{const r=e.request,u=new URL(r.url);

@@ -155,7 +155,7 @@ const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&g
 const ls={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 let D=ls.get('cat_'+CFG.v,null),P=[],byId={},byName={},cart={},cat='Todos',open=null;
 
-function setData(d){D=d;P=d.productos||[];byId={};byName={};P.forEach(p=>{byId[p.id]=p;byName[p.n.toLowerCase()]=p});}
+function setData(d){D=d;P=(d.productos||[]).slice().reverse();byId={};byName={};P.forEach(p=>{byId[p.id]=p;byName[p.n.toLowerCase()]=p});}
 async function load(){
   if(D)setData(D),render();
   try{const r=await fetch(CFG.api+'?accion=catalogo&v='+CFG.v);const d=await r.json();if(d.ok){setData(d);ls.set('cat_'+CFG.v,d);render();deep();}else if(!D)fail();}
