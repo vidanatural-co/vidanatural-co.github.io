@@ -35,6 +35,7 @@ header .sym{width:70px;height:70px}
 .sig b{font-family:var(--display);font-size:20px;font-weight:800;line-height:1}
 .shcat.inst{border-style:solid;background:var(--ac);color:#fff}
 .shcat[hidden]{display:none}
+.prow[hidden]{display:none}
 .shcat{display:block;width:100%;border:2px dashed var(--ac);background:var(--surface);color:var(--ac);border-radius:14px;padding:11px;font-weight:800;font-size:15px;cursor:pointer;margin:-4px 0 12px}
 .search{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:inherit;font-size:16px}
 .cats{display:flex;gap:8px;overflow-x:auto;padding:10px 0 12px;scrollbar-width:none;margin:0 -2px}
@@ -247,7 +248,9 @@ function panelShow(){const d=PD;$('#pin').innerHTML=`<h2>Hola, ${esc(d.asesor)}<
  <div class="prow"><span>Por 2 unidades</span><input id="d2" inputmode="numeric" value="${d.desc2||''}"></div>
  <div class="prow"><span>Por 3 o más</span><input id="d3" inputmode="numeric" value="${d.desc3||''}"></div>
  <h3 style="margin:8px 0 0">Precios</h3>
- ${d.productos.map(p=>`<div class="prow"><span>${esc(p.n)}</span><input data-fila="${p.fila}" data-orig="${p.p||''}" inputmode="numeric" value="${p.p||''}"></div>`).join('')}
+ <input id="pBus" type="search" placeholder="🔍 Buscar producto…" autocomplete="off" style="width:100%;font-size:16px;padding:10px 12px;border:1px solid #ddd;border-radius:10px;margin:6px 0">
+ <p class="sub" id="pNada" hidden>No encontré ese producto.</p>
+ ${d.productos.map(p=>`<div class="prow" data-n="${esc(norm(p.n))}"><span>${esc(p.n)}</span><input data-fila="${p.fila}" data-orig="${p.p||''}" inputmode="numeric" value="${p.p||''}"></div>`).join('')}
  <p class="err" id="pErr"></p><button class="btn" id="pSave">Guardar cambios</button>
  <h3 style="margin:8px 0 0">Mis últimos pedidos</h3>${d.pedidos.length?d.pedidos.map(x=>`<div class="ped"><b>Pedido #${x.num}</b> · ${new Date(x.fecha).toLocaleString('es-CO')}\n${esc(x.det)}\nDescuento: ${cop(x.desc||0)} · <b>Total: ${cop(x.total)}</b></div>`).join(''):'<p class="sub">Aún no tienes pedidos.</p>'}`}
 async function panelSave(b){const cambios=[...document.querySelectorAll('[data-fila]')].filter(i=>i.value.replace(/\D/g,'')!==String(i.dataset.orig)).map(i=>({fila:+i.dataset.fila,p:i.value.replace(/\D/g,'')}));
@@ -276,7 +279,8 @@ document.addEventListener('click',e=>{const b=e.target.closest('button,img[data-
  if(ds.norep!==undefined){ls.set('ultimo_'+CFG.v,null);repeat();return}
  if(ds.rep!==undefined){const o=ls.get('ultimo_'+CFG.v,{});for(const id in o){const p=byId[id];if(p&&p.s!=='agotado')cart[id]=o[id]}render();return}
  if(ds.close!==undefined){const o=b.parentElement;if(o.id==='ficha')closeF();else o.hidden=true}});
-document.addEventListener('input',e=>{if(e.target.id==='q')grid();
+document.addEventListener('input',e=>{if(e.target.id==='pBus'){const q=norm(e.target.value.trim());let n=0;document.querySelectorAll('.prow[data-n]').forEach(r=>{const ok=!q||r.dataset.n.includes(q);r.hidden=!ok;if(ok)n++});$('#pNada').hidden=n>0;return}
+ if(e.target.id==='q')grid();
  if(e.target.id==='bPed'&&PD){const n=e.target.value.trim();const x=PD.pedidos.find(p=>String(p.num)===n);$('#rPed').innerHTML=n?(x?`<div class="ped"><b>Pedido #${x.num}</b>\n${esc(x.det)}\nDescuento: ${cop(x.desc||0)} · <b>Total: ${cop(x.total)}</b></div>`:'<p class="sub">No encontré ese pedido entre tus últimos 50.</p>'):''}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!$('#viewer').hidden)$('#viewer').hidden=true;else if(!$('#sum').hidden)$('#sum').hidden=true;else if(open)closeF()}});
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
