@@ -1,0 +1,14 @@
+const {chromium}=require('playwright');const root='/home/claude/catalogo/gh';const http=require('http'),fs=require('fs');
+const srv=http.createServer((q,r)=>{let u=decodeURIComponent(q.url.split('?')[0]);if(u.endsWith('/'))u+='index.html';const f=root+u;
+ if(fs.existsSync(f)){r.writeHead(200);r.end(fs.readFileSync(f))}else{r.writeHead(404);r.end()}}).listen(8095);
+const px='data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
+(async()=>{const b=await chromium.launch({executablePath:'/opt/pw-browsers/chromium-1194/chrome-linux/chrome'});
+const ctx=await b.newContext({viewport:{width:390,height:844}});
+await ctx.route('**/script.google.com/**',rt=>{const d=JSON.parse(rt.request().postData());if(d.clave!=='ok')return rt.fulfill({json:{ok:false,error:'Clave incorrecta'}});
+ rt.fulfill({json:{ok:true,leal:[{n:'MACA',k:'maca',q:5,f:px},{n:'TE VERDE',k:'teverde',q:24,f:px},{n:'ZINC',k:'zinc',q:2,f:''}],cat:[{n:'Maca',img:'maca.jpg',vis:true,k:['maca']},{n:'Zinc',img:'x.jpg',vis:false,k:['zinc']},{n:'Shilajit',img:'shilajit.jpg',vis:false,k:[]}],noVan:['teverde'],cambio:['maca']}})});
+const pg=await ctx.newPage();const errs=[];pg.on('pageerror',e=>errs.push(e.message));
+await pg.goto('http://localhost:8095/revision/');await pg.fill('#k','mal');await pg.click('#go');await pg.waitForTimeout(300);const e1=await pg.textContent('#e');
+await pg.fill('#k','ok');await pg.click('#go');await pg.waitForSelector('.tabs');const f=await pg.$$eval('.c .nm',x=>x.map(e=>e.textContent));
+await pg.click('[data-t=ya]');const y=await pg.$$eval('.c .q',x=>x.map(e=>e.textContent));await pg.screenshot({path:'rev.png'});
+await pg.click('[data-t=sin]');const o=await pg.$$eval('.c .nm',x=>x.map(e=>e.textContent));await pg.click('[data-t=no]');const nn=await pg.$$eval('.c .nm',x=>x.map(e=>e.textContent));const warn=await pg.$eval('.err',e=>e.textContent).catch(()=>'');
+console.log(JSON.stringify({e1,f,y,o,nn,warn,errs}));await b.close();srv.close();})();

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Revisión con fotos</title>
+<style>
+:root{--bg:#f6f4ef;--card:#fff;--fg:#25221e;--mu:#776f66;--line:#e6e0d6;--ac:#3f8f1f;--warn:#b5560c;--bad:#b3261e}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.w{max-width:960px;margin:0 auto;padding:16px}
+h1{font-size:22px;margin:4px 0 6px}.sub{color:var(--mu);font-size:14px;line-height:1.45;margin:0 0 12px}
+.login{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;max-width:360px}
+input{width:100%;font-size:16px;padding:10px;border:1px solid var(--line);border-radius:10px;margin:6px 0 10px}
+button{font:inherit;cursor:pointer}.btn{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:10px 16px;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 10px}.tabs button{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 14px;font-weight:600}
+.tabs button.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.c{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.c.pair{grid-column:span 2}@media(max-width:420px){.c.pair{grid-column:span 2}}
+.ph{display:flex;gap:2px;background:#eee}.ph figure{margin:0;flex:1;min-width:0;position:relative}
+.ph img{width:100%;aspect-ratio:1;object-fit:contain;background:#fff;display:block}
+.ph figcaption{position:absolute;left:4px;top:4px;background:rgba(0,0,0,.6);color:#fff;font-size:11px;padding:2px 6px;border-radius:6px}
+.none{aspect-ratio:1;display:grid;place-items:center;color:var(--mu);font-size:12px;background:#fafafa}
+.t{padding:8px 10px;font-size:13px;display:flex;flex-direction:column;gap:3px}
+.n{font-weight:800;font-size:18px;color:var(--ac)}.nm{font-weight:600;line-height:1.25;word-break:break-word}
+.q{color:var(--mu)}.tag{font-weight:700;color:var(--warn)}.tag.bad{color:var(--bad)}
+.err{color:var(--bad);font-weight:600}
+</style></head><body><div class="w">
+<h1>Revisión con fotos: Leal vs Catálogo</h1>
+<p class="sub">Solo lectura: aquí no se cambia nada. Mira las fotos y respóndele a Claude por número.</p>
+<div id="app"><div class="login"><b>Entra con tu clave de asesor</b><input id="k" type="password" autocomplete="current-password"><button class="btn" id="go">Ver fotos</button><p class="err" id="e"></p></div></div>
+</div>
+<script>
+const API='__API__';const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let D=null,tab='pend';
+async function go(){const b=$('#go');b.disabled=true;b.textContent='Cargando fotos…';$('#e').textContent='';
+ try{const r=await fetch(API,{method:'POST',body:JSON.stringify({accion:'revision',v:'jairo',clave:$('#k').value})});const d=await r.json();
+  if(!d.ok){$('#e').textContent=d.error||'Error';b.disabled=false;b.textContent='Ver fotos';return}D=d;build();render()}
+ catch(e){$('#e').textContent='No hay conexión. Intenta de nuevo.';b.disabled=false;b.textContent='Ver fotos'}}
+let P=[],S=[],Y=[],N=[];
+function build(){const byK={};D.leal.forEach(l=>byK[l.k]=l);D.byK=byK;const nv=new Set(D.noVan||[]),ch=new Set(D.cambio||[]);D.ch=ch;const usados={};
+ D.cat.forEach(c=>{c.k.forEach(k=>{usados[k]=usados[k]||c.vis});if(c.vis)Y.push(c);else{const ls=c.k.map(k=>byK[k]).filter(Boolean);if(ls.length)P.push({n:ls[0].n,q:ls[0].q,f:ls[0].f,cat:c});else S.push(c)}});
+ D.leal.forEach(l=>{if(l.k in usados)return;if(nv.has(l.k))N.push(l);else P.push(l)});
+ P.sort((a,b)=>b.q-a.q);Y.sort((a,b)=>(b.k.some(k=>ch.has(k))?1:0)-(a.k.some(k=>ch.has(k))?1:0))}
+const img=(src,cap)=>`<figure>${src?`<img loading="lazy" src="${esc(src)}" alt="">`:'<div class="none">Sin foto</div>'}<figcaption>${cap}</figcaption></figure>`;
+const T=[['pend','Pendientes',()=>P.length],['ya','Ya están',()=>Y.length],['sin','Ocultos sin bodega',()=>S.length],['no','No van',()=>N.length]];
+function pair(c,i,pre){const ls=c.k.map(k=>D.byK[k]).filter(Boolean);const l=ls[0];const cam=c.k.some(k=>D.ch.has(k));
+ return `<div class="c pair"><div class="ph">${img(l&&l.f,'Leal')}${img('../img/'+c.img,'Catálogo')}</div><div class="t"><span class="n">${pre}${i+1}</span><span class="nm">${esc(c.n)}</span>${cam?'<span class="tag bad">⚠️ Leal cambió la foto: revisa si cambió el frasco</span>':''}<span class="q">Leal: ${ls.length?esc(ls.map(x=>x.n).join(c.alt?' / ':' + ')):'<span class="tag bad">no está en su inventario</span>'}${l?` · ${ls.map(x=>x.q).join('/')} en bodega`:''}</span>${ls.length>1?(c.alt?'<span class="tag">Mismo producto, varios proveedores (se suman las unidades)</span>':'<span class="tag">Combo</span>'):''}</div></div>`}
+function one(l,i,pre){return `<div class="c"><div class="ph">${img(l.f,'Leal')}</div><div class="t"><span class="n">${pre}${i+1}</span><span class="nm">${esc(l.n)}</span><span class="q">${l.q} en bodega</span>${l.cat?'<span class="tag">Oculto en el catálogo: tomar foto nueva</span>':'<span class="tag">Nuevo: falta en el catálogo</span>'}</div></div>`}
+function render(){const cam=Y.filter(c=>c.k.some(k=>D.ch.has(k))).length;
+ let h=`<div class="tabs">${T.map(([t,n,c])=>`<button data-t="${t}" class="${tab===t?'on':''}">${n} (${c()})</button>`).join('')}</div>`;
+ if(cam)h+=`<p class="err">⚠️ Leal cambió la foto de ${cam} producto(s) del catálogo. Míralos al inicio de "Ya están".</p>`;
+ if(tab==='pend')h+=`<p class="sub">Lo que falta hacer: productos de Leal que hay que agregar o volver a fotografiar, de más a menos unidades en bodega.</p><div class="grid">`+P.map((l,i)=>one(l,i,'P')).join('')+'</div>';
+ else if(tab==='ya')h+=`<p class="sub">Productos a la venta, con su foto de Leal al lado.</p><div class="grid">`+Y.map((c,i)=>pair(c,i,'C')).join('')+'</div>';
+ else if(tab==='sin')h+=`<p class="sub">Ocultos que Leal no tiene en su inventario. Se dejan quietos: cuando Leal los cree, pasan a Pendientes.</p><div class="grid">`+S.map((c,i)=>pair(c,i,'S')).join('')+'</div>';
+ else h+=`<p class="sub">Productos de Leal que decidiste no poner en el catálogo (pestaña "No van en catálogo" de la hoja). Para que vuelva a Pendientes, borra su fila en esa pestaña.</p><div class="grid">`+N.map((l,i)=>`<div class="c"><div class="ph">${img(l.f,'Leal')}</div><div class="t"><span class="n">N${i+1}</span><span class="nm">${esc(l.n)}</span><span class="q">${l.q} en bodega</span></div></div>`).join('')+'</div>';
+ $('#app').innerHTML=h}
+document.addEventListener('click',e=>{if(e.target.id==='go')go();const t=e.target.dataset&&e.target.dataset.t;if(t){tab=t;render();scrollTo(0,0)}});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='k')go()});
+</script></body></html>
