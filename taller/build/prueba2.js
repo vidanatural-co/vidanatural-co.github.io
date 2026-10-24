@@ -1,0 +1,12 @@
+const {chromium}=require('playwright');const root='/home/claude/catalogo/gh';const http=require('http'),fs=require('fs');
+const srv=http.createServer((q,r)=>{let u=decodeURIComponent(q.url.split('?')[0]);if(u.endsWith('/'))u+='index.html';const f=root+u;
+ if(fs.existsSync(f)){r.writeHead(200);r.end(fs.readFileSync(f))}else{r.writeHead(404);r.end()}}).listen(8098);
+(async()=>{const b=await chromium.launch({executablePath:'/opt/pw-browsers/chromium-1194/chrome-linux/chrome'});
+const ctx=await b.newContext({viewport:{width:390,height:844}});await ctx.grantPermissions(['clipboard-read','clipboard-write'],{origin:'http://localhost:8098'});
+await ctx.route('**/script.google.com/**',rt=>rt.fulfill({json:{ok:true,asesor:'Liliana',whatsapp:'57',desc2:10000,desc3:25000,productos:Array.from({length:64},(_,i)=>({id:'maca',n:'P'+i,c:['X'],g:'',ip:'',d:'',b:[],pr:'',u:'',r:'',op:[],w:[],img:'maca.jpg',p:70000,s:'disponible'}))}}));
+const pg=await ctx.newPage();const errs=[];pg.on('pageerror',e=>errs.push(e.message));
+await pg.goto('http://localhost:8098/liliana/');await pg.waitForSelector('.card');
+const imgOk=await pg.$eval('.card img',i=>i.complete&&i.naturalWidth>0);
+await pg.click('#shcat');await pg.waitForTimeout(500);const clip=await pg.evaluate(()=>navigator.clipboard.readText());
+await pg.screenshot({path:'s3.png'});
+console.log(JSON.stringify({imgOk,clip,errs}));await b.close();srv.close();})();

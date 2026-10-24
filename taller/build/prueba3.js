@@ -1,0 +1,16 @@
+const {chromium}=require('playwright');const root='/home/claude/catalogo/gh';const http=require('http'),fs=require('fs');
+const srv=http.createServer((q,r)=>{let u=decodeURIComponent(q.url.split('?')[0]);if(u.endsWith('/'))u+='index.html';const f=root+u;
+ if(fs.existsSync(f)){r.writeHead(200);r.end(fs.readFileSync(f))}else{r.writeHead(404);r.end()}}).listen(8099);
+(async()=>{const b=await chromium.launch({executablePath:'/opt/pw-browsers/chromium-1194/chrome-linux/chrome'});
+const ctx=await b.newContext({viewport:{width:390,height:844}});
+await ctx.route('**/script.google.com/**',rt=>{const d=JSON.parse(rt.request().postData()||'{}');
+ if(d.accion==='panel')return rt.fulfill({json:{ok:true,asesor:'Jairo',desc2:1,desc3:2,productos:[],pedidos:[]}});
+ rt.fulfill({json:{ok:true,asesor:'Jairo',whatsapp:'57',desc2:10000,desc3:25000,productos:[{id:'maca',n:'Maca',c:['X'],g:'',ip:'',d:'',b:[],pr:'',u:'',r:'',op:[],w:[],img:'maca.jpg',p:70000,s:'disponible'}]}})});
+const pg=await ctx.newPage();const errs=[];pg.on('pageerror',e=>errs.push(e.message));
+await pg.goto('http://localhost:8099/jairo/');await pg.evaluate(()=>localStorage.setItem('ultimo_jairo','{"maca":2}'));
+await pg.reload();await pg.waitForSelector('.card');const a=await pg.isVisible('#rep');
+await pg.click('[data-norep]');const b1=await pg.isVisible('#rep');
+await pg.evaluate(()=>localStorage.setItem('ultimo_jairo','{"maca":2}'));await pg.reload();await pg.waitForSelector('.card');const c=await pg.isVisible('#rep');
+await pg.click('#soy');await pg.fill('#kClave','x');await pg.click('#kGo');await pg.waitForTimeout(300);
+await pg.reload();await pg.waitForSelector('.card');await pg.evaluate(()=>localStorage.setItem('ultimo_jairo','{"maca":2}'));await pg.reload();await pg.waitForSelector('.card');const d=await pg.isVisible('#rep');
+console.log(JSON.stringify({visibleAntes:a,trasX:b1,vuelveConPedido:c,vendedorNoVe:!d,errs}));await b.close();srv.close();})();

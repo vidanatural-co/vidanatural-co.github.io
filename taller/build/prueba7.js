@@ -1,0 +1,15 @@
+const {chromium}=require('playwright');const root='/home/claude/catalogo/gh';const http=require('http'),fs=require('fs');
+const srv=http.createServer((q,r)=>{let u=decodeURIComponent(q.url.split('?')[0]);if(u.endsWith('/'))u+='index.html';const f=root+u;
+ if(fs.existsSync(f)){r.writeHead(200);r.end(fs.readFileSync(f))}else{r.writeHead(404);r.end()}}).listen(8094);
+(async()=>{const b=await chromium.launch({executablePath:'/opt/pw-browsers/chromium-1194/chrome-linux/chrome'});
+const ctx=await b.newContext({viewport:{width:390,height:844}});
+await ctx.route('**/script.google.com/**',rt=>{const d=JSON.parse(rt.request().postData()||'{}');
+ if(d.accion==='panel')return rt.fulfill({json:{ok:true,asesor:'Jairo',desc2:1,desc3:2,productos:[{fila:0,n:'Calostro Bovino',p:60000},{fila:1,n:'Té Verde + Jengibre',p:60000},{fila:2,n:'Maca',p:70000}],pedidos:[]}});
+ rt.fulfill({json:{ok:true,asesor:'Jairo',whatsapp:'57',desc2:10000,desc3:25000,productos:[]}})});
+const pg=await ctx.newPage();const errs=[];pg.on('pageerror',e=>errs.push(e.message));
+await pg.goto('http://localhost:8094/jairo/');await pg.waitForTimeout(500);
+await pg.click('#soy');await pg.fill('#kClave','x');await pg.click('#kGo');await pg.waitForSelector('#pBus');
+await pg.fill('#pBus','te verde');const v1=await pg.$$eval('.prow[data-n]',x=>x.filter(e=>!e.hidden).map(e=>e.textContent.trim()));
+await pg.fill('#pBus','zzz');const nada=await pg.isVisible('#pNada');
+await pg.fill('#pBus','');const v3=await pg.$$eval('.prow[data-n]',x=>x.filter(e=>!e.hidden).length);
+console.log(JSON.stringify({v1,nada,v3,errs}));await b.close();srv.close();})();

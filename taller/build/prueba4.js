@@ -1,0 +1,15 @@
+const {chromium}=require('playwright');const root='/home/claude/catalogo/gh';const http=require('http'),fs=require('fs');
+const srv=http.createServer((q,r)=>{let u=decodeURIComponent(q.url.split('?')[0]);if(u.endsWith('/'))u+='index.html';const f=root+u;
+ if(fs.existsSync(f)){r.writeHead(200);r.end(fs.readFileSync(f))}else{r.writeHead(404);r.end()}}).listen(8097);
+(async()=>{const b=await chromium.launch({executablePath:'/opt/pw-browsers/chromium-1194/chrome-linux/chrome'});
+const ctx=await b.newContext({viewport:{width:390,height:844}});await ctx.grantPermissions(['clipboard-read','clipboard-write'],{origin:'http://localhost:8097'});
+await ctx.addInitScript(()=>{navigator.share=async d=>{window._sh=d};navigator.canShare=()=>true});
+await ctx.route('**/script.google.com/**',rt=>rt.fulfill({json:{ok:true,asesor:'Jairo',whatsapp:'57',desc2:10000,desc3:25000,productos:[{id:'maca',n:'Maca',c:['X'],g:'',ip:'',d:'',b:[],pr:'120 cápsulas (te dura 2 meses)',u:'',r:'',op:[],w:[],img:'maca.jpg',p:70000,s:'disponible'}]}}));
+const pg=await ctx.newPage();const errs=[];pg.on('pageerror',e=>errs.push(e.message));
+await pg.goto('http://localhost:8097/jairo/');await pg.waitForSelector('.card');
+await pg.click('.card img');await pg.click('[data-share]');await pg.waitForTimeout(800);
+const c1=await pg.evaluate(()=>navigator.clipboard.readText());const t1=await pg.$$eval('.toast',x=>x.map(e=>e.textContent));
+const f1=await pg.evaluate(()=>window._sh.files.length);
+await pg.evaluate(()=>navigator.clipboard.writeText(''));await pg.click('[data-close]').catch(()=>{});await pg.goto('http://localhost:8097/jairo/');await pg.waitForSelector('.card');
+await pg.click('#shcat');await pg.waitForTimeout(800);const c2=await pg.evaluate(()=>navigator.clipboard.readText());const f2=await pg.evaluate(()=>window._sh.files[0].name);
+console.log(JSON.stringify({c1,t1,f1,c2:c2.slice(0,40),f2,errs}));await b.close();srv.close();})();
