@@ -79,6 +79,15 @@ function productosMaestra() {
   return h.getRange(2, 1, Math.max(h.getLastRow() - 1, 1), 15).getValues();
 }
 
+/* Etiquetas de las hojas de precios: la columna A se reescribe siempre desde la hoja maestra
+   (fila r de la maestra = fila r+3 de precios). Asi nunca quedan corridas aunque alguien
+   inserte o mueva un nombre a mano. El precio (columna B) no se toca. */
+function sincronizarNombres(archivo, filas) {
+  var h = SpreadsheetApp.openById(archivo).getSheets()[0];
+  var nombres = filas.map(function (f) { return [String(f[0])]; });
+  if (nombres.length) h.getRange(5, 1, nombres.length, 1).setValues(nombres);
+}
+
 /* ---------- Catálogo para clientes ---------- */
 function catalogo(v) {
   var cache = CacheService.getScriptCache();
@@ -187,6 +196,7 @@ function entrar(d) {
 function panel(d) {
   var ven = verificar(d);
   var pr = precios(ven.archivo), filas = productosMaestra();
+  sincronizarNombres(ven.archivo, filas);
   var prods = [];
   filas.forEach(function (f, i) {
     if (!String(f[0]).trim() || ['SÍ', 'SI'].indexOf(String(f[13]).toUpperCase().trim()) < 0) return;
@@ -210,6 +220,7 @@ function guardarPrecios(d) {
     var val = c.p === '' || c.p === null ? '' : Math.max(0, Math.round(Number(c.p) || 0));
     h.getRange(fila + 5, 2).setValue(val);
   });
+  sincronizarNombres(ven.archivo, productosMaestra());
   CacheService.getScriptCache().remove('cat_' + String(d.v).toLowerCase());
   return { ok: true };
 }

@@ -21,3 +21,10 @@ La tienda publicada es el resultado; si se edita a mano un index.html publicado,
 - Inventario de Leal (solo lectura): 1gDg2MgnJqCSYEhU9F9nWRpeof1gi4QeDfV9vVI4Nz_k.
 - REGLA DE ORO: nunca borrar ni mover filas de la pestaña Productos. Si cambia un producto, se edita su misma fila; para quitarlo, Mostrar = NO. Mover filas desalinea los precios de los 3 asesores.
 - En "Nombre en Distry": "+" = combo (cuenta el que tenga menos), "/" = mismo producto de varios proveedores (se suman).
+
+## Hojas de precios (regla, oct-2026)
+- Fila r de la hoja maestra = fila r+3 en cada hoja de precios. El cartero lee el precio SOLO por posición (columna B); la columna A es solo una etiqueta.
+- NUNCA insertar, mover ni borrar filas en las hojas de precios. Producto nuevo: va al final de la pestaña Productos y su precio en la fila +3 de cada asesor (al final).
+- "Nuevo de primero" se logra con el orden del catálogo, no moviendo filas.
+- Después de cualquier cambio de precios: leer la columna A y B de las tres hojas y comparar nombre por nombre con la maestra antes de dar por terminado.
+- El cartero reescribe la columna A desde la maestra cada vez que un asesor abre o guarda su panel (función sincronizarNombres).
