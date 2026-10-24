@@ -28,3 +28,7 @@ La tienda publicada es el resultado; si se edita a mano un index.html publicado,
 - "Nuevo de primero" se logra con el orden del catálogo, no moviendo filas.
 - Después de cualquier cambio de precios: leer la columna A y B de las tres hojas y comparar nombre por nombre con la maestra antes de dar por terminado.
 - El cartero reescribe la columna A desde la maestra cada vez que un asesor abre o guarda su panel (función sincronizarNombres).
+
+## Cartero: enlace del editor
+- https://script.google.com/home/projects/191VKbLmgA9hvaAN2O0cjARx37ZB2X4sHYk9NwiZJch5ccqb3cB8mehuR/edit
+- Regla: cada vez que se le pida a Jairo pegar o actualizar el cartero, darle este enlace dentro de los pasos.
