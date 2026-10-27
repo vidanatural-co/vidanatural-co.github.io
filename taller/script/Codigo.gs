@@ -106,6 +106,9 @@ function catalogo(v) {
       var minimo = null;
       // "+" = combo (cuenta el componente con menos unidades)
       // "/" = mismo producto de varios proveedores (se suman las unidades)
+      // Si un combo repite el mismo producto (ej. 2 frascos iguales), las unidades se dividen entre las veces que aparece
+      var veces = {};
+      dist.split('+').forEach(function (parte) { var kp = limpiar(parte); veces[kp] = (veces[kp] || 0) + 1; });
       dist.split('+').forEach(function (parte) {
         var suma = null;
         parte.split('/').forEach(function (n) {
@@ -115,6 +118,7 @@ function catalogo(v) {
           suma = (suma || 0) + stock[k];
         });
         if (suma === null) return;
+        suma = Math.floor(suma / (veces[limpiar(parte)] || 1));
         minimo = (minimo === null) ? suma : Math.min(minimo, suma);
       });
       if (minimo !== null && !aviso) estado = minimo <= 0 ? 'agotado' : (minimo <= POCAS ? 'ultimas' : 'disponible');
