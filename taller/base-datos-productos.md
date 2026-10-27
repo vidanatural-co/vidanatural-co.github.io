@@ -1604,7 +1604,7 @@ Precauciones: embarazadas, lactantes, personas que toman medicamentos o tienen a
 - **Registro / origen:** Fabricado en USA
 - **Se combina con:** Coll4gen M4X
 - **Nombre en el inventario de Leal:** GLUCOSAMIN AMER🔹️
-- **Enlace:** https://vidanatural-co.github.io/jairo/p/glucosamina-1660.html
+- **Enlace:** https://vidanatural-co.github.io/jairo/p/glucosamina-2.html
 
 ## Ashwagandha KSM-66 6.700 mg con Hierba de San Juan
 - **Precio:** $70.000
@@ -1622,7 +1622,7 @@ Precauciones: embarazadas, lactantes, personas que toman medicamentos o tienen a
 - **Registro / origen:** Fabricado en USA
 - **Se combina con:** Melatonina Softnaf
 - **Nombre en el inventario de Leal:** ASHAGUANDA KSM AMER🔹️
-- **Enlace:** https://vidanatural-co.github.io/jairo/p/ashwagandha-ksm66-6700.html
+- **Enlace:** https://vidanatural-co.github.io/jairo/p/ashwagandha-ksm66.html
 
 ## Combo 2 Ashwagandha KSM-66
 - **Precio:** $100.000 (cuenta como 1 producto para los descuentos)
