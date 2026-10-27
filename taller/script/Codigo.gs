@@ -74,9 +74,14 @@ function existencias() {
   c.put('stock', JSON.stringify(m), CACHE_SEG);
   return m;
 }
+function fechaNum(v) {
+  if (v instanceof Date) return v.getTime();
+  var t = Date.parse(String(v || '').trim());
+  return isNaN(t) ? 0 : t;
+}
 function productosMaestra() {
   var h = SpreadsheetApp.openById(MAESTRA).getSheetByName('Productos');
-  return h.getRange(2, 1, Math.max(h.getLastRow() - 1, 1), 15).getValues();
+  return h.getRange(2, 1, Math.max(h.getLastRow() - 1, 1), 16).getValues(); // A:P (P = Fecha)
 }
 
 /* Etiquetas de las hojas de precios: la columna A se reescribe siempre desde la hoja maestra
@@ -128,6 +133,7 @@ function catalogo(v) {
     var visible = ['SÍ', 'SI'].indexOf(String(f[13]).toUpperCase().trim()) >= 0;
     if (!nombre || !visible || !precio) return;
     lista.push({
+      _f: fechaNum(f[15]), _i: i,
       id: String(f[11]).replace(/\.[a-z]+$/i, ''), n: nombre,
       c: String(f[1]).split(',').map(function (x) { return x.trim(); }).filter(String),
       g: f[2], ip: f[3], d: f[4],
@@ -144,6 +150,10 @@ function catalogo(v) {
     var rango = h.getRange(2, 15, avisos.length, 1);
     if (JSON.stringify(rango.getValues()) !== JSON.stringify(avisos)) rango.setValues(avisos);
   } catch (e) {}
+  // Orden: la tienda muestra la lista al revés, así que aquí va de la fecha más vieja a la más nueva.
+  // Sin fecha = más viejos. Misma fecha: por fila. Resultado en la tienda: fecha más reciente de primero.
+  lista.sort(function (a, b) { return (a._f - b._f) || (a._i - b._i); });
+  lista.forEach(function (x) { delete x._f; delete x._i; });
   var res = { ok: true, asesor: ven.nombre, whatsapp: ven.whatsapp, desc2: pr.desc2, desc3: pr.desc3, productos: lista };
   cache.put('cat_' + v, JSON.stringify(res), CACHE_SEG);
   return res;
