@@ -8,9 +8,9 @@
 
 **Precios:** son los de Jairo (los tres asesores tienen hoy los mismos, salvo que cambien los suyos en su panel). Descuentos: 2 unidades −$10.000; 3 o más −$25.000. Pago contraentrega (cada asesor coordina la forma de pago).
 
-**Productos publicados:** 85
+**Productos publicados:** 92
 
-**Actualizado:** 23-oct-2026
+**Actualizado:** 27-oct-2026
 
 Enlace de cada producto: https://vidanatural-co.github.io/jairo/p/<foto-sin-.jpg>.html (cambiar jairo por liliana o gladys)
 
@@ -250,24 +250,6 @@ Enlace de cada producto: https://vidanatural-co.github.io/jairo/p/<foto-sin-.jpg
 - **Nombre en el inventario de Leal:** VITAMINA E SANAF🔹️
 - **Enlace:** https://vidanatural-co.github.io/jairo/p/vitamina-e.html
 
-## Ashwagandha KSM-66 5.500 mg
-- **Precio:** $70.000
-- **Categoría:** Estrés y descanso
-- **Gancho:** Calma tu mente y recupera tu paz, de forma natural.
-- **Ideal para:** Personas con mucho estrés, quienes se sienten ansiosas o tensas y quienes quieren dormir más profundo.
-- **Qué es:** Extracto patentado de raíz de ashwagandha KSM-66 (equivalente a 5.500 mg de hierba), en cápsulas blandas. Libre de gluten.
-- **Beneficios:**
-  - Menos estrés: la ashwagandha KSM-66 ayuda a tu cuerpo a manejar el estrés.
-  - Mente tranquila: apoya la calma en los días difíciles.
-  - Sueño profundo: contribuye a un descanso más reparador.
-  - Alta pureza: extracto de raíz estandarizado.
-- **Presentación:** 100 cápsulas blandas (te dura más de 3 meses)
-- **Modo de uso:** 1 cápsula blanda al día con una comida, en temporadas de mucho estrés.
-- **Registro / origen:** Fabricado en USA
-- **Se combina con:** Melatonina Softnaf
-- **Nombre en el inventario de Leal:** ASHAGUANDA KSM AMER🔹️
-- **Enlace:** https://vidanatural-co.github.io/jairo/p/ashwagandha-ksm66.html
-
 ## Vinq Cbr4l
 - **Precio:** $50.000
 - **Categoría:** Energía y vitalidad
@@ -336,7 +318,7 @@ Enlace de cada producto: https://vidanatural-co.github.io/jairo/p/<foto-sin-.jpg
 - **Presentación:** 33 porciones (te dura 1 mes) · Caramelo blando
 - **Modo de uso:** 1 caramelo blando 30 minutos antes de dormir.
 - **Registro / origen:** INVIMA NSA-2039-2025
-- **Se combina con:** Ashwagandha KSM-66 5.500 mg
+- **Se combina con:** Ashwagandha KSM-66 6.700 mg con Hierba de San Juan
 - **Nombre en el inventario de Leal:** MELATONINA SANAF
 - **Enlace:** https://vidanatural-co.github.io/jairo/p/melatonina.html
 
@@ -970,24 +952,6 @@ Enlace de cada producto: https://vidanatural-co.github.io/jairo/p/<foto-sin-.jpg
 - **Nombre en el inventario de Leal:** ZOOONE EYES🔹️
 - **Enlace:** https://vidanatural-co.github.io/jairo/p/zooone-eyes.html
 
-## Clorofila Greensofg
-- **Precio:** $70.000
-- **Categoría:** Digestión
-- **Gancho:** El verde de las plantas, en una cápsula.
-- **Ideal para:** Personas que comen pocas verduras y quienes buscan antioxidantes naturales.
-- **Qué es:** Clorofila concentrada en cápsula blanda con relleno líquido. Para mayores de 18 años.
-- **Beneficios:**
-  - Antioxidantes: la clorofila aporta compuestos antioxidantes.
-  - Complemento verde: ideal si comes pocas verduras.
-  - Bienestar interior: apoya tu rutina diaria.
-  - Fácil de tomar: cápsula blanda.
-- **Presentación:** 100 unidades · 50 porciones (te dura 50 días)
-- **Modo de uso:** 2 unidades al día.
-- **Registro / origen:** INVIMA RSA-0865-2025
-- **Se combina con:** Papaya Greensofg
-- **Nombre en el inventario de Leal:** CLOROFILA CAPSULAS🔹️
-- **Enlace:** https://vidanatural-co.github.io/jairo/p/clorofila.html
-
 ## Papaya Greensofg
 - **Precio:** $70.000
 - **Categoría:** Digestión
@@ -1201,24 +1165,6 @@ Enlace de cada producto: https://vidanatural-co.github.io/jairo/p/<foto-sin-.jpg
 - **Se combina con:** Calcio Softnaf 500 mg
 - **Nombre en el inventario de Leal:** D3K2 CAP
 - **Enlace:** https://vidanatural-co.github.io/jairo/p/d3-k2-greensofg.html
-
-## Glucosamina Condroitina MSM + Ácido Hialurónico
-- **Precio:** $70.000
-- **Categoría:** Articulaciones y huesos
-- **Gancho:** Articulaciones lubricadas y flexibles.
-- **Ideal para:** Adultos con rodillas o articulaciones rígidas, personas mayores y deportistas.
-- **Qué es:** Glucosamina (1.500 mg), condroitina, MSM y ácido hialurónico, en cápsulas blandas.
-- **Beneficios:**
-  - Cartílagos: la glucosamina y la condroitina apoyan tus articulaciones.
-  - Lubricación: el ácido hialurónico es parte natural del líquido de tus articulaciones.
-  - Comodidad: el MSM apoya tu movilidad.
-  - Extra fuerte: fórmula de alta potencia.
-- **Presentación:** 100 cápsulas blandas (te dura 50 días)
-- **Modo de uso:** 2 cápsulas blandas al día con la comida principal.
-- **Registro / origen:** Fabricado en USA
-- **Se combina con:** Collagen Peptides Toplux 1.800 mg
-- **Nombre en el inventario de Leal:** GLUCOSAMIN AMER🔹️
-- **Enlace:** https://vidanatural-co.github.io/jairo/p/glucosamina-2.html
 
 ## Té Verde + Jengibre Greensofg
 - **Precio:** $70.000
@@ -1533,3 +1479,183 @@ Precauciones: embarazadas, lactantes, personas que toman medicamentos o tienen a
 - **Se combina con:** L-Carnitine 3.000 mg
 - **Nombre en el inventario de Leal:** TURKESTERONA🔹️
 - **Enlace:** https://vidanatural-co.github.io/jairo/p/turkesterone-2.html
+
+## Clorofila Greensofg
+- **Precio:** $70.000
+- **Categoría:** Digestión
+- **Gancho:** El verde de las plantas, en una cápsula.
+- **Ideal para:** Personas que comen pocas verduras y quienes buscan antioxidantes naturales.
+- **Qué es:** Clorofila concentrada en cápsula blanda con relleno líquido. Para mayores de 18 años.
+- **Beneficios:**
+  - Antioxidantes: la clorofila aporta compuestos antioxidantes.
+  - Complemento verde: ideal si comes pocas verduras.
+  - Bienestar interior: apoya tu rutina diaria.
+  - Fácil de tomar: cápsula blanda.
+- **Presentación:** 100 unidades · 50 porciones (te dura 50 días)
+- **Modo de uso:** 2 unidades al día.
+- **Registro / origen:** INVIMA RSA-0865-2025
+- **Se combina con:** Papaya Greensofg
+- **Nombre en el inventario de Leal:** CLOROFILA CAPSULAS🔹️
+- **Enlace:** https://vidanatural-co.github.io/jairo/p/clorofila.html
+
+## Ajo y Perejil 1.800 mg Greensofg
+- **Precio:** $70.000
+- **Categoría:** Defensas y nutrición, Digestión
+- **Gancho:** El poder del ajo y el perejil, sin el olor ni el sabor.
+- **Ideal para:** Adultos que quieren cuidar sus defensas y su digestión de forma natural.
+- **Qué es:** Ajo (equivale a 1.500 mg de ajo fresco) y semilla de perejil (equivale a 300 mg) con vitamina C, en cápsula blanda masticable con relleno líquido.
+- **Beneficios:**
+  - Defensas: el ajo es un apoyo tradicional para tu sistema inmune.
+  - Digestión: el ajo y el perejil apoyan una digestión ligera.
+  - Antioxidantes: con vitamina C.
+  - Sin mal aliento: en cápsula blanda, fácil de tomar.
+- **Presentación:** 100 unidades · 50 porciones (te dura 50 días)
+- **Modo de uso:** 2 unidades al día. Para mayores de 18 años. Si te da alergia o molestia, deja de tomarlo.
+- **Registro / origen:** INVIMA RSA-0034378-2024 · Hecho en Colombia
+- **Se combina con:** Probióticos y Prebióticos Softnaf
+- **Nombre en el inventario de Leal:** GARLIC PARSLEY AJO🔹️
+- **Enlace:** https://vidanatural-co.github.io/jairo/p/ajo-perejil.html
+
+## Inositol 1.000 mg Greensofg
+- **Precio:** $70.000
+- **Categoría:** Metabolismo y peso, Estrés y descanso
+- **Gancho:** Equilibrio por dentro, en un masticable al día.
+- **Ideal para:** Mujeres y hombres adultos que quieren cuidar su metabolismo, su equilibrio y su tranquilidad.
+- **Qué es:** 1.000 mg de inositol por porción, en cápsula blanda masticable con relleno líquido.
+- **Beneficios:**
+  - Metabolismo: el inositol participa en el aprovechamiento de los azúcares en tu cuerpo.
+  - Equilibrio: es muy usado por mujeres para apoyar su balance natural.
+  - Calma: apoya el funcionamiento normal de tu sistema nervioso.
+  - Fácil de tomar: cápsula blanda masticable.
+- **Presentación:** 100 unidades · 50 porciones (te dura 50 días)
+- **Modo de uso:** 2 unidades al día. Para mayores de 18 años. Si te da alergia o molestia, deja de tomarlo.
+- **Registro / origen:** INVIMA RSA-0865-2025 · Hecho en Colombia
+- **Se combina con:** Magnesio Triple Softnaf (Citrato, Glicinato y Malato)
+- **Nombre en el inventario de Leal:** INOSITOL🔹️
+- **Enlace:** https://vidanatural-co.github.io/jairo/p/inositol.html
+
+## Cúrcuma 1.000 mg Greensofg
+- **Precio:** $70.000
+- **Categoría:** Articulaciones y huesos, Defensas y nutrición
+- **Gancho:** Cúrcuma concentrada al 95%, sin el sabor amargo.
+- **Ideal para:** Adultos con articulaciones rígidas y quienes buscan antioxidantes naturales.
+- **Qué es:** Extracto de raíz de cúrcuma (1.000 mg por porción, con 95% de curcuminoides) en cápsula blanda masticable con relleno líquido. Contiene soya.
+- **Beneficios:**
+  - Articulaciones: la cúrcuma contribuye a la comodidad y movilidad de tus articulaciones.
+  - Antioxidante: los curcuminoides ayudan a proteger tus células del desgaste diario.
+  - Concentrada: extracto con 95% de curcuminoides, su parte más activa.
+  - Fácil de tomar: sin el sabor amargo de la cúrcuma en polvo.
+- **Presentación:** 100 unidades · 50 porciones (te dura 50 días)
+- **Modo de uso:** 2 unidades al día. Para mayores de 18 años. Si te da alergia o molestia, deja de tomarlo.
+- **Registro / origen:** INVIMA RSA-0865-2025 · Hecho en Colombia
+- **Se combina con:** Glucosamina 1.660 mg con Ácido Hialurónico y Cúrcuma
+- **Nombre en el inventario de Leal:** CURCUMA🔹️
+- **Enlace:** https://vidanatural-co.github.io/jairo/p/curcuma.html
+
+## Magnesium Complex Toplux 1.000 mg
+- **Precio:** $60.000
+- **Categoría:** Estrés y descanso, Articulaciones y huesos
+- **Gancho:** 8 formas de magnesio para tus músculos, tus huesos y tu descanso.
+- **Ideal para:** Personas con tensión muscular, calambres o cansancio, quienes duermen mal y quienes entrenan.
+- **Qué es:** 1.000 mg de magnesio por porción en 8 formas: óxido, glicinato, malato, taurato, citrato, carbonato, aspartato y orotato, en cápsulas vegetales.
+- **Beneficios:**
+  - Huesos y músculos: el magnesio contribuye a su funcionamiento normal.
+  - Descanso: apoya la relajación y un sueño reparador.
+  - Defensas: participa en el buen funcionamiento de tu sistema inmune.
+  - Máxima absorción: 8 formas distintas de magnesio para que tu cuerpo lo aproveche mejor.
+- **Presentación:** 90 cápsulas vegetales · 45 porciones (te dura 45 días)
+- **Modo de uso:** 2 cápsulas al día, 20 a 30 minutos antes de una comida, con un vaso de agua. No exceder la dosis. Embarazadas, lactantes, menores de 18 años o personas con alguna enfermedad: consultar al médico.
+- **Registro / origen:** Fabricado en USA
+- **Se combina con:** Melatonina Softnaf
+- **Nombre en el inventario de Leal:** Magnesio comp toplux🔹️
+- **Enlace:** https://vidanatural-co.github.io/jairo/p/magnesium-toplux.html
+
+## Epimedium 8 en 1 Bmvinvol
+- **Precio:** $70.000
+- **Categoría:** Bienestar masculino, Energía y vitalidad
+- **Gancho:** 8 plantas para tu energía y tu vigor, en una sola cápsula.
+- **Ideal para:** Hombres adultos que se sienten cansados y quieren recuperar energía y vitalidad.
+- **Qué es:** Epimedium (Horny Goat Weed) con ashwagandha, ginseng panax, tribulus, maca, tongkat ali, ortiga y pimienta negra, en cápsulas vegetales.
+- **Beneficios:**
+  - Vigor: el epimedium, la maca y el tongkat ali se usan tradicionalmente para la vitalidad del hombre.
+  - Energía: el ginseng apoya tu rendimiento en el día.
+  - Menos estrés: la ashwagandha ayuda a tu cuerpo a manejar el cansancio.
+  - Mejor absorción: con extracto de pimienta negra.
+- **Presentación:** 100 cápsulas vegetales (te dura 50 días)
+- **Modo de uso:** 2 cápsulas una vez al día. No exceder la dosis. Embarazadas, lactantes, menores de 18 años o personas con alguna enfermedad: consultar al médico.
+- **Registro / origen:** Fabricado en USA
+- **Se combina con:** Maca Negra, Roja y Amarilla Softnaf
+- **Nombre en el inventario de Leal:** HORNY 🔹️
+- **Enlace:** https://vidanatural-co.github.io/jairo/p/epimedium.html
+
+## Glucosamina 1.660 mg con Ácido Hialurónico y Cúrcuma
+- **Precio:** $70.000
+- **Categoría:** Articulaciones y huesos
+- **Gancho:** Rodillas y articulaciones más cómodas y flexibles, a cada paso.
+- **Ideal para:** Adultos con rodillas o articulaciones rígidas, personas mayores y deportistas.
+- **Qué es:** Glucosamina (1.500 mg) con ácido hialurónico (2.100 mg), condroitina, MSM, colágeno, cúrcuma, boswellia, bioflavonoides cítricos y saw palmetto, en cápsulas blandas de liberación rápida. Contiene mariscos. Sin azúcar, gluten, soya ni lácteos.
+- **Beneficios:**
+  - Cartílagos: la glucosamina y la condroitina apoyan tus articulaciones.
+  - Lubricación: el ácido hialurónico es parte natural del líquido de tus articulaciones.
+  - Comodidad: la cúrcuma, la boswellia y el MSM contribuyen a la comodidad articular.
+  - Fórmula completa: 9 ingredientes en una sola porción.
+- **Presentación:** 100 cápsulas blandas (te dura 50 días)
+- **Modo de uso:** Adultos: 2 cápsulas blandas al día. No tomar dentro de la hora siguiente a un medicamento. No apta para alérgicos a mariscos. En embarazo, lactancia, si tomas medicamentos, tienes una cirugía programada o alguna enfermedad, consulta a tu médico antes de usarla.
+- **Registro / origen:** Fabricado en USA
+- **Se combina con:** Coll4gen M4X
+- **Nombre en el inventario de Leal:** GLUCOSAMIN AMER🔹️
+- **Enlace:** https://vidanatural-co.github.io/jairo/p/glucosamina-1660.html
+
+## Ashwagandha KSM-66 6.700 mg con Hierba de San Juan
+- **Precio:** $70.000
+- **Categoría:** Estrés y descanso
+- **Gancho:** Calma tu mente y recupera tu paz, de forma natural.
+- **Ideal para:** Personas con mucho estrés, quienes se sienten tensas y quienes quieren dormir más profundo.
+- **Qué es:** Concentrado de raíz de ashwagandha (5.500 mg) con extracto KSM-66 (600 mg) e Hierba de San Juan (600 mg) por porción, en cápsulas blandas de liberación rápida. Sin levadura, gluten, soya, leche, huevo, mariscos ni ajonjolí.
+- **Beneficios:**
+  - Menos estrés: la ashwagandha ayuda a tu cuerpo a adaptarse al estrés del día a día.
+  - Mente tranquila: apoya la calma en los días difíciles.
+  - Buen ánimo: la Hierba de San Juan es una planta tradicional para el ánimo.
+  - Doble ashwagandha: raíz concentrada más extracto KSM-66.
+- **Presentación:** 100 cápsulas blandas · 50 porciones (te dura 50 días)
+- **Modo de uso:** Adultos: 2 cápsulas blandas al día con comida. La Hierba de San Juan puede cruzarse con medicamentos (antidepresivos, anticonceptivos, anticoagulantes y otros): si tomas alguno, estás en embarazo o lactancia o tienes una enfermedad, consulta a tu médico antes de usarla.
+- **Registro / origen:** Fabricado en USA
+- **Se combina con:** Melatonina Softnaf
+- **Nombre en el inventario de Leal:** ASHAGUANDA KSM AMER🔹️
+- **Enlace:** https://vidanatural-co.github.io/jairo/p/ashwagandha-ksm66-6700.html
+
+## Combo 2 Ashwagandha KSM-66
+- **Precio:** $100.000 (cuenta como 1 producto para los descuentos)
+- **Categoría:** Estrés y descanso
+- **Gancho:** Calma y buen ánimo por 100 días, sin interrupciones.
+- **Ideal para:** Personas con estrés constante que quieren seguir su rutina sin interrupciones.
+- **Qué es:** 2 frascos de Ashwagandha KSM-66 6.700 mg con Hierba de San Juan (100 cápsulas blandas cada uno).
+- **Beneficios:**
+  - Menos estrés: la ashwagandha ayuda a tu cuerpo a manejar el estrés.
+  - Mente tranquila: apoya la calma en los días difíciles.
+  - Buen ánimo: con Hierba de San Juan.
+  - Rinde más: 100 días de uso.
+- **Presentación:** 2 frascos de 100 cápsulas blandas (te dura 100 días)
+- **Modo de uso:** Adultos: 2 cápsulas blandas al día con comida. Al terminar un frasco, sigue con el otro. La Hierba de San Juan puede cruzarse con medicamentos (antidepresivos, anticonceptivos, anticoagulantes y otros): si tomas alguno, estás en embarazo o lactancia o tienes una enfermedad, consulta a tu médico antes de usarla.
+- **Registro / origen:** Fabricado en USA
+- **Se combina con:** Melatonina Softnaf
+- **Nombre en el inventario de Leal:** ASHAGUANDA KSM AMER🔹️ + ASHAGUANDA KSM AMER🔹️ (existencias ÷ 2)
+- **Enlace:** https://vidanatural-co.github.io/jairo/p/combo-2-ashwagandha.html
+
+## Combo Ashwagandha KSM-66 + Glucosamina
+- **Precio:** $100.000 (cuenta como 1 producto para los descuentos)
+- **Categoría:** Articulaciones y huesos, Estrés y descanso
+- **Gancho:** Cuerpo que se mueve libre, mente en calma.
+- **Ideal para:** Adultos con articulaciones rígidas y días de mucho estrés.
+- **Qué es:** 1 frasco de Ashwagandha KSM-66 6.700 mg con Hierba de San Juan (100 cápsulas blandas) y 1 frasco de Glucosamina 1.660 mg con Ácido Hialurónico y Cúrcuma (100 cápsulas blandas).
+- **Beneficios:**
+  - Articulaciones: la glucosamina y la condroitina apoyan tus cartílagos.
+  - Movilidad: el ácido hialurónico y la cúrcuma contribuyen a tu comodidad al moverte.
+  - Menos estrés: la ashwagandha ayuda a tu cuerpo a manejar el estrés.
+  - Buen ánimo: con Hierba de San Juan.
+- **Presentación:** 2 frascos de 100 cápsulas blandas (te dura 50 días)
+- **Modo de uso:** Ashwagandha: 2 cápsulas blandas al día con comida. Glucosamina: 2 cápsulas blandas al día. Solo adultos. La Glucosamina contiene mariscos. La Hierba de San Juan puede cruzarse con medicamentos (antidepresivos, anticonceptivos, anticoagulantes y otros): si tomas alguno, estás en embarazo o lactancia o tienes una enfermedad, consulta a tu médico.
+- **Registro / origen:** Fabricados en USA
+- **Se combina con:** Coll4gen M4X
+- **Nombre en el inventario de Leal:** ASHAGUANDA KSM AMER🔹️ + GLUCOSAMIN AMER🔹️
+- **Enlace:** https://vidanatural-co.github.io/jairo/p/combo-ashwagandha-glucosamina.html
