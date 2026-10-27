@@ -10,4 +10,5 @@ Nombre en el inventario de Leal → archivo (https://vidanatural-co.github.io/im
 - 180 LITRO → 180-litro.jpg
 - 180 PEQUEÑO → 180-pequeno.jpg
 - INVICTOS → invictos.jpg
-- PATRON LITRO → ¿? (la foto que llegó fue de Mero Macho 1000 ml: pendiente-mero-macho-litro.jpg; Jairo debe confirmar)
+- PATRON LITRO → sin foto todavía
+- Sin producto en Leal: pendiente-mero-macho-litro.jpg (Mero Macho 1000 ml). Puede que Leal no lo haya creado o que esté dentro de "LITROS VARIOS". Pendiente.
