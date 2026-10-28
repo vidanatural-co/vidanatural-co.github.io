@@ -65,13 +65,21 @@ function precios(archivo) {
   return { desc2: desc2, desc3: desc3, lista: col.map(function (r) { return Number(r[0]) || 0; }) };
 }
 function existencias() {
+  // Lee el inventario de Leal (solo lectura). Devuelve { q: unidades por producto, b: productos dados de baja }.
+  // La columna "baja" se busca por su título (no por posición). Si dice SI, Leal ya no maneja el producto.
   var c = CacheService.getScriptCache();
-  var g = c.get('stock');
+  var g = c.get('stock2');
   if (g) return JSON.parse(g);
-  var f = SpreadsheetApp.openById(DISTRY).getSheetByName('Inventario').getRange('A:D').getValues();
-  var m = {};
-  for (var i = 1; i < f.length; i++) { if (f[i][0] !== '') m[limpiar(f[i][0])] = Number(f[i][3]) || 0; }
-  c.put('stock', JSON.stringify(m), CACHE_SEG);
+  var f = SpreadsheetApp.openById(DISTRY).getSheetByName('Inventario').getDataRange().getValues();
+  var cb = (f[0] || []).map(function (x) { return String(x).toLowerCase().trim(); }).indexOf('baja');
+  var m = { q: {}, b: {} };
+  for (var i = 1; i < f.length; i++) {
+    if (f[i][0] === '') continue;
+    var k = limpiar(f[i][0]);
+    m.q[k] = Number(f[i][3]) || 0;
+    if (cb >= 0 && ['SÍ', 'SI'].indexOf(String(f[i][cb]).toUpperCase().trim()) >= 0) m.b[k] = true;
+  }
+  c.put('stock2', JSON.stringify(m), CACHE_SEG);
   return m;
 }
 function fechaNum(v) {
@@ -107,31 +115,37 @@ function catalogo(v) {
     var aviso = '';
     var estado = 'disponible';
     var dist = String(f[12] || '').trim();
+    var deBaja = '';
     if (dist) {
       var minimo = null;
       // "+" = combo (cuenta el componente con menos unidades)
       // "/" = mismo producto de varios proveedores (se suman las unidades)
       // Si un combo repite el mismo producto (ej. 2 frascos iguales), las unidades se dividen entre las veces que aparece
+      // Dado de baja en Leal: un proveedor de baja no cuenta; si todos los de una parte están de baja, el producto no se muestra
       var veces = {};
       dist.split('+').forEach(function (parte) { var kp = limpiar(parte); veces[kp] = (veces[kp] || 0) + 1; });
       dist.split('+').forEach(function (parte) {
-        var suma = null;
+        var suma = null, vivos = 0, bajas = [];
         parte.split('/').forEach(function (n) {
           var k = limpiar(n);
           if (!k) return;
-          if (!(k in stock)) { aviso = 'No encontrado en Distry: ' + n.trim(); return; }
-          suma = (suma || 0) + stock[k];
+          if (!(k in stock.q)) { aviso = 'No encontrado en Distry: ' + n.trim(); return; }
+          if (stock.b[k]) { bajas.push(n.trim()); return; }
+          vivos++;
+          suma = (suma || 0) + stock.q[k];
         });
+        if (bajas.length && !vivos && !deBaja) deBaja = bajas.join(' / ');
         if (suma === null) return;
         suma = Math.floor(suma / (veces[limpiar(parte)] || 1));
         minimo = (minimo === null) ? suma : Math.min(minimo, suma);
       });
       if (minimo !== null && !aviso) estado = minimo <= 0 ? 'agotado' : (minimo <= POCAS ? 'ultimas' : 'disponible');
+      if (deBaja && !aviso) aviso = 'Dado de baja en Leal: ' + deBaja;
     } else if (nombre) { aviso = 'Sin nombre en Distry'; }
     avisos.push([aviso]);
     var precio = pr.lista[i] || 0;
     var visible = ['SÍ', 'SI'].indexOf(String(f[13]).toUpperCase().trim()) >= 0;
-    if (!nombre || !visible || !precio) return;
+    if (!nombre || !visible || !precio || deBaja) return;
     lista.push({
       _f: fechaNum(f[15]), _i: i,
       id: String(f[11]).replace(/\.[a-z]+$/i, ''), n: nombre,
