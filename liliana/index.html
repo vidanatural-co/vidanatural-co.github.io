@@ -85,6 +85,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-o
 .row.disc{color:var(--ok);font-weight:800}
 .row.tot{font-weight:800;font-size:17px;border-top:1px solid var(--line);padding-top:8px}
 .waf{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:45;width:58px;height:58px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.28)}.waf svg{width:32px;height:32px}.waf[hidden]{display:none}
+#shm{z-index:60}
 .ficha{position:fixed;inset:0;z-index:40;background:var(--bg);overflow-y:auto}
 .ficha-in{max-width:560px;margin:0 auto;padding:calc(12px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(120px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:14px}
 .top{display:grid;grid-template-columns:38% minmax(0,1fr);gap:14px;align-items:start;padding-top:44px}
@@ -146,6 +147,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-o
 <div class="ov" id="viewer" hidden><button class="close" data-close aria-label="Cerrar">✕</button><img id="vimg" alt=""></div>
 <a class="waf" id="waf" hidden target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#fff" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.6l-.4-.3-3.8 1.2 1.2-3.7-.3-.4c-1.2-1.8-1.8-3.8-1.8-5.9C5 10 9.9 5.2 16 5.2S27 10 27 15.9s-4.9 10.5-11 10.5zm6-7.9c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.3-.7.1-.3-.2-1.4-.5-2.7-1.7-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.4 0-.6l-1-2.5c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.6 5.8 5 .8.4 1.4.6 1.9.7.8.3 1.6.2 2.2.1.7-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6-.1-.1-.3-.2-.6-.4z"/></svg></a>
 <div class="ficha" id="ficha" hidden><button class="close" data-close aria-label="Cerrar">✕</button><div class="ficha-in" id="fin"></div></div>
+<div class="ov" id="shm" hidden><button class="close" data-close aria-label="Cerrar">✕</button><div class="sheet"><h2>¿Dónde lo vas a compartir?</h2><button class="go" data-shmode="feed"><span>📝 Publicación (feed)</span><span>→</span></button><p class="sub" style="font-size:13px;margin:0">Foto con el mensaje completo y hashtags.</p><button class="go" data-shmode="historia" style="background:var(--ac)"><span>📱 Historia</span><span>→</span></button><p class="sub" style="font-size:13px;margin:0">Solo la foto. El enlace queda copiado: en tu historia pon el sticker 🔗 Enlace y pega.</p></div></div>
 <div class="ov" id="sum" hidden><button class="close" data-close aria-label="Cerrar">✕</button><div class="sheet" id="sumin"></div></div>
 <div class="panel" id="panel" hidden><button class="close" data-close aria-label="Cerrar">✕</button><div class="panel-in" id="pin"></div></div>
 
@@ -225,16 +227,18 @@ async function send(btn){const t=totals();if(!t.u)return;btn.disabled=true;btn.f
  cart={};$('#sum').hidden=true;render();btn.disabled=false}
 function extra(p){const m=String(p.pr||'').match(/(\d+)\s*c[áa]psulas/i);const k=m?+m[1]:0;return k>100?`🎁 ¡Trae ${k} cápsulas al precio de 100! Más producto por el mismo valor.\n`:''}
 const HT=['#VidaNaturalCo','#SuplementosNaturales','#ContraentregaColombia'];function tags(p){const c=p?(p.c||[]).map(x=>'#'+String(x).split(/\s+/).filter(Boolean).map(w=>w[0].toUpperCase()+w.slice(1)).join('').replace(/[^\p{L}\p{N}]/gu,'')):[];return '\n\n'+[...new Set([...c.slice(0,2),...HT])].join(' ')}
-async function share(id){const p=byId[id];const link=CFG.sitio+'/p/'+id+'.html';const text=`${extra(p)}${p.n} – ${cop(p.p)}. Mira los beneficios y pide aquí: ${link}${tags(p)}`;const cp=precopia(text);
+const HISTORIA='✅ Enlace copiado. En tu historia toca el sticker 🔗 Enlace, mantén presionado y toca Pegar.';
+let shT=null;function pickShare(t){shT=t;$('#shm').hidden=false}
+async function share(id,h){const p=byId[id];const link=CFG.sitio+'/p/'+id+'.html';const text=h?link:`${extra(p)}${p.n} – ${cop(p.p)}. Mira los beneficios y pide aquí: ${link}${tags(p)}`;const cp=precopia(text);
  try{if(navigator.share){let files=[];try{const b=await (await fetch('../img/'+p.img)).blob();const f=new File([b],p.img,{type:b.type||'image/jpeg'});if(navigator.canShare&&navigator.canShare({files:[f]}))files=[f]}catch(e){}
-  await navigator.share(files.length?{files,text}:{text,url:link});toast(cp()?COPIADO:'No pude copiar el enlace. Cópialo desde la barra de arriba.',6000);return}}catch(e){if(e&&e.name==='AbortError')return}
- try{await navigator.clipboard.writeText(text);toast('Enlace copiado')}catch(e){prompt('Copia este enlace:',link)}}
+  await navigator.share(files.length?(h?{files}:{files,text}):(h?{url:link}:{text,url:link}));toast(cp()?(h?HISTORIA:COPIADO):'No pude copiar el enlace. Cópialo desde la barra de arriba.',6000);return}}catch(e){if(e&&e.name==='AbortError')return}
+ try{await navigator.clipboard.writeText(text);toast(h?HISTORIA:'Enlace copiado',6000)}catch(e){prompt('Copia este enlace:',link)}}
 
-async function shareCat(){const link=CFG.sitio+'/';const n=P.length?Math.floor(P.length/10)*10:60;
- const text=`🌿 Te invito a ver mi catálogo de productos naturales: más de ${n} productos para energía, defensas, descanso, belleza y más.\nElige lo que te guste y pídelo por WhatsApp. Pagas cuando lo recibes.\n👉 ${link}${tags()}`;const cp=precopia(text);
+async function shareCat(h){const link=CFG.sitio+'/';const n=P.length?Math.floor(P.length/10)*10:60;
+ let text=`🌿 Te invito a ver mi catálogo de productos naturales: más de ${n} productos para energía, defensas, descanso, belleza y más.\nElige lo que te guste y pídelo por WhatsApp. Pagas cuando lo recibes.\n👉 ${link}${tags()}`;if(h)text=link;const cp=precopia(text);
  try{if(navigator.share){let files=[];try{const b=await (await fetch('historia.jpg')).blob();const f=new File([b],'catalogo.jpg',{type:'image/jpeg'});if(navigator.canShare&&navigator.canShare({files:[f]}))files=[f]}catch(e){}
-  await navigator.share(files.length?{files,text}:{text,url:link});toast(cp()?COPIADO:'No pude copiar el enlace. Cópialo desde la barra de arriba.',6000);return}}catch(e){if(e&&e.name==='AbortError')return}
- try{await navigator.clipboard.writeText(text);toast('Invitación copiada')}catch(e){prompt('Copia esta invitación:',text)}}
+  await navigator.share(files.length?(h?{files}:{files,text}):(h?{url:link}:{text,url:link}));toast(cp()?(h?HISTORIA:COPIADO):'No pude copiar el enlace. Cópialo desde la barra de arriba.',6000);return}}catch(e){if(e&&e.name==='AbortError')return}
+ try{await navigator.clipboard.writeText(text);toast(h?HISTORIA:'Invitación copiada',6000)}catch(e){prompt('Copia esta invitación:',text)}}
 /* ---- Panel de asesores ---- */
 let clave=null,PD=null;
 async function api(body){const r=await fetch(CFG.api,{method:'POST',body:JSON.stringify(Object.assign({v:CFG.v},body))});return r.json()}
@@ -269,7 +273,7 @@ async function panelSave(b){const cambios=[...document.querySelectorAll('[data-f
 
 document.addEventListener('click',e=>{const b=e.target.closest('button,img[data-f],a');if(!b)return;
  if(b.id==='soy')return panelLogin();
- if(b.id==='shcat')return shareCat();
+ if(b.id==='shcat')return pickShare('cat');
  if(b.id==='inst'){if(instP){instP.prompt();instP.userChoice.finally(()=>{instP=null;$('#inst').hidden=true})}return}
  if(b.id==='tLog'||b.id==='tNew'){const n=b.id==='tNew';$('#fNew').hidden=!n;$('#fLog').hidden=n;$('#tNew').className=n?'btn':'btn alt';$('#tLog').className=n?'btn alt':'btn';return}
  if(b.id==='kGo')return panelGo();
@@ -282,7 +286,8 @@ document.addEventListener('click',e=>{const b=e.target.closest('button,img[data-
  if(ds.m){cart[ds.m]--;if(!cart[ds.m])delete cart[ds.m];render();return}
  if(ds.f){showF(ds.f);return}
  if(ds.v){$('#vimg').src=ds.v;$('#viewer').hidden=false;return}
- if(ds.share){share(ds.share);return}
+ if(ds.share){pickShare(ds.share);return}
+ if(ds.shmode){const h=ds.shmode==='historia';$('#shm').hidden=true;if(shT==='cat')shareCat(h);else share(shT,h);return}
  if(ds.norep!==undefined){ls.set('ultimo_'+CFG.v,null);repeat();return}
  if(ds.rep!==undefined){const o=ls.get('ultimo_'+CFG.v,{});for(const id in o){const p=byId[id];if(p&&p.s!=='agotado')cart[id]=o[id]}render();return}
  if(ds.close!==undefined){const o=b.parentElement;if(o.id==='ficha')closeF();else o.hidden=true}});
