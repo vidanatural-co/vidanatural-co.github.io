@@ -13,7 +13,7 @@ La tienda publicada es el resultado; si se edita a mano un index.html publicado,
 - `build/portada.py`, `build/historia.py`, `build/iconos.js`: generan portadas, historias e íconos.
 - `build/prueba*.js`: pruebas automáticas con Playwright.
 - `script/Codigo.gs`: el "cartero" (Google Apps Script). Lo que está implementado en Google debe coincidir con este archivo.
-- `base-datos-productos.md`: copia de la base de datos de productos (la oficial está en el proyecto de Claude).
+- `base-datos-productos.md`: base de datos de productos para contestar clientes (la única copia; desde el 29-oct-2026 ya no está en el proyecto de Claude). Leerla solo cuando se pregunte por un producto.
 
 ## Datos clave
 - Hoja maestra: 1Mgp6y6wbyS-ExoxDHy3buRgf-s7ir33V7DeQEwTN4lk (pestañas Productos, Vendedores, Pedidos, Faltan en catálogo, No van en catálogo, Fotos de Leal).
