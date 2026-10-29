@@ -4,7 +4,7 @@
 
 **Fuente oficial:** la hoja "Catálogo - Hoja maestra" (ID 1Mgp6y6wbyS-ExoxDHy3buRgf-s7ir33V7DeQEwTN4lk), pestaña Productos, y los precios de cada asesor en su archivo de precios. Si este documento y la hoja no coinciden, manda la hoja.
 
-**Regla para Claude:** cada vez que se agregue, oculte, cambie o reordene un producto, o cambien precios, regenerar este documento desde la hoja y guardarlo de nuevo en el proyecto (claude/base-datos-productos.md). Nunca borrar ni mover filas de la hoja Productos (desalinea los precios).
+**Regla para Claude:** cada vez que se agregue, oculte, cambie o reordene un producto, o cambien precios, regenerar este documento desde la hoja y guardarlo en este mismo archivo del repositorio (taller/base-datos-productos.md), con git push. Ya NO se guarda en el proyecto de Claude (decisión de Jairo del 29-oct-2026, para gastar menos). Nunca borrar ni mover filas de la hoja Productos (desalinea los precios).
 
 **Precios:** son los de Jairo (los tres asesores tienen hoy los mismos, salvo que cambien los suyos en su panel). Descuentos: 2 unidades −$10.000; 3 o más −$25.000. Pago contraentrega (cada asesor coordina la forma de pago).
 
