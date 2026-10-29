@@ -224,13 +224,14 @@ async function send(btn){const t=totals();if(!t.u)return;btn.disabled=true;btn.f
  if(w&&!w.closed)w.location.href=url;else location.href=url;
  cart={};$('#sum').hidden=true;render();btn.disabled=false}
 function extra(p){const m=String(p.pr||'').match(/(\d+)\s*c[áa]psulas/i);const k=m?+m[1]:0;return k>100?`🎁 ¡Trae ${k} cápsulas al precio de 100! Más producto por el mismo valor.\n`:''}
-async function share(id){const p=byId[id];const link=CFG.sitio+'/p/'+id+'.html';const text=`${extra(p)}${p.n} – ${cop(p.p)}. Mira los beneficios y pide aquí: ${link}`;const cp=precopia(text);
+const HT=['#VidaNaturalCo','#SuplementosNaturales','#ContraentregaColombia'];function tags(p){const c=p?(p.c||[]).map(x=>'#'+String(x).split(/\s+/).filter(Boolean).map(w=>w[0].toUpperCase()+w.slice(1)).join('').replace(/[^\p{L}\p{N}]/gu,'')):[];return '\n\n'+[...new Set([...c.slice(0,2),...HT])].join(' ')}
+async function share(id){const p=byId[id];const link=CFG.sitio+'/p/'+id+'.html';const text=`${extra(p)}${p.n} – ${cop(p.p)}. Mira los beneficios y pide aquí: ${link}${tags(p)}`;const cp=precopia(text);
  try{if(navigator.share){let files=[];try{const b=await (await fetch('img/'+p.img)).blob();const f=new File([b],p.img,{type:b.type||'image/jpeg'});if(navigator.canShare&&navigator.canShare({files:[f]}))files=[f]}catch(e){}
   await navigator.share(files.length?{files,text}:{text,url:link});toast(cp()?COPIADO:'No pude copiar el enlace. Cópialo desde la barra de arriba.',6000);return}}catch(e){if(e&&e.name==='AbortError')return}
  try{await navigator.clipboard.writeText(text);toast('Enlace copiado')}catch(e){prompt('Copia este enlace:',link)}}
 
 async function shareCat(){const link=CFG.sitio+'/';const n=P.length?Math.floor(P.length/10)*10:60;
- const text=`🌿 Te invito a ver mi catálogo de productos naturales: más de ${n} productos para energía, defensas, descanso, belleza y más.\nElige lo que te guste y pídelo por WhatsApp. Pagas cuando lo recibes.\n👉 ${link}`;const cp=precopia(text);
+ const text=`🌿 Te invito a ver mi catálogo de productos naturales: más de ${n} productos para energía, defensas, descanso, belleza y más.\nElige lo que te guste y pídelo por WhatsApp. Pagas cuando lo recibes.\n👉 ${link}${tags()}`;const cp=precopia(text);
  try{if(navigator.share){let files=[];try{const b=await (await fetch('historia.jpg')).blob();const f=new File([b],'catalogo.jpg',{type:'image/jpeg'});if(navigator.canShare&&navigator.canShare({files:[f]}))files=[f]}catch(e){}
   await navigator.share(files.length?{files,text}:{text,url:link});toast(cp()?COPIADO:'No pude copiar el enlace. Cópialo desde la barra de arriba.',6000);return}}catch(e){if(e&&e.name==='AbortError')return}
  try{await navigator.clipboard.writeText(text);toast('Invitación copiada')}catch(e){prompt('Copia esta invitación:',text)}}
