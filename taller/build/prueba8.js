@@ -20,6 +20,8 @@ ok(sh&&sh.n===1&&sh.type==='video/mp4'&&sh.size>100000&&sh.name==='ajo-perejil.m
 ok(cb&&cb.includes('Comenta QUIERO')&&!cb.includes('http'),`${v}: Instagram: descripción sin enlace`);
 await pg.click('#fin [data-share]');await pg.click('[data-shmode="reel"]');await pg.waitForSelector('[data-reelgo]',{timeout:8000});await pg.click('[data-reelgo="fb"]');await pg.waitForTimeout(300);sh=await pg.evaluate(()=>window.__sh.pop());cb=await pg.evaluate(()=>window.__cb.pop());
 ok(sh&&sh.name==='ajo-perejil.mp4'&&cb&&cb.includes(`https://vidanatural-co.github.io/${v}/p/ajo-perejil.html`)&&!cb.includes('Comenta'),`${v}: Facebook: video + descripción con enlace`);console.log(cb);
+await pg.click('#fin [data-share]');await pg.click('[data-shmode="reel"]');await pg.waitForSelector('[data-reelgo]',{timeout:8000});await pg.click('[data-reelgo="wa"]');await pg.waitForTimeout(300);sh=await pg.evaluate(()=>window.__sh.pop());cb=await pg.evaluate(()=>window.__cb.pop());
+ok(sh&&sh.name==='ajo-perejil.mp4'&&cb&&cb.includes('Mira más información aquí: https://vidanatural-co.github.io/'+v+'/p/ajo-perejil.html')&&!cb.includes('#'),`${v}: WhatsApp: video + texto corto con enlace, sin hashtags`);console.log(cb);
 // Copiar enlace
 await pg.click('#fin [data-share]');await pg.click('[data-shmode="link"]');await pg.waitForTimeout(200);cb=await pg.evaluate(()=>window.__cb.pop());
 ok(cb===`https://vidanatural-co.github.io/${v}/p/ajo-perejil.html`,`${v}: copia enlace del producto (${cb})`);
