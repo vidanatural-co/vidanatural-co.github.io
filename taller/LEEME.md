@@ -45,3 +45,4 @@ Menú de compartir: 📝 Publicación (feed), 📱 Historia, 🎬 Reel y 🔗 Co
 
 - Instagram Lite y Facebook Lite NO reciben videos para Reels (comprobado 29-oct-2026). Al compartir, escoger Instagram o Facebook normales.
 - Hashtags (desde 29-oct-2026): máximo 5 (límite de Instagram). Producto: hasta 2 de su categoría + uno con el nombre del producto (función htn, sale del nombre en la hoja) + #VidaNaturalCo #ContraentregaColombia. Catálogo: #VidaNaturalCo #SuplementosNaturales #ContraentregaColombia.
+- Estado de WhatsApp (desde 30-oct-2026): tercer botón en la ventana del Reel. Mismo video; copia texto corto SIN hashtags: nombre – precio / "👉 Mira más información aquí: <enlace>" / "🚚 Pagas cuando lo recibes." (en los estados el enlace sí se toca). La música la pone Jairo en WhatsApp.
