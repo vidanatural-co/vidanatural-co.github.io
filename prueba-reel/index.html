@@ -1,0 +1,18 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Prueba Reel</title>
+<style>body{font-family:system-ui,sans-serif;margin:16px;max-width:520px}button{display:block;width:100%;padding:16px;margin:8px 0;font-size:17px;border-radius:12px;border:0;background:#2f8f3a;color:#fff;font-weight:700}button.s{background:#13361c}#log{white-space:pre-wrap;background:#f1f1f1;padding:10px;border-radius:8px;font-size:14px}</style></head><body>
+<h2>Prueba de Reels (solo Jairo)</h2><p>Toca una opción, espera a que diga "Listo", toca <b>Compartir</b> y en el menú escoge <b>Instagram – Reels</b>. Anota cuál sí abre el video en Instagram.</p>
+<button data-f="v1.mp4">1. Video actual (el de la tienda)</button>
+<button data-f="v2.mp4">2. Video sin pista de sonido</button>
+<button data-f="v3.mp4">3. Video formato "más compatible"</button>
+<button data-f="v4.mp4">4. Video más pequeño (720p)</button>
+<button data-f="foto.jpg">5. Solo la foto (para comparar)</button>
+<button data-f="v1.mp4" data-u="1">6. Video actual compartido como enlace a archivo</button>
+<button class="s" id="go" hidden>Compartir</button>
+<div id="log">Navegador: </div>
+<script>
+const log=t=>document.getElementById('log').textContent+='\n'+t;log(navigator.userAgent);let F=null,U=null;
+document.querySelectorAll('[data-f]').forEach(b=>b.onclick=async()=>{const go=document.getElementById('go');go.hidden=true;F=null;U=null;const n=b.dataset.f;log('— Opción '+b.textContent.slice(0,2)+' cargando…');
+ try{const r=await fetch(n,{cache:'no-cache'});const bl=await r.blob();const tp=n.endsWith('.jpg')?'image/jpeg':'video/mp4';F=new File([bl],'vida-natural-'+n,{type:tp});U=b.dataset.u?location.href.replace(/[^/]*$/,'')+n:null;
+  log('Listo ('+Math.round(bl.size/1024)+' KB). canShare: '+(navigator.canShare?navigator.canShare(U?{url:U}:{files:[F]}):'no existe'));go.hidden=false;go.scrollIntoView()}catch(e){log('Error al cargar: '+e)}});
+document.getElementById('go').onclick=async()=>{try{await navigator.share(U?{url:U}:{files:[F]});log('El celular dice: compartido OK')}catch(e){log('El celular dice: '+e.name+' '+e.message)}};
+</script></body></html>
