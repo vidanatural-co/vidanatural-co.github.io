@@ -12,6 +12,8 @@ La tienda publicada es el resultado; si se edita a mano un index.html publicado,
 - `build/iconos/`: símbolos de cada asesor (192, 512, maskable), portadas (horizontal) e historias (vertical 9:16).
 - `build/portada.py`, `build/historia.py`, `build/iconos.js`: generan portadas, historias e íconos.
 - `build/prueba*.js`: pruebas automáticas con Playwright.
+- `build/reels.py`: hace los videos para Reels (7 s, vertical 1080x1920, acercamiento suave del 5 %, sin voz ni música). Uso desde la raíz del repositorio: `python3 taller/build/reels.py` (solo rehace los videos cuya foto cambió; `--todo` rehace todos). Producto: `img/<foto>.jpg` → `img/reel/<foto>.mp4`. Catálogo: `<asesor>/historia.jpg` → `<asesor>/reel.mp4`. Voces (etapa 2): poner `taller/voces/<foto>.mp3` (o `<asesor>.mp3`) y correrlo otra vez; el video se alarga al largo de la voz. Correrlo SIEMPRE después de agregar o cambiar fotos, y antes del git push. Tarda unos 17 s por video.
+- `build/prueba8.js`: prueba de los botones 🎬 Reel y 🔗 Copiar enlace en las 3 tiendas (`node prueba8.js`).
 - `script/Codigo.gs`: el "cartero" (Google Apps Script). Lo que está implementado en Google debe coincidir con este archivo.
 - `base-datos-productos.md`: base de datos de productos para contestar clientes (la única copia; desde el 29-oct-2026 ya no está en el proyecto de Claude). Leerla solo cuando se pregunte por un producto.
 
@@ -32,3 +34,9 @@ La tienda publicada es el resultado; si se edita a mano un index.html publicado,
 ## Cartero: enlace del editor
 - https://script.google.com/home/projects/191VKbLmgA9hvaAN2O0cjARx37ZB2X4sHYk9NwiZJch5ccqb3cB8mehuR/edit
 - Regla: cada vez que se le pida a Jairo pegar o actualizar el cartero, darle este enlace dentro de los pasos.
+
+## Compartir (desde 29-oct-2026)
+Menú de compartir: 📝 Publicación (feed), 📱 Historia, 🎬 Reel y 🔗 Copiar enlace.
+- Reel: descarga el video, luego el botón "Compartir video" lo comparte (segundo toque, para que el celular lo permita) y copia una descripción SIN enlace que termina en "Comenta QUIERO y te envío el enlace". En Reels el enlace no se puede tocar.
+- Copiar enlace: para pegarlo en un comentario fijado en Facebook.
+- El ayudante sw.js no guarda los videos .mp4 en el celular (para que siempre salga el video más nuevo).
