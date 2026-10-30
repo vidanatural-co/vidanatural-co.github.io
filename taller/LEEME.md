@@ -44,3 +44,4 @@ Menú de compartir: 📝 Publicación (feed), 📱 Historia, 🎬 Reel y 🔗 Co
 - El ayudante sw.js no guarda los videos .mp4 en el celular (para que siempre salga el video más nuevo).
 
 - Instagram Lite y Facebook Lite NO reciben videos para Reels (comprobado 29-oct-2026). Al compartir, escoger Instagram o Facebook normales.
+- Hashtags (desde 29-oct-2026): máximo 5 (límite de Instagram). Producto: hasta 2 de su categoría + uno con el nombre del producto (función htn, sale del nombre en la hoja) + #VidaNaturalCo #ContraentregaColombia. Catálogo: #VidaNaturalCo #SuplementosNaturales #ContraentregaColombia.
