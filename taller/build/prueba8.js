@@ -14,19 +14,21 @@ await pg.goto(`http://localhost:8095/${v}/`);await pg.waitForSelector('.card .ph
 await pg.locator('.card .ph').first().click();await pg.waitForTimeout(400);if(!errs.length===false)console.log('ERR',errs);await pg.click('#fin [data-share]')
 ok(await pg.isVisible('[data-shmode="reel"]'),`${v}: aparece la opción Reel`);
 await pg.click('[data-shmode="reel"]');await pg.waitForSelector('[data-reelgo]',{timeout:8000}).catch(()=>{});
-await pg.click('[data-reelgo]');await pg.waitForTimeout(300);
+await pg.click('[data-reelgo="ig"]');await pg.waitForTimeout(300);
 let sh=await pg.evaluate(()=>window.__sh.pop());let cb=await pg.evaluate(()=>window.__cb.pop());
 ok(sh&&sh.n===1&&sh.type==='video/mp4'&&sh.size>100000&&sh.name==='ajo-perejil.mp4',`${v}: comparte el video del producto (${sh&&sh.name}, ${sh&&sh.size} bytes)`);
-ok(cb&&cb.includes('Comenta QUIERO')&&!cb.includes('http'),`${v}: descripción copiada sin enlace`);console.log(cb);
+ok(cb&&cb.includes('Comenta QUIERO')&&!cb.includes('http'),`${v}: Instagram: descripción sin enlace`);
+await pg.click('#fin [data-share]');await pg.click('[data-shmode="reel"]');await pg.waitForSelector('[data-reelgo]',{timeout:8000});await pg.click('[data-reelgo="fb"]');await pg.waitForTimeout(300);sh=await pg.evaluate(()=>window.__sh.pop());cb=await pg.evaluate(()=>window.__cb.pop());
+ok(sh&&sh.name==='ajo-perejil.mp4'&&cb&&cb.includes(`https://vidanatural-co.github.io/${v}/p/ajo-perejil.html`)&&!cb.includes('Comenta'),`${v}: Facebook: video + descripción con enlace`);console.log(cb);
 // Copiar enlace
 await pg.click('#fin [data-share]');await pg.click('[data-shmode="link"]');await pg.waitForTimeout(200);cb=await pg.evaluate(()=>window.__cb.pop());
 ok(cb===`https://vidanatural-co.github.io/${v}/p/ajo-perejil.html`,`${v}: copia enlace del producto (${cb})`);
 await pg.click('#ficha [data-close]');
 // Catálogo
-await pg.click('#shcat');await pg.click('[data-shmode="reel"]');await pg.waitForSelector('[data-reelgo]',{timeout:8000}).catch(()=>{});await pg.click('[data-reelgo]');await pg.waitForTimeout(300);
+await pg.click('#shcat');await pg.click('[data-shmode="reel"]');await pg.waitForSelector('[data-reelgo]',{timeout:8000}).catch(()=>{});await pg.click('[data-reelgo="fb"]');await pg.waitForTimeout(300);
 sh=await pg.evaluate(()=>window.__sh.pop());cb=await pg.evaluate(()=>window.__cb.pop());
 ok(sh&&sh.name===`catalogo-${v}.mp4`&&sh.size>100000,`${v}: comparte el video del catálogo (${sh&&sh.size} bytes)`);
-ok(cb&&cb.includes('Comenta QUIERO')&&!cb.includes('http'),`${v}: descripción del catálogo sin enlace`);
+ok(cb&&cb.includes(`https://vidanatural-co.github.io/${v}/`)&&!cb.includes('Comenta'),`${v}: catálogo en Facebook con enlace`);
 await pg.click('#shcat');await pg.click('[data-shmode="link"]');await pg.waitForTimeout(200);cb=await pg.evaluate(()=>window.__cb.pop());
 ok(cb===`https://vidanatural-co.github.io/${v}/`,`${v}: copia enlace del catálogo`);
 // Feed e Historia siguen funcionando

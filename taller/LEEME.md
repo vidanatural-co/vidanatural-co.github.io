@@ -38,7 +38,8 @@ La tienda publicada es el resultado; si se edita a mano un index.html publicado,
 
 ## Compartir (desde 29-oct-2026)
 Menú de compartir: 📝 Publicación (feed), 📱 Historia, 🎬 Reel y 🔗 Copiar enlace.
-- Reel: descarga el video, luego el botón "Compartir video" lo comparte (segundo toque, para que el celular lo permita) y copia una descripción SIN enlace que termina en "Comenta QUIERO y te envío el enlace". En Reels el enlace no se puede tocar.
+- Reel: descarga el video y muestra 2 botones (segundo toque, para que el celular lo permita): "Compartir en Instagram" copia la descripción SIN enlace con "Comenta QUIERO y te envío el enlace" (en Instagram los enlaces no se pueden tocar); "Compartir en Facebook" copia la descripción CON el enlace (en Facebook sí se puede tocar).
+- Cierre de los videos: los 92 hechos el 29-oct dicen "Comenta QUIERO" (Jairo decidió dejarlos así). Los NUEVOS cierran con "PÍDELO HOY" + cinta "🚚 Pagas cuando lo recibes" (sirve en las dos redes).
 - Copiar enlace: para pegarlo en un comentario fijado en Facebook.
 - El ayudante sw.js no guarda los videos .mp4 en el celular (para que siempre salga el video más nuevo).
 
