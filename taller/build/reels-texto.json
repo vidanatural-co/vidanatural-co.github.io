@@ -1,14 +1,830 @@
 {
-"vinq-cbr4l":{"gancho":"Energía y mente clara","resalta":"Energía","b":["Energía para tu día","Con antioxidantes","Una copa al día"]},
-"vitafer-l":{"gancho":"¿Te falta energía?","resalta":"energía","b":["Más vigor","Menos cansancio","Rinde al máximo"]},
-"vitafrancesa":{"gancho":"Vitaminas con sabor a frutos rojos","resalta":"frutos rojos","b":["Multivitamínico","Con calcio, hierro y zinc","En gomitas"]},
-"vitamina-c-greensofg":{"gancho":"Vitamina C que se mastica","resalta":"se mastica","b":["1.000 mg","Cápsulas masticables","Para casi 2 meses"]},
-"vitamina-c-liposomal":{"gancho":"Vitamina C suave con tu estómago","resalta":"suave","b":["1.500 mg","Alta absorción","Apoya tus defensas"]},
-"vitamina-c":{"gancho":"Tus defensas en un caramelo","resalta":"defensas","b":["1.000 mg sabor naranja","Apoya tus defensas","Sin pastillas duras"]},
-"vitamina-d":{"gancho":"¿Casi no tomas sol?","resalta":"sol","b":["Huesos fuertes","Defensas activas","Un caramelo al día"]},
-"vitamina-e-selenio":{"gancho":"Doble protección antioxidante","resalta":"Doble","b":["Vitamina E + Selenio","Cuida tu piel","1.000 UI"]},
-"vitamina-e":{"gancho":"Cuida tu piel desde adentro","resalta":"piel","b":["1.000 mg","Antioxidante","Un caramelo al día"]},
-"vitcebrin-kids":{"gancho":"Nutrición para los más pequeños","resalta":"pequeños","b":["Sabor naranja","Sin azúcar añadida","Defensas y crecimiento"]},
-"zinc-softnaf":{"gancho":"El mineral de tus defensas","resalta":"defensas","b":["Piel, cabello y uñas","Caramelo blando","Apoya tus defensas"]},
-"zooone-eyes":{"gancho":"¿Muchas horas frente a pantallas?","resalta":"pantallas","b":["Cuida tu vista","Con antioxidantes","90 cápsulas"]}
+"vinq-cbr4l": {
+"gancho": "Energía y mente clara",
+"resalta": "Energía",
+"b": [
+"Energía para tu día",
+"Con antioxidantes",
+"Una copa al día"
+]
+},
+"vitafer-l": {
+"gancho": "¿Te falta energía?",
+"resalta": "energía",
+"b": [
+"Más vigor",
+"Menos cansancio",
+"Rinde al máximo"
+]
+},
+"vitafrancesa": {
+"gancho": "Vitaminas con sabor a frutos rojos",
+"resalta": "frutos rojos",
+"b": [
+"Multivitamínico",
+"Con calcio, hierro y zinc",
+"En gomitas"
+]
+},
+"vitamina-c-greensofg": {
+"gancho": "Vitamina C que se mastica",
+"resalta": "se mastica",
+"b": [
+"1.000 mg",
+"Cápsulas masticables",
+"Para casi 2 meses"
+]
+},
+"vitamina-c-liposomal": {
+"gancho": "Vitamina C suave con tu estómago",
+"resalta": "suave",
+"b": [
+"1.500 mg",
+"Alta absorción",
+"Apoya tus defensas"
+]
+},
+"vitamina-c": {
+"gancho": "Tus defensas en un caramelo",
+"resalta": "defensas",
+"b": [
+"1.000 mg sabor naranja",
+"Apoya tus defensas",
+"Sin pastillas duras"
+]
+},
+"vitamina-d": {
+"gancho": "¿Casi no tomas sol?",
+"resalta": "sol",
+"b": [
+"Huesos fuertes",
+"Defensas activas",
+"Un caramelo al día"
+]
+},
+"vitamina-e-selenio": {
+"gancho": "Doble protección antioxidante",
+"resalta": "Doble",
+"b": [
+"Vitamina E + Selenio",
+"Cuida tu piel",
+"1.000 UI"
+]
+},
+"vitamina-e": {
+"gancho": "Cuida tu piel desde adentro",
+"resalta": "piel",
+"b": [
+"1.000 mg",
+"Antioxidante",
+"Un caramelo al día"
+]
+},
+"vitcebrin-kids": {
+"gancho": "Nutrición para los más pequeños",
+"resalta": "pequeños",
+"b": [
+"Sabor naranja",
+"Sin azúcar añadida",
+"Defensas y crecimiento"
+]
+},
+"zinc-softnaf": {
+"gancho": "El mineral de tus defensas",
+"resalta": "defensas",
+"b": [
+"Piel, cabello y uñas",
+"Caramelo blando",
+"Apoya tus defensas"
+]
+},
+"zooone-eyes": {
+"gancho": "¿Muchas horas frente a pantallas?",
+"resalta": "pantallas",
+"b": [
+"Cuida tu vista",
+"Con antioxidantes",
+"90 cápsulas"
+]
+},
+"growxure": {
+"gancho": "Proteína que te dura más horas",
+"resalta": "más horas",
+"b": [
+"Doble acción",
+"Proteína vegetal",
+"30 porciones"
+]
+},
+"calostro": {
+"gancho": "Nutrición que fortalece desde adentro",
+"resalta": "desde adentro",
+"b": [
+"Apoya tus defensas",
+"Cuida tu músculo",
+"Sabor vainilla"
+]
+},
+"magnesio": {
+"gancho": "Descansa mejor, rinde más",
+"resalta": "rinde más",
+"b": [
+"Músculos relajados",
+"Menos cansancio",
+"90 cápsulas"
+]
+},
+"ashwagandha": {
+"gancho": "¿Mucho estrés en tu día?",
+"resalta": "estrés",
+"b": [
+"Más calma",
+"Mejor descanso",
+"Caramelo blando"
+]
+},
+"oregano": {
+"gancho": "Orégano sin el sabor picante",
+"resalta": "sin el sabor",
+"b": [
+"Con semilla negra",
+"6.000 mg",
+"Te dura 3 meses"
+]
+},
+"sangtorq": {
+"gancho": "Frutos de nuestra tierra en una copa",
+"resalta": "nuestra tierra",
+"b": [
+"Energía para tu día",
+"Con antioxidantes",
+"Endulzado natural"
+]
+},
+"megflx": {
+"gancho": "Muévete con más libertad",
+"resalta": "libertad",
+"b": [
+"Huesos y articulaciones",
+"Cuida tu músculo",
+"Sabor uva"
+]
+},
+"colgenwell": {
+"gancho": "Colágeno que sabe a postre",
+"resalta": "postre",
+"b": [
+"Piel firme",
+"Articulaciones",
+"Cookies & cream"
+]
+},
+"theraphycell": {
+"gancho": "Calostro, hongos y superalimentos",
+"resalta": "superalimentos",
+"b": [
+"Apoya tus defensas",
+"Antioxidantes",
+"Una copa al día"
+]
+},
+"coll4gen": {
+"gancho": "Colágeno líquido de rápida absorción",
+"resalta": "líquido",
+"b": [
+"Muévete mejor",
+"Luce mejor",
+"1 litro"
+]
+},
+"resveratrol-b3": {
+"gancho": "Juventud que se nota por fuera",
+"resalta": "se nota",
+"b": [
+"Resveratrol + B3",
+"Energía",
+"Caramelo blando"
+]
+},
+"cloruro-magnesio": {
+"gancho": "Magnesio sin el sabor amargo",
+"resalta": "sin el sabor amargo",
+"b": [
+"Músculos relajados",
+"Nervios en calma",
+"1.000 mg"
+]
+},
+"melatonina": {
+"gancho": "Duerme profundo, despierta ligero",
+"resalta": "profundo",
+"b": [
+"Tu ritmo natural",
+"Sin pesadez",
+"Un caramelo al día"
+]
+},
+"biotina": {
+"gancho": "Cabello, uñas y piel con brillo",
+"resalta": "brillo",
+"b": [
+"Más fuerza",
+"1.000 mg",
+"Un caramelo al día"
+]
+},
+"marinq": {
+"gancho": "Colágeno con sabor a coco",
+"resalta": "coco",
+"b": [
+"Piel firme",
+"Apoya tus defensas",
+"Un batido al día"
+]
+},
+"multi-vi": {
+"gancho": "Dile adiós al cansancio",
+"resalta": "cansancio",
+"b": [
+"Energía líquida",
+"Antioxidantes",
+"Todo el día"
+]
+},
+"b-complex": {
+"gancho": "Energía y nervios en calma",
+"resalta": "nervios en calma",
+"b": [
+"Complejo B",
+"Sabor frutal",
+"Una copa al día"
+]
+},
+"calostro-500": {
+"gancho": "Defensas e intestino en un caramelo",
+"resalta": "Defensas",
+"b": [
+"Calostro bovino",
+"500 mg",
+"Fácil de tomar"
+]
+},
+"probioticos": {
+"gancho": "¿Hinchazón después de comer?",
+"resalta": "Hinchazón",
+"b": [
+"Digestión ligera",
+"Probióticos + prebióticos",
+"Un caramelo al día"
+]
+},
+"multivitamin": {
+"gancho": "Todas tus vitaminas en una cápsula",
+"resalta": "una cápsula",
+"b": [
+"Energía",
+"Piel y uñas",
+"Te dura 3 meses"
+]
+},
+"mero-macho": {
+"gancho": "Recupera tu fuerza natural",
+"resalta": "fuerza",
+"b": [
+"Más vigor",
+"Más resistencia",
+"100% natural"
+]
+},
+"calci-plus": {
+"gancho": "Huesos fuertes en una copa",
+"resalta": "Huesos fuertes",
+"b": [
+"Articulaciones",
+"Antioxidantes",
+"Fácil de tomar"
+]
+},
+"colageno-biotina": {
+"gancho": "Piel firme y cabello fuerte",
+"resalta": "Piel firme",
+"b": [
+"Colágeno + biotina",
+"Articulaciones",
+"100 cápsulas"
+]
+},
+"la-berraquera": {
+"gancho": "Alivio justo donde lo necesitas",
+"resalta": "Alivio",
+"b": [
+"Efecto frío-calor",
+"Rápida absorción",
+"Uso externo"
+]
+},
+"nad-resveratrol": {
+"gancho": "Juventud desde tus células",
+"resalta": "células",
+"b": [
+"Energía celular",
+"Liposomal",
+"Antioxidante"
+]
+},
+"magnesio-triple": {
+"gancho": "Tres magnesios en uno",
+"resalta": "Tres",
+"b": [
+"Citrato, glicinato y malato",
+"Duerme mejor",
+"Despierta con energía"
+]
+},
+"oregano-softnaf": {
+"gancho": "Orégano en caramelo, sin picante",
+"resalta": "sin picante",
+"b": [
+"Defensas naturales",
+"Buena digestión",
+"500 mg"
+]
+},
+"cranberry": {
+"gancho": "El poder del arándano rojo",
+"resalta": "arándano rojo",
+"b": [
+"Vías urinarias",
+"Ideal para la mujer",
+"Un caramelo al día"
+]
+},
+"vinagre-manzana": {
+"gancho": "Vinagre de manzana sin acidez",
+"resalta": "sin acidez",
+"b": [
+"Buena digestión",
+"Menos pesadez",
+"Un caramelo al día"
+]
+},
+"calcio": {
+"gancho": "Huesos fuertes en un caramelo",
+"resalta": "Huesos fuertes",
+"b": [
+"Músculos y nervios",
+"500 mg",
+"Fácil de tomar"
+]
+},
+"ginkgo": {
+"gancho": "¿Se te olvidan las cosas?",
+"resalta": "olvidan",
+"b": [
+"Memoria",
+"Agilidad mental",
+"120 mg"
+]
+},
+"selerb-nad": {
+"gancho": "Bienestar masculino en una fórmula",
+"resalta": "masculino",
+"b": [
+"Energía",
+"Circulación",
+"Más vigor"
+]
+},
+"brain": {
+"gancho": "Mente en calma, memoria clara",
+"resalta": "memoria clara",
+"b": [
+"Enfoque",
+"Buen ánimo",
+"60 cápsulas"
+]
+},
+"neurazenx": {
+"gancho": "Cuida tus nervios: fórmula 20 en 1",
+"resalta": "20 en 1",
+"b": [
+"Nervios protegidos",
+"Antioxidantes",
+"Mejor absorción"
+]
+},
+"l-theanine": {
+"gancho": "¿Tu mente no se apaga de noche?",
+"resalta": "no se apaga",
+"b": [
+"Calma sin sueño de día",
+"Descanso profundo",
+"Liposomal"
+]
+},
+"resveratrol-greensofg": {
+"gancho": "Juventud con sabor a uva",
+"resalta": "uva",
+"b": [
+"Piel firme",
+"Antioxidantes",
+"1.000 mg"
+]
+},
+"glucosamina-greenworld": {
+"gancho": "Muévete con comodidad",
+"resalta": "comodidad",
+"b": [
+"Glucosamina + condroitina",
+"Con MSM",
+"Flexibilidad"
+]
+},
+"blood-sugar": {
+"gancho": "20 ingredientes en una fórmula",
+"resalta": "20 ingredientes",
+"b": [
+"Plantas tradicionales",
+"Antioxidantes",
+"60 cápsulas"
+]
+},
+"gaf-plus": {
+"gancho": "Colágeno y magnesio sabor fresa",
+"resalta": "fresa",
+"b": [
+"Articulaciones",
+"Músculos",
+"Un sorbo al día"
+]
+},
+"citrato-potasio": {
+"gancho": "Recarga tu cuerpo",
+"resalta": "Recarga",
+"b": [
+"Potasio + proteína",
+"Con frutas",
+"Energía"
+]
+},
+"ginseng-6": {
+"gancho": "Energía con sabor a miel",
+"resalta": "miel",
+"b": [
+"Más resistencia",
+"Menos cansancio",
+"Antioxidantes"
+]
+},
+"melena-leon": {
+"gancho": "El hongo de la mente clara",
+"resalta": "mente clara",
+"b": [
+"Memoria",
+"Calma",
+"Caramelo blando"
+]
+},
+"mary-ruth-mango": {
+"gancho": "Belleza que se toma",
+"resalta": "se toma",
+"b": [
+"Colágeno + biotina",
+"Cabello y uñas",
+"Sabor mango"
+]
+},
+"papaya": {
+"gancho": "Digestión ligera con papaya",
+"resalta": "ligera",
+"b": [
+"Menos pesadez",
+"Concentrado",
+"Natural"
+]
+},
+"super-b-complex": {
+"gancho": "Todo el complejo B en una cápsula",
+"resalta": "complejo B",
+"b": [
+"Con vitamina C",
+"Energía",
+"Sistema nervioso"
+]
+},
+"citrato-magnesio": {
+"gancho": "Magnesio de alta absorción",
+"resalta": "alta absorción",
+"b": [
+"Músculos",
+"Nervios",
+"1.000 mg"
+]
+},
+"blue-line": {
+"gancho": "Colágeno, omega 3 y cúrcuma",
+"resalta": "omega 3",
+"b": [
+"Articulaciones",
+"Huesos",
+"Una copa al día"
+]
+},
+"maca": {
+"gancho": "Tres macas, una sola energía",
+"resalta": "Tres macas",
+"b": [
+"Negra, roja y amarilla",
+"Más resistencia",
+"Caramelo blando"
+]
+},
+"hair-growth": {
+"gancho": "Cabello con más cuerpo",
+"resalta": "más cuerpo",
+"b": [
+"Grosor y brillo",
+"Uñas y piel",
+"Te dura 2 meses"
+]
+},
+"l-carnitine": {
+"gancho": "Convierte tu entreno en energía",
+"resalta": "energía",
+"b": [
+"Rendimiento",
+"3.000 mg",
+"Aliado del gym"
+]
+},
+"collagen-peptides": {
+"gancho": "5 tipos de colágeno",
+"resalta": "5 tipos",
+"b": [
+"Piel y cabello",
+"Articulaciones",
+"1.800 mg"
+]
+},
+"pumpkin-saw-palmetto": {
+"gancho": "Bienestar masculino natural",
+"resalta": "masculino",
+"b": [
+"Semilla de calabaza",
+"Saw palmetto",
+"Cápsula blanda"
+]
+},
+"omega-3-alaska": {
+"gancho": "Omega 3 del salvaje Alaska",
+"resalta": "Alaska",
+"b": [
+"Corazón",
+"Mente",
+"1.300 mg"
+]
+},
+"d3-k2-greensofg": {
+"gancho": "D3 y K2 juntas",
+"resalta": "juntas",
+"b": [
+"Huesos",
+"Apoya tus defensas",
+"Sabor vainilla"
+]
+},
+"te-verde-jengibre": {
+"gancho": "Té verde y jengibre masticable",
+"resalta": "masticable",
+"b": [
+"Antioxidante",
+"Buena digestión",
+"Fácil de tomar"
+]
+},
+"saw-palmetto": {
+"gancho": "Cuidado natural para él",
+"resalta": "para él",
+"b": [
+"Saw palmetto",
+"Con zinc",
+"2.400 mg"
+]
+},
+"omega-369": {
+"gancho": "Los tres omegas en un masticable",
+"resalta": "tres omegas",
+"b": [
+"Omega 3, 6 y 9",
+"Corazón",
+"Fácil de tomar"
+]
+},
+"calabaza": {
+"gancho": "Semilla de calabaza masticable",
+"resalta": "calabaza",
+"b": [
+"Bienestar urinario",
+"2.000 mg",
+"Fácil de tomar"
+]
+},
+"bururan": {
+"gancho": "Chanca piedra y uña de gato",
+"resalta": "uña de gato",
+"b": [
+"Plantas tradicionales",
+"Con ajo y perejil",
+"Natural"
+]
+},
+"max-calm": {
+"gancho": "¿Necesitas relajarte?",
+"resalta": "relajarte",
+"b": [
+"Bebida de magnesio",
+"Mejor descanso",
+"113 porciones"
+]
+},
+"gummies-naturalsplast": {
+"gancho": "Gomitas con huevo de pato",
+"resalta": "huevo de pato",
+"b": [
+"Con calostro",
+"Vitaminas y minerales",
+"Deliciosas"
+]
+},
+"drenaje-linfatico": {
+"gancho": "Siéntete más liviano",
+"resalta": "liviano",
+"b": [
+"Menos pesadez",
+"Plantas",
+"En gotas"
+]
+},
+"drenaje-linfatico-capsulas": {
+"gancho": "Ligereza en cápsulas",
+"resalta": "Ligereza",
+"b": [
+"Menos hinchazón",
+"Plantas",
+"60 cápsulas"
+]
+},
+"combo-drenaje-linfovit": {
+"gancho": "Gotas + cápsulas: combo completo",
+"resalta": "combo",
+"b": [
+"Más ligereza",
+"Menos pesadez",
+"Dura más tiempo"
+]
+},
+"liver-sandhus": {
+"gancho": "Cuida tu hígado",
+"resalta": "hígado",
+"b": [
+"Cardo mariano",
+"Diente de león",
+"Antioxidantes"
+]
+},
+"omega-3-krill": {
+"gancho": "Omega 3 de krill",
+"resalta": "krill",
+"b": [
+"Cápsulas blandas",
+"1.300 mg",
+"Para todo el mes"
+]
+},
+"castano-indias": {
+"gancho": "¿Piernas cansadas?",
+"resalta": "Piernas",
+"b": [
+"Castaño de indias",
+"Con caléndula",
+"600 mg"
+]
+},
+"creatina-gomitas": {
+"gancho": "Creatina sin polvos ni mezclas",
+"resalta": "sin polvos",
+"b": [
+"5 g por porción",
+"Más fuerza",
+"Sin azúcar"
+]
+},
+"fibra-gomitas": {
+"gancho": "Fibra que sabe a frambuesa",
+"resalta": "frambuesa",
+"b": [
+"5 g de fibra",
+"Regularidad",
+"Sin azúcar añadida"
+]
+},
+"turkesterone-2": {
+"gancho": "Fuerza y vigor en una cápsula",
+"resalta": "Fuerza y vigor",
+"b": [
+"Turkesterone",
+"Tongkat Ali",
+"Fórmula limpia"
+]
+},
+"clorofila": {
+"gancho": "El verde de las plantas",
+"resalta": "verde",
+"b": [
+"Antioxidantes",
+"Bienestar interior",
+"Fácil de tomar"
+]
+},
+"ajo-perejil": {
+"gancho": "Ajo y perejil sin el olor",
+"resalta": "sin el olor",
+"b": [
+"Apoya tus defensas",
+"Buena digestión",
+"Sin mal aliento"
+]
+},
+"inositol": {
+"gancho": "Equilibrio por dentro",
+"resalta": "Equilibrio",
+"b": [
+"Calma",
+"1.000 mg",
+"Masticable"
+]
+},
+"curcuma": {
+"gancho": "Cúrcuma al 95%, sin amargor",
+"resalta": "95%",
+"b": [
+"Articulaciones",
+"Antioxidante",
+"1.000 mg"
+]
+},
+"magnesium-toplux": {
+"gancho": "8 formas de magnesio",
+"resalta": "8 formas",
+"b": [
+"Huesos y músculos",
+"Descanso",
+"Máxima absorción"
+]
+},
+"epimedium": {
+"gancho": "8 plantas para tu vigor",
+"resalta": "vigor",
+"b": [
+"Energía",
+"Menos estrés",
+"Mejor absorción"
+]
+},
+"glucosamina-2": {
+"gancho": "Rodillas que se mueven mejor",
+"resalta": "Rodillas",
+"b": [
+"Ácido hialurónico",
+"Con cúrcuma",
+"1.660 mg"
+]
+},
+"ashwagandha-ksm66": {
+"gancho": "Recupera tu paz",
+"resalta": "paz",
+"b": [
+"Menos estrés",
+"Buen ánimo",
+"KSM-66"
+]
+},
+"combo-2-ashwagandha": {
+"gancho": "100 días de calma",
+"resalta": "100 días",
+"b": [
+"Menos estrés",
+"Buen ánimo",
+"2 frascos"
+]
+},
+"combo-ashwagandha-glucosamina": {
+"gancho": "Cuerpo libre, mente en calma",
+"resalta": "mente en calma",
+"b": [
+"Articulaciones",
+"Menos estrés",
+"Combo de 2"
+]
+}
 }
