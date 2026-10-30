@@ -1,6 +1,7 @@
 // Reels con texto animado (tipografía cinética). Sin voz ni música. 10 s, 1080x1920, 30 cuadros/s.
-// Uso: node reels-texto.js <estilo 1|2> <carpeta de salida> [foto1 foto2 ...]
+// Uso: node reels-texto.js <estilo 1|2|2n> <carpeta de salida> [foto1 foto2 ...]
 //   Estilo 1: gancho animado (2,4 s) -> foto con acercamiento -> cierre "Comenta QUIERO".
+//   Estilo 2n: igual al 2 pero con la foto completa nítida (sin desenfoque), con sombra arriba y abajo para leer el texto.
 //   Estilo 2: foto con el frasco nítido y el resto desenfocado + gancho arriba + 3 beneficios + cierre.
 // Textos: reels-texto.json (gancho, palabra resaltada, 3 beneficios). Sin precios: el video es igual para los 3 asesores.
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path'),os=require('os'),{execFileSync}=require('child_process');
@@ -37,6 +38,7 @@ function html(foto,d){return `<!doctype html><html><head><meta charset="utf-8"><
 <div class="lay" id="bg"><img src="${foto}"></div>
 <div class="lay" id="ph"><img src="${foto}"></div>
 <div class="lay" id="sh"><img src="${foto}"></div>
+<div class="lay" id="gr" style="display:none;background:linear-gradient(to bottom,rgba(5,20,10,.82) 0,rgba(5,20,10,.55) 22%,rgba(5,20,10,0) 36%,rgba(5,20,10,0) 60%,rgba(5,20,10,.5) 74%,rgba(5,20,10,.5) 82%,rgba(5,20,10,0) 92%)"></div>
 <div class="txt hook" id="hook">${palabras(d.gancho,d.resalta)}</div>
 ${(d.b||[]).map((b,i)=>`<div class="txt" id="b${i}"><span class="pill" style="font-size:${b.length>20?50:56}px"><span class="ck">✓</span>${esc(b)}</span></div>`).join('')}
 <div class="txt" id="end"><div class="sub" id="e0" style="font-size:66px;font-family:M;font-weight:800">¿LO QUIERES?</div>
@@ -44,7 +46,7 @@ ${(d.b||[]).map((b,i)=>`<div class="txt" id="b${i}"><span class="pill" style="fo
 <div class="hook" id="e2" style="font-size:210px;margin-top:6px"><span class="q">QUIERO</span></div>
 <div class="sub" id="e3" style="font-size:54px;margin-top:34px">y te envío el enlace 👇</div></div>
 <script>
-const ES=${estilo==='2'?2:1};const $=s=>document.querySelector(s);
+const ES=${estilo==='1'?1:2},NB=${estilo==='2n'?1:0};const $=s=>document.querySelector(s);
 const cl=x=>Math.max(0,Math.min(1,x)),sm=x=>{x=cl(x);return x*x*(3-2*x)},oc=x=>{x=cl(x);return 1-Math.pow(1-x,3)},
  back=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
 const W=[...document.querySelectorAll('#hook .w')];
@@ -66,7 +68,7 @@ function render(t){
   for(let i=0;i<3;i++){const e=$('#b'+i);if(e)e.style.display='none'}
   end.style.top='560px';endAt(t,8.05);
  }else{
-  ph.style.display='none';const z=1+.05*sm(t/SEG_);const tr=\`translateY(-90px) scale(\${.76*z})\`;sh.style.transform=tr;bg.style.transform=\`scale(\${1.25*z})\`;
+  ph.style.display='none';const z=1+.05*sm(t/SEG_);const tr=NB?\`scale(\${z})\`:\`translateY(-90px) scale(\${.76*z})\`;if(NB){sh.style.webkitMaskImage='none';bg.style.display='none';$('#gr').style.display='block'}sh.style.transform=tr;bg.style.transform=\`scale(\${1.25*z})\`;
   fit(hook,124,2);hook.style.top='235px';hookAt(t,-.2,7.6);puAt();
   for(let i=0;i<3;i++){const e=$('#b'+i);if(!e)continue;const s=2.3+i*1.75,p=(t-s)/.45,o=cl(p*2)*(1-sm((t-(s+1.6))/.3));
    e.style.top='1290px';e.style.opacity=i===2?cl(p*2)*(1-sm((t-7.6)/.3)):o;e.style.transform=\`translateX(\${(1-back(p))*-260}px) scale(\${.85+.15*back(p)})\`}
