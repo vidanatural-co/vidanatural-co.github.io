@@ -14,8 +14,9 @@ function palabras(txt,resalta){const r=(resalta||'').toLowerCase();const out=[];
  // agrupa la frase resaltada como una sola "palabra" con caja amarilla
  const low=txt.toLowerCase(),k=r?low.indexOf(r):-1;
  let fin=k>=0?k+r.length:0;while(k>=0&&/[?!.,:;]/.test(txt[fin]||''))fin++;  // el signo pegado queda con la palabra resaltada
- const partes=k>=0?[[txt.slice(0,k),0],[txt.slice(k,fin),1],[txt.slice(fin),0]]:[[txt,0]];
- for(const [p,h] of partes){if(h){const m=p.trim().match(/^(.*?)([?!.,:;]*)$/);out.push(`<span style="white-space:nowrap"><span class="w hl" data-i="${i++}"><i class="box"></i><b>${esc(m[1])}</b></span>${m[2]?`<b class="pu">${esc(m[2])}</b>`:''}</span>`);continue}
+ let ini=k;while(k>=0&&ini>0&&/[¿¡]/.test(txt[ini-1]))ini--;  // el "¿" de adelante también va pegado
+ const partes=k>=0?[[txt.slice(0,ini),0],[txt.slice(ini,fin),1],[txt.slice(fin),0]]:[[txt,0]];
+ for(const [p,h] of partes){if(h){const m=p.trim().match(/^[¿¡]*(.*?)([?!.,:;]*)$/);const pre=p.trim().match(/^[¿¡]*/)[0];out.push(`<span style="white-space:nowrap">${pre?`<b class="pu pre">${esc(pre)}</b>`:''}<span class="w hl" data-i="${i++}"><i class="box"></i><b>${esc(m[1])}</b></span>${m[2]?`<b class="pu">${esc(m[2])}</b>`:''}</span>`);continue}
   for(const w of p.split(/\s+/).filter(Boolean))out.push(`<span class="w" data-i="${i++}"><b>${esc(w)}</b></span>`)}
  return out.join(' ')}
 function html(foto,d){return `<!doctype html><html><head><meta charset="utf-8"><style>
@@ -29,7 +30,7 @@ function html(foto,d){return `<!doctype html><html><head><meta charset="utf-8"><
 .txt{position:absolute;left:70px;right:70px;text-align:center;color:#fff}
 .hook{font-family:Anton;text-transform:uppercase;line-height:1.08;letter-spacing:1px;text-shadow:0 6px 24px rgba(0,0,0,.45)}
 .w{display:inline-block;position:relative;opacity:0;margin:0 6px}.w b{position:relative;font-weight:400}
-.pu{display:inline-block;font-weight:400;margin-left:-4px}.hl b{color:#13361c;text-shadow:none;padding:0 14px}.box{position:absolute;inset:4px -2px;background:#ffd23f;border-radius:14px;transform-origin:0 50%;transform:scaleX(0)}
+.pu{display:inline-block;font-weight:400;margin-left:-4px}.pu.pre{margin-left:0;margin-right:-2px}.hl b{color:#13361c;text-shadow:none;padding:0 14px}.box{position:absolute;inset:4px -2px;background:#ffd23f;border-radius:14px;transform-origin:0 50%;transform:scaleX(0)}
 .pill{display:inline-flex;align-items:center;gap:22px;background:#fff;color:#13361c;font-family:M;font-weight:800;border-radius:999px;padding:24px 46px 24px 26px;box-shadow:0 14px 40px rgba(0,0,0,.35)}
 .ck{width:66px;height:66px;border-radius:50%;background:#2f8f3a;color:#fff;display:grid;place-items:center;font-size:40px}
 .q{display:inline-block;background:#ffd23f;color:#13361c;border-radius:22px;padding:0 34px}
@@ -50,8 +51,8 @@ const ES=${estilo==='1'?1:2},NB=${estilo==='2n'?1:0};const $=s=>document.querySe
 const cl=x=>Math.max(0,Math.min(1,x)),sm=x=>{x=cl(x);return x*x*(3-2*x)},oc=x=>{x=cl(x);return 1-Math.pow(1-x,3)},
  back=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
 const W=[...document.querySelectorAll('#hook .w')];
-let FIT=0;function fit(el,base,lines){if(FIT)return;let z=base;el.style.fontSize=z+'px';while(el.getBoundingClientRect().height>lines*z*1.08+20&&z>60){z-=4;el.style.fontSize=z+'px'}FIT=1}
-function puAt(){document.querySelectorAll('#hook .pu').forEach(u=>{const w=u.previousElementSibling;u.style.opacity=w.style.opacity;u.style.transform=w.style.transform})}
+let FIT=0;function fit(el,base,lines){if(FIT)return;let z=base;el.style.fontSize=z+'px';const ancho=()=>Math.max(...[...el.querySelectorAll('.w,.pu')].map(w=>w.getBoundingClientRect().right))>1015||el.scrollWidth>el.clientWidth+2;while((el.getBoundingClientRect().height>lines*z*1.08+20||ancho())&&z>60){z-=4;el.style.fontSize=z+'px'}FIT=1}
+function puAt(){document.querySelectorAll('#hook .pu').forEach(u=>{const w=u.classList.contains('pre')?u.nextElementSibling:u.previousElementSibling;u.style.opacity=w.style.opacity;u.style.transform=w.style.transform})}
 function hookAt(t,t0,out){W.forEach((w,i)=>{const p=(t-(t0+i*.13))/.38;const o=cl(p*2.2)*(1-sm((t-out)/.35));
   w.style.opacity=o;w.style.transform=\`translateY(\${(1-back(p))*70-sm((t-out)/.35)*60}px) scale(\${.75+.25*back(p)})\`;
   const bx=w.querySelector('.box');if(bx)bx.style.transform=\`scaleX(\${oc((t-(t0+W.length*.13+.15))/.35)})\`})}
