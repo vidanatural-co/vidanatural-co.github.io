@@ -1,6 +1,7 @@
 // Reels con texto animado (tipografía cinética). Sin voz ni música. 10 s, 1080x1920, 30 cuadros/s.
 // Uso: node reels-texto.js <estilo 1|2|2n> <carpeta de salida> [foto1 foto2 ...]
 //   Estilo 1: gancho animado (2,4 s) -> foto con acercamiento -> cierre "Comenta QUIERO".
+// Cierre (desde 29-oct-2026, sirve en Instagram y Facebook): "PÍDELO HOY" + "Pagas cuando lo recibes". Los 92 videos anteriores dicen "Comenta QUIERO".
 //   Estilo 2n: igual al 2 pero con la foto completa nítida (sin desenfoque), con sombra arriba y abajo para leer el texto.
 //   Estilo 2: foto con el frasco nítido y el resto desenfocado + gancho arriba + 3 beneficios + cierre.
 // Textos: reels-texto.json (gancho, palabra resaltada, 3 beneficios). Sin precios: el video es igual para los 3 asesores.
@@ -43,9 +44,9 @@ function html(foto,d){return `<!doctype html><html><head><meta charset="utf-8"><
 <div class="txt hook" id="hook">${palabras(d.gancho,d.resalta)}</div>
 ${(d.b||[]).map((b,i)=>`<div class="txt" id="b${i}"><span class="pill" style="font-size:${b.length>20?50:56}px"><span class="ck">✓</span>${esc(b)}</span></div>`).join('')}
 <div class="txt" id="end"><div class="sub" id="e0" style="font-size:66px;font-family:M;font-weight:800">¿LO QUIERES?</div>
-<div class="hook" id="e1" style="font-size:120px;margin-top:26px">COMENTA</div>
-<div class="hook" id="e2" style="font-size:210px;margin-top:6px"><span class="q">QUIERO</span></div>
-<div class="sub" id="e3" style="font-size:54px;margin-top:34px">y te envío el enlace 👇</div></div>
+<div class="hook" id="e1" style="font-size:120px;margin-top:26px">PÍDELO</div>
+<div class="hook" id="e2" style="font-size:210px;margin-top:6px"><span class="q">HOY</span></div>
+<div class="sub" id="e3" style="font-size:54px;margin-top:34px"><span class="pill" style="font-size:50px;padding:22px 42px">🚚 Pagas cuando lo recibes</span></div></div>
 <script>
 const ES=${estilo==='1'?1:2},NB=${estilo==='2n'?1:0};const $=s=>document.querySelector(s);
 const cl=x=>Math.max(0,Math.min(1,x)),sm=x=>{x=cl(x);return x*x*(3-2*x)},oc=x=>{x=cl(x);return 1-Math.pow(1-x,3)},
