@@ -22,7 +22,9 @@ for v, (nom, trato, col, col2) in V.items():
     out = f'/home/claude/catalogo/gh/{v}'
     shutil.rmtree(out, ignore_errors=True); os.makedirs(out + '/p')
     sitio = f'https://vidanatural-co.github.io/{v}'
-    h = (tpl.replace('__NOMBRE__', nom).replace('__TRATO__', trato).replace('__COLOR2__', col2).replace('__COLOR__', col)
+    # Solo la tienda de Jairo es Vida Natural; los demás asesores son independientes (31-oct-2026)
+    titulo = 'Tienda Vida Natural · Jairo' if v == 'jairo' else f'Tienda de {nom} · Productos naturales'
+    h = (tpl.replace('__TITULO__', titulo).replace('__HASHTAG__', '#VidaNaturalCo' if v == 'jairo' else '#ProductosNaturales').replace('__NOMBRE__', nom).replace('__TRATO__', trato).replace('__COLOR2__', col2).replace('__COLOR__', col)
          .replace('__SITIO__', sitio).replace('__V__', v).replace('__API__', API).replace('__SIMBOLO__', SYM[v])).replace('img/','../img/')
     open(out + '/index.html', 'w', encoding='utf-8').write(h)
     
@@ -31,7 +33,7 @@ for v, (nom, trato, col, col2) in V.items():
     shutil.copy(f'iconos/{v}-maskable.png', f'{out}/icono-maskable.png')
     for s in ('192', '512'):
         shutil.copy(f'iconos/{v}-{s}.png', f'{out}/icono-{s}.png')
-    json.dump({"name": f"Tienda Vida Natural · {nom}", "short_name": f"Tienda {nom}", "start_url": "./", "scope": "./", "display": "standalone",
+    json.dump({"name": titulo, "short_name": f"Tienda {nom}", "start_url": "./", "scope": "./", "display": "standalone",
                "background_color": "#fbf7f2", "theme_color": col,
                "icons": [{"src": "icono-192.png", "sizes": "192x192", "type": "image/png"},
                          {"src": "icono-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},

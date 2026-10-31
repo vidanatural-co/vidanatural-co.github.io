@@ -48,8 +48,13 @@ Menú de compartir: 📝 Publicación (feed), 📱 Historia, 🎬 Reel y 🔗 Co
 - Estado de WhatsApp (desde 30-oct-2026): tercer botón en la ventana del Reel. Mismo video; copia texto corto SIN hashtags: nombre – precio / "👉 Mira más información aquí: <enlace>" / "🚚 Pagas cuando lo recibes." (en los estados el enlace sí se toca). La música la pone Jairo en WhatsApp.
 
 ## Página de material (desde 31-oct-2026)
-- `material/` = **Vitrina Vida Natural** (https://vidanatural-co.github.io/material/): videos con texto y fotos de cada producto para compartir. Para Liliana, Gladys, Pineda y Adriana (no usan la tienda). Pública, sin clave, sin precios.
+- `material/` = **Vitrina de Productos Naturales** (https://vidanatural-co.github.io/material/): videos con texto y fotos de cada producto para compartir. Para Liliana, Gladys, Pineda y Adriana (no usan la tienda). Pública, sin clave, sin precios.
 - Es una página aparte, NO sale de plantilla.html ni de build.py: se edita directamente `material/index.html`.
 - Lee la misma lista que la tienda de Jairo (cartero, `v=jairo`) y oculta los agotados. Video: `img/reel/<foto>.mp4`; foto: `img/<foto>`. Se actualiza sola al cambiar la hoja o los videos.
 - Botones: Compartir video (grande), Compartir foto, Descargar (pregunta video o foto), Copiar texto (nombre + gancho + 3 beneficios + "Escríbeme y pídelo 🌿"). Compartir también copia el texto.
 - Botón Instalar (corregido 31-oct, Pineda vio pasos equivocados): si Chrome ofrece instalar, sale "Instalar ahora"; si no, espera 3 s y muestra pasos según el celular: iPhone (Safari), Samsung (☰ → Agregar página a), Android Chrome (⋮ → Instalar app); si está abierta dentro de WhatsApp/Facebook u otro navegador, primero dice "Abrir en Chrome".
+
+## Nombres (31-oct-2026)
+- Solo la tienda de Jairo es "Vida Natural" (Tienda Vida Natural · Jairo, hashtag #VidaNaturalCo). Liliana, Gladys, Pineda, Adriana y Leal son independientes: sus tiendas se llaman "Tienda de <nombre> · Productos naturales" (hashtag #ProductosNaturales) y la Vitrina es "Vitrina de Productos Naturales" (ícono de hoja, sin el sol de Jairo). build.py arma título y hashtag según el asesor.
+- La página principal (raíz) es solo de Vida Natural: un botón a la tienda de Jairo; ya no lista a Liliana y Gladys.
+- La dirección web (vidanatural-co.github.io) NO se cambia (decisión de Jairo).
