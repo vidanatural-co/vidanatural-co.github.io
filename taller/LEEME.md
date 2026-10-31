@@ -46,3 +46,10 @@ Menú de compartir: 📝 Publicación (feed), 📱 Historia, 🎬 Reel y 🔗 Co
 - Instagram Lite y Facebook Lite NO reciben videos para Reels (comprobado 29-oct-2026). Al compartir, escoger Instagram o Facebook normales.
 - Hashtags (desde 29-oct-2026): máximo 5 (límite de Instagram). Producto: hasta 2 de su categoría + uno con el nombre del producto (función htn, sale del nombre en la hoja) + #VidaNaturalCo #ContraentregaColombia. Catálogo: #VidaNaturalCo #SuplementosNaturales #ContraentregaColombia.
 - Estado de WhatsApp (desde 30-oct-2026): tercer botón en la ventana del Reel. Mismo video; copia texto corto SIN hashtags: nombre – precio / "👉 Mira más información aquí: <enlace>" / "🚚 Pagas cuando lo recibes." (en los estados el enlace sí se toca). La música la pone Jairo en WhatsApp.
+
+## Página de material (desde 31-oct-2026)
+- `material/` (https://vidanatural-co.github.io/material/): videos con texto y fotos de cada producto para compartir. Para Liliana, Gladys, Pineda y Adriana (no usan la tienda). Pública, sin clave, sin precios.
+- Es una página aparte, NO sale de plantilla.html ni de build.py: se edita directamente `material/index.html`.
+- Lee la misma lista que la tienda de Jairo (cartero, `v=jairo`) y oculta los agotados. Video: `img/reel/<foto>.mp4`; foto: `img/<foto>`. Se actualiza sola al cambiar la hoja o los videos.
+- Botones: Compartir video (grande), Compartir foto, Descargar (pregunta video o foto), Copiar texto (nombre + gancho + 3 beneficios + "Escríbeme y te lo envío 🚚 Pagas cuando lo recibes."). Compartir también copia el texto.
+- Botón Instalar: en Android abre la instalación; si no se puede (iPhone, otro navegador) muestra los pasos.

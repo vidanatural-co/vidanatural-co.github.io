@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Vida Natural · Material para compartir</title>
+<meta name="description" content="Videos y fotos de productos naturales listos para compartir en WhatsApp y Facebook.">
+<meta name="theme-color" content="#3f8f1f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icono-192.png">
+<link rel="apple-touch-icon" href="icono-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+:root{
+  --ac:#3f8f1f; --acfg:#fff;
+  --bg:#fbf7f2; --surface:#fff; --fg:#2b2430; --muted:#776d7c; --line:#ece4dc;
+  --ok:#2f7a4f; --wa:#1f8f4e; --gold:#f4b400;
+  --display:"Baloo 2",system-ui,sans-serif; --body:"Nunito",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{--bg:#1c1820;--surface:#27212c;--fg:#f4eef6;--muted:#b8adbd;--line:#3a3240;--ok:#5fbf86;--wa:#2fae64;color-scheme:dark}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit}
+[hidden]{display:none!important}
+.wrap{max-width:560px;margin:0 auto;padding:calc(10px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 60px max(16px,env(safe-area-inset-left,0px))}
+header{display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 0 10px}
+header .sym{width:64px;height:64px}
+header h1{font-family:var(--display);font-weight:800;font-size:24px;margin:0;line-height:1.1;text-align:center}
+header p{margin:0;color:var(--muted);font-size:14px;text-align:center}
+.inst{display:block;width:100%;border:0;background:var(--ac);color:#fff;border-radius:14px;padding:13px;font-weight:800;font-size:16px;cursor:pointer;margin:0 0 12px}
+.search{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:inherit;font-size:16px}
+.cats{display:flex;gap:8px;overflow-x:auto;padding:10px 0 12px;scrollbar-width:none;margin:0 -2px}
+.cats::-webkit-scrollbar{display:none}
+.cats button{flex:none;border:1px solid var(--line);background:var(--surface);padding:8px 14px;border-radius:999px;font-weight:700;font-size:13px;cursor:pointer}
+.cats button[aria-pressed="true"]{background:var(--ac);color:var(--acfg);border-color:var(--ac)}
+.list{display:flex;flex-direction:column;gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.name{font-family:var(--display);font-weight:800;font-size:19px;line-height:1.15;margin:0}
+.media{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.thumb{position:relative;aspect-ratio:9/16;border:0;padding:0;background:#ddd;border-radius:12px;overflow:hidden;cursor:pointer;display:block;width:100%}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb .tag{position:absolute;left:8px;bottom:8px;font-weight:800;font-size:12px;padding:5px 10px;border-radius:999px;background:var(--surface);color:var(--fg);box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center}
+.play::after{content:"";border-left:18px solid #fff;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:5px}
+.btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.b{border:2px solid var(--ac);background:var(--surface);color:var(--ac);border-radius:12px;padding:12px 8px;font-weight:800;font-size:15px;cursor:pointer;text-align:center}
+.b.big{grid-column:1/-1;background:var(--wa);border-color:var(--wa);color:#fff;font-size:17px;padding:14px}
+.b.full{grid-column:1/-1}
+.empty{text-align:center;color:var(--muted);padding:30px 0}
+.foot{text-align:center;margin-top:28px;font-size:13px;color:var(--muted)}
+.ov{position:fixed;inset:0;background:rgba(10,6,8,.92);z-index:50;display:flex;align-items:center;justify-content:center;padding:calc(12px + env(safe-area-inset-top,0px)) 12px calc(12px + env(safe-area-inset-bottom,0px))}
+.ov video,.ov img{max-height:100%;max-width:100%;border-radius:10px}
+.close{position:absolute;top:calc(10px + env(safe-area-inset-top,0px));right:calc(10px + env(safe-area-inset-right,0px));width:44px;height:44px;border-radius:50%;border:0;background:var(--surface);color:var(--fg);font-size:20px;cursor:pointer;z-index:2}
+.sheet{background:var(--surface);border-radius:18px;padding:18px;width:100%;max-width:460px;max-height:100%;overflow:auto;display:flex;flex-direction:column;gap:12px}
+.sheet h2{font-family:var(--display);margin:0;font-size:22px;line-height:1.2}
+.sheet p{margin:0;line-height:1.5}
+.sheet ol{margin:0;padding-left:22px;line-height:1.7;font-size:16px}
+.go{border:0;border-radius:14px;background:var(--wa);color:#fff;font-weight:800;font-size:17px;padding:15px 16px;cursor:pointer;width:100%}
+.go.alt{background:var(--ac)}
+.toast{position:fixed;left:50%;bottom:calc(30px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:12px 18px;border-radius:16px;font-weight:700;z-index:60;font-size:14px;max-width:92vw;text-align:center}
+button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+@media (prefers-reduced-motion:no-preference){.b,.go{transition:transform .12s}.b:active,.go:active{transform:scale(.97)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><svg class="sym" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="26" fill="#f4b400"/><g stroke="#f4b400" stroke-width="6" stroke-linecap="round"><line x1="50" y1="8" x2="50" y2="16"/><line x1="50" y1="84" x2="50" y2="92"/><line x1="8" y1="50" x2="16" y2="50"/><line x1="84" y1="50" x2="92" y2="50"/><line x1="20" y1="20" x2="26" y2="26"/><line x1="74" y1="74" x2="80" y2="80"/><line x1="80" y1="20" x2="74" y2="26"/><line x1="20" y1="80" x2="26" y2="74"/></g><path d="M50 66c-10-6-12-16-6-24 6 2 10 10 6 24z" fill="#5fae2e"/><path d="M50 66c10-6 12-16 6-24-6 2-10 10-6 24z" fill="#4a9322"/></svg>
+  <h1>Videos y fotos para compartir</h1><p>Toca un botón y compártelo en WhatsApp o Facebook</p></header>
+  <button class="inst" id="inst">📲 Instalar app en mi celular</button>
+  <input id="q" class="search" type="search" placeholder="Escribe el producto que buscas…" aria-label="Buscar producto">
+  <div class="cats" id="cats"></div>
+  <div class="list" id="list"><p class="empty">Cargando productos…</p></div>
+  <div class="foot">Productos naturales · Los suplementos no son medicamentos.</div>
+</div>
+<div class="ov" id="ov" hidden><button class="close" data-close aria-label="Cerrar">✕</button><div id="ovin" style="display:contents"></div></div>
+
+<script>
+const CFG={api:"https://script.google.com/macros/s/AKfycbwGZY-vY9ELNQatTatnsdVWumyoE8nyGRQuRxBjCprunSfRgkhc__vnXUfvCmkgxkOg/exec",v:"jairo"};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const norm=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+const ls={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let P=[],byId={},cat='Todos';
+const base=p=>String(p.img).replace(/\.[a-z]+$/i,'');
+const vurl=p=>'../img/reel/'+base(p)+'.mp4', iurl=p=>'../img/'+p.img;
+
+function setData(d){P=(d.productos||[]).filter(p=>p.s!=='agotado').slice().reverse();byId={};P.forEach(p=>byId[p.id]=p)}
+async function load(){
+  const c=ls.get('mat_cat',null);if(c){setData(c);render()}
+  try{const r=await fetch(CFG.api+'?accion=catalogo&v='+CFG.v);const d=await r.json();if(d.ok){ls.set('mat_cat',{productos:d.productos});setData(d);render()}else if(!c)fail()}
+  catch(e){if(!c)fail()}
+}
+function fail(){$('#list').innerHTML='<p class="empty">No pudimos cargar los productos. Revisa tu internet y vuelve a abrir la app.</p>'}
+function render(){cats();list()}
+function cats(){const s=new Set();P.forEach(p=>(p.c||[]).forEach(c=>s.add(c)));const l=['Todos',...[...s].sort((a,b)=>a.localeCompare(b,'es'))];
+ $('#cats').innerHTML=l.map(c=>`<button aria-pressed="${c===cat}" data-cat="${esc(c)}">${esc(c)}</button>`).join('')}
+function list(){const q=norm($('#q').value.trim());
+ const l=P.filter(p=>(cat==='Todos'||(p.c||[]).includes(cat))&&(!q||norm(p.n+' '+(p.g||'')+' '+(p.c||[]).join(' ')).includes(q)));
+ $('#list').innerHTML=l.length?l.map(p=>`<article class="card"><h2 class="name">${esc(p.n)}</h2>
+ <div class="media"><button class="thumb" data-ver="${p.id}" aria-label="Ver video de ${esc(p.n)}"><img src="${esc(iurl(p))}" alt="" loading="lazy" decoding="async"><span class="play"></span><span class="tag">🎬 Video</span></button>
+ <button class="thumb" data-foto="${p.id}" aria-label="Ver foto de ${esc(p.n)}"><img src="${esc(iurl(p))}" alt="${esc(p.n)}" loading="lazy" decoding="async"><span class="tag">🖼️ Foto</span></button></div>
+ <div class="btns"><button class="b big" data-shv="${p.id}">📤 Compartir video</button><button class="b" data-shi="${p.id}">📤 Compartir foto</button><button class="b" data-dl="${p.id}">⬇️ Descargar</button><button class="b full" data-cp="${p.id}">📋 Copiar texto</button></div></article>`).join(''):'<p class="empty">No encontramos productos con esa búsqueda.</p>'}
+
+function texto(p){const b=(p.b||[]).slice(0,3).map(t=>'✅ '+String(t).trim()).join('\n');
+ return `🌿 ${p.n}\n${p.g?String(p.g).trim()+'\n':''}${b?b+'\n':''}\nEscríbeme y te lo envío 🚚 Pagas cuando lo recibes.`}
+function copiar(t){let ok=false;
+ try{const a=document.createElement('textarea');a.value=t;a.setAttribute('readonly','');a.style.cssText='position:fixed;top:0;left:0;opacity:0;font-size:16px';document.body.appendChild(a);a.focus();a.select();a.setSelectionRange(0,t.length);ok=document.execCommand('copy');a.remove()}catch(e){}
+ if(!ok)try{navigator.clipboard.writeText(t);ok=true}catch(e){}return ok}
+function toast(t,ms){document.querySelectorAll('.toast').forEach(e=>e.remove());const e=document.createElement('div');e.className='toast';e.textContent=t;document.body.appendChild(e);setTimeout(()=>e.remove(),ms||3000)}
+function ov(html){$('#ovin').innerHTML=html;$('#ov').hidden=false}
+function cerrar(){$('#ov').hidden=true;$('#ovin').innerHTML=''}
+const PEGA='Al publicar, mantén presionado donde se escribe y toca Pegar.';
+
+let LISTO=null;
+async function prep(p,tipo){
+ ov(`<div class="sheet"><h2>Preparando ${tipo==='v'?'el video':'la foto'}…</h2><p>Espera un momento.</p></div>`);
+ try{const r=await fetch(tipo==='v'?vurl(p):iurl(p),{cache:'no-cache'});
+  if(r.status===404){ov('<div class="sheet"><h2>Este producto todavía no tiene video</h2><p>Pronto estará listo. Mientras tanto puedes compartir la foto.</p><button class="go alt" data-close>Entendido</button></div>');return}
+  if(!r.ok)throw 0;const b=await r.blob();
+  const name=base(p)+(tipo==='v'?'.mp4':'.jpg');
+  LISTO={p,f:new File([b],name,{type:tipo==='v'?'video/mp4':(b.type||'image/jpeg')})};
+  ov(`<div class="sheet"><h2>✅ ${tipo==='v'?'Tu video':'Tu foto'} está ${tipo==='v'?'listo':'lista'}</h2><p>Toca el botón y escoge <b>WhatsApp</b> (estado o un cliente) o <b>Facebook</b>.</p><button class="go" data-go>📤 Compartir ahora</button><p style="font-size:13px;color:var(--muted)">El texto también queda copiado para que lo pegues.</p></div>`)
+ }catch(e){ov('<div class="sheet"><h2>No se pudo preparar</h2><p>Revisa tu internet y vuelve a intentar.</p><button class="go alt" data-close>Cerrar</button></div>')}
+}
+async function compartir(){if(!LISTO)return;const {p,f}=LISTO;const ok=copiar(texto(p));
+ try{if(navigator.share&&navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f]});cerrar();toast(ok?'✅ Texto copiado. '+PEGA:'Listo.',6000);return}}
+ catch(e){if(e&&e.name==='AbortError'){cerrar();return}}
+ const a=document.createElement('a');a.href=URL.createObjectURL(f);a.download=f.name;document.body.appendChild(a);a.click();a.remove();cerrar();
+ toast('Tu celular no deja compartir directo: el archivo quedó en tu galería o en Descargas. Ábrelo desde ahí para compartirlo.',8000)}
+function descargar(p,tipo){const a=document.createElement('a');a.href=tipo==='v'?vurl(p):iurl(p);a.download=base(p)+(tipo==='v'?'.mp4':'.jpg');document.body.appendChild(a);a.click();a.remove();cerrar();toast('⬇️ Descargando… Quedará en tu galería o en Descargas.',5000)}
+
+const standalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
+let instP=null;
+function guiaInstalar(){ov(ios?`<div class="sheet"><h2>Instalar en iPhone</h2><ol><li>Abre esta página en <b>Safari</b>.</li><li>Toca el botón <b>Compartir</b> (cuadrito con flecha hacia arriba ⬆️), abajo en la pantalla.</li><li>Baja y toca <b>Agregar a inicio</b>.</li><li>Toca <b>Agregar</b>. Listo: queda el ícono.</li></ol><button class="go alt" data-close>Entendido</button></div>`
+ :`<div class="sheet"><h2>Instalar en el celular</h2><ol><li>Abre esta página en <b>Chrome</b>.</li><li>Toca los <b>tres puntitos ⋮</b> arriba a la derecha.</li><li>Toca <b>Agregar a la pantalla principal</b> o <b>Instalar app</b>.</li><li>Toca <b>Instalar</b>. Listo: queda el ícono.</li></ol><button class="go alt" data-close>Entendido</button></div>`)}
+
+document.addEventListener('click',e=>{const t=e.target.closest('button');if(!t)return;const d=t.dataset;
+ if(d.close!==undefined||t.id==='ov'){cerrar();return}
+ if(t.id==='inst'){if(instP){instP.prompt();instP.userChoice.finally(()=>{instP=null})}else guiaInstalar();return}
+ if(d.cat){cat=d.cat;render();return}
+ if(d.go!==undefined){compartir();return}
+ const p=byId[d.ver||d.foto||d.shv||d.shi||d.dl||d.cp||d.dlv||d.dli];
+ if(d.ver&&p){ov(`<video src="${esc(vurl(p))}" controls autoplay playsinline></video>`);$('#ovin video').onerror=()=>ov('<div class="sheet"><h2>Este producto todavía no tiene video</h2><button class="go alt" data-close>Entendido</button></div>');return}
+ if(d.foto&&p){ov(`<img src="${esc(iurl(p))}" alt="${esc(p.n)}">`);return}
+ if(d.shv&&p){prep(p,'v');return}
+ if(d.shi&&p){prep(p,'i');return}
+ if(d.dl&&p){ov(`<div class="sheet"><h2>¿Qué quieres descargar?</h2><button class="go" data-dlv="${p.id}">🎬 Video</button><button class="go alt" data-dli="${p.id}">🖼️ Foto</button></div>`);return}
+ if(d.dlv&&p){descargar(p,'v');return}
+ if(d.dli&&p){descargar(p,'i');return}
+ if(d.cp&&p){toast(copiar(texto(p))?'✅ Texto copiado. '+PEGA:'No se pudo copiar. Intenta otra vez.',5000);return}
+});
+$('#ov').addEventListener('click',e=>{if(e.target.id==='ov')cerrar()});
+$('#q').addEventListener('input',list);
+if(standalone())$('#inst').hidden=true;
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();instP=e});
+addEventListener('appinstalled',()=>{$('#inst').hidden=true;toast('✅ App instalada. Búscala con tus demás aplicaciones.',5000)});
+load();
+</script>
+</body>
+</html>
