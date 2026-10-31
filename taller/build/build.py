@@ -31,7 +31,7 @@ for v, (nom, trato, col, col2) in V.items():
     shutil.copy(f'iconos/{v}-maskable.png', f'{out}/icono-maskable.png')
     for s in ('192', '512'):
         shutil.copy(f'iconos/{v}-{s}.png', f'{out}/icono-{s}.png')
-    json.dump({"name": f"{nom} · Bienestar natural", "short_name": nom, "start_url": "./", "scope": "./", "display": "standalone",
+    json.dump({"name": f"Tienda Vida Natural · {nom}", "short_name": f"Tienda {nom}", "start_url": "./", "scope": "./", "display": "standalone",
                "background_color": "#fbf7f2", "theme_color": col,
                "icons": [{"src": "icono-192.png", "sizes": "192x192", "type": "image/png"},
                          {"src": "icono-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},

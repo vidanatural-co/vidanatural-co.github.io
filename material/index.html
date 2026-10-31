@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Vida Natural · Material para compartir</title>
-<meta name="description" content="Videos y fotos de productos naturales listos para compartir en WhatsApp y Facebook.">
+<title>Vitrina Vida Natural</title>
+<meta name="description" content="Videos y fotos de productos naturales listos para compartir en cualquier red social.">
 <meta name="theme-color" content="#3f8f1f">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icono-192.png">
@@ -67,7 +67,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-o
 <body>
 <div class="wrap">
   <header><svg class="sym" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="26" fill="#f4b400"/><g stroke="#f4b400" stroke-width="6" stroke-linecap="round"><line x1="50" y1="8" x2="50" y2="16"/><line x1="50" y1="84" x2="50" y2="92"/><line x1="8" y1="50" x2="16" y2="50"/><line x1="84" y1="50" x2="92" y2="50"/><line x1="20" y1="20" x2="26" y2="26"/><line x1="74" y1="74" x2="80" y2="80"/><line x1="80" y1="20" x2="74" y2="26"/><line x1="20" y1="80" x2="26" y2="74"/></g><path d="M50 66c-10-6-12-16-6-24 6 2 10 10 6 24z" fill="#5fae2e"/><path d="M50 66c10-6 12-16 6-24-6 2-10 10-6 24z" fill="#4a9322"/></svg>
-  <h1>Videos y fotos para compartir</h1><p>Toca un botón y compártelo en WhatsApp o Facebook</p></header>
+  <h1>Vitrina Vida Natural</h1><p>Videos y fotos para compartir en cualquier red social</p></header>
   <button class="inst" id="inst">📲 Instalar app en mi celular</button>
   <input id="q" class="search" type="search" placeholder="Escribe el producto que buscas…" aria-label="Buscar producto">
   <div class="cats" id="cats"></div>
@@ -104,7 +104,7 @@ function list(){const q=norm($('#q').value.trim());
  <div class="btns"><button class="b big" data-shv="${p.id}">📤 Compartir video</button><button class="b" data-shi="${p.id}">📤 Compartir foto</button><button class="b" data-dl="${p.id}">⬇️ Descargar</button><button class="b full" data-cp="${p.id}">📋 Copiar texto</button></div></article>`).join(''):'<p class="empty">No encontramos productos con esa búsqueda.</p>'}
 
 function texto(p){const b=(p.b||[]).slice(0,3).map(t=>'✅ '+String(t).trim()).join('\n');
- return `🌿 ${p.n}\n${p.g?String(p.g).trim()+'\n':''}${b?b+'\n':''}\nEscríbeme y te lo envío 🚚 Pagas cuando lo recibes.`}
+ return `🌿 ${p.n}\n${p.g?String(p.g).trim()+'\n':''}${b?b+'\n':''}\nEscríbeme y pídelo 🌿`}
 function copiar(t){let ok=false;
  try{const a=document.createElement('textarea');a.value=t;a.setAttribute('readonly','');a.style.cssText='position:fixed;top:0;left:0;opacity:0;font-size:16px';document.body.appendChild(a);a.focus();a.select();a.setSelectionRange(0,t.length);ok=document.execCommand('copy');a.remove()}catch(e){}
  if(!ok)try{navigator.clipboard.writeText(t);ok=true}catch(e){}return ok}
@@ -121,7 +121,7 @@ async function prep(p,tipo){
   if(!r.ok)throw 0;const b=await r.blob();
   const name=base(p)+(tipo==='v'?'.mp4':'.jpg');
   LISTO={p,f:new File([b],name,{type:tipo==='v'?'video/mp4':(b.type||'image/jpeg')})};
-  ov(`<div class="sheet"><h2>✅ ${tipo==='v'?'Tu video':'Tu foto'} está ${tipo==='v'?'listo':'lista'}</h2><p>Toca el botón y escoge <b>WhatsApp</b> (estado o un cliente) o <b>Facebook</b>.</p><button class="go" data-go>📤 Compartir ahora</button><p style="font-size:13px;color:var(--muted)">El texto también queda copiado para que lo pegues.</p></div>`)
+  ov(`<div class="sheet"><h2>✅ ${tipo==='v'?'Tu video':'Tu foto'} está ${tipo==='v'?'listo':'lista'}</h2><p>Toca el botón y escoge la red social o la persona a la que se lo quieres mandar.</p><button class="go" data-go>📤 Compartir ahora</button><p style="font-size:13px;color:var(--muted)">El texto también queda copiado para que lo pegues.</p></div>`)
  }catch(e){ov('<div class="sheet"><h2>No se pudo preparar</h2><p>Revisa tu internet y vuelve a intentar.</p><button class="go alt" data-close>Cerrar</button></div>')}
 }
 async function compartir(){if(!LISTO)return;const {p,f}=LISTO;const ok=copiar(texto(p));
