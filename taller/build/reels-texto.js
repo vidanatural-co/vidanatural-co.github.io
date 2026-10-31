@@ -1,7 +1,10 @@
 // Reels con texto animado (tipografía cinética). Sin voz ni música. 10 s, 1080x1920, 30 cuadros/s.
+// Revisar un cuadro sin hacer el video: CUADRO=9.5 node reels-texto.js 2n /tmp/x foto (guarda /tmp/x/foto.png).
 // Uso: node reels-texto.js <estilo 1|2|2n> <carpeta de salida> [foto1 foto2 ...]
 //   Estilo 1: gancho animado (2,4 s) -> foto con acercamiento -> cierre "Comenta QUIERO".
-// Cierre (desde 29-oct-2026, sirve en Instagram y Facebook): "PÍDELO HOY" + "Pagas cuando lo recibes". Los 92 videos anteriores dicen "Comenta QUIERO".
+// Cierre (desde 31-oct-2026, sirve para todos los vendedores y todas las redes): una de 6 frases que se turnan entre los productos
+// (CIERRES, por la posición del producto en reels-texto.json; se puede fijar con "cierre": 0-5 en el json). Sin cinta abajo,
+// sin "Comenta QUIERO" y sin "Pagas cuando lo recibes" (Liliana, Gladys, Pineda y Adriana no hacen envíos).
 //   Estilo 2n: igual al 2 pero con la foto completa nítida (sin desenfoque), con sombra arriba y abajo para leer el texto.
 //   Estilo 2: foto con el frasco nítido y el resto desenfocado + gancho arriba + 3 beneficios + cierre.
 // Textos: reels-texto.json (gancho, palabra resaltada, 3 beneficios). Sin precios: el video es igual para los 3 asesores.
@@ -10,6 +13,7 @@ const AQUI=__dirname,RAIZ=path.resolve(AQUI,'../..');const FPS=30,SEG=10,N=FPS*S
 const [estilo,salida,...fotos]=process.argv.slice(2);const T=JSON.parse(fs.readFileSync(path.join(AQUI,'reels-texto.json'),'utf8'));
 const lista=fotos.length?fotos:Object.keys(T);fs.mkdirSync(salida,{recursive:true});
 const F=n=>'file://'+path.join(AQUI,'fuentes',n);
+const CIERRES=[['PÍDELO','HOY'],['','ESCRÍBEME'],['¿LO QUIERES?','ESCRÍBEME'],['HAZ TU PEDIDO','HOY'],['ASEGURA','EL TUYO'],['PREGUNTA','POR EL TUYO']];
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function palabras(txt,resalta){const r=(resalta||'').toLowerCase();const out=[];let i=0;
  // agrupa la frase resaltada como una sola "palabra" con caja amarilla
@@ -20,7 +24,7 @@ function palabras(txt,resalta){const r=(resalta||'').toLowerCase();const out=[];
  for(const [p,h] of partes){if(h){const m=p.trim().match(/^[¿¡]*(.*?)([?!.,:;]*)$/);const pre=p.trim().match(/^[¿¡]*/)[0];out.push(`<span style="white-space:nowrap">${pre?`<b class="pu pre">${esc(pre)}</b>`:''}<span class="w hl" data-i="${i++}"><i class="box"></i><b>${esc(m[1])}</b></span>${m[2]?`<b class="pu">${esc(m[2])}</b>`:''}</span>`);continue}
   for(const w of p.split(/\s+/).filter(Boolean))out.push(`<span class="w" data-i="${i++}"><b>${esc(w)}</b></span>`)}
  return out.join(' ')}
-function html(foto,d){return `<!doctype html><html><head><meta charset="utf-8"><style>
+function html(foto,d,c){return `<!doctype html><html><head><meta charset="utf-8"><style>
 @font-face{font-family:Anton;src:url(${F('anton-latin-400-normal.woff2')})}
 @font-face{font-family:M;font-weight:800;src:url(${F('montserrat-latin-800-normal.woff2')})}
 @font-face{font-family:M;font-weight:600;src:url(${F('montserrat-latin-600-normal.woff2')})}
@@ -44,15 +48,15 @@ function html(foto,d){return `<!doctype html><html><head><meta charset="utf-8"><
 <div class="txt hook" id="hook">${palabras(d.gancho,d.resalta)}</div>
 ${(d.b||[]).map((b,i)=>`<div class="txt" id="b${i}"><span class="pill" style="font-size:${b.length>20?50:56}px"><span class="ck">✓</span>${esc(b)}</span></div>`).join('')}
 <div class="txt" id="end"><div class="sub" id="e0" style="font-size:66px;font-family:M;font-weight:800">¿LO QUIERES?</div>
-<div class="hook" id="e1" style="font-size:120px;margin-top:26px">PÍDELO</div>
-<div class="hook" id="e2" style="font-size:210px;margin-top:6px"><span class="q">HOY</span></div>
-<div class="sub" id="e3" style="font-size:54px;margin-top:34px"><span class="pill" style="font-size:50px;padding:22px 42px">🚚 Pagas cuando lo recibes</span></div></div>
+<div class="hook" id="e1" style="font-size:120px;margin-top:26px${c[0]?'':';visibility:hidden;height:0;margin:0'}">${esc(c[0])}</div>
+<div class="hook" id="e2" style="font-size:210px;margin-top:6px"><span class="q">${esc(c[1])}</span></div>
+<div class="sub" id="e3" style="font-size:54px;margin-top:34px"></div></div>
 <script>
 const ES=${estilo==='1'?1:2},NB=${estilo==='2n'?1:0};const $=s=>document.querySelector(s);
 const cl=x=>Math.max(0,Math.min(1,x)),sm=x=>{x=cl(x);return x*x*(3-2*x)},oc=x=>{x=cl(x);return 1-Math.pow(1-x,3)},
  back=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
 const W=[...document.querySelectorAll('#hook .w')];
-let FIT=0;function fit(el,base,lines){if(FIT)return;let z=base;el.style.fontSize=z+'px';const ancho=()=>Math.max(...[...el.querySelectorAll('.w,.pu')].map(w=>w.getBoundingClientRect().right))>1015||el.scrollWidth>el.clientWidth+2;while((el.getBoundingClientRect().height>lines*z*1.08+20||ancho())&&z>60){z-=4;el.style.fontSize=z+'px'}FIT=1}
+let FIT=0,FIT2=0;function fit(el,base,lines){if(FIT)return;let z=base;el.style.fontSize=z+'px';const ancho=()=>Math.max(...[...el.querySelectorAll('.w,.pu')].map(w=>w.getBoundingClientRect().right))>1015||el.scrollWidth>el.clientWidth+2;while((el.getBoundingClientRect().height>lines*z*1.08+20||ancho())&&z>60){z-=4;el.style.fontSize=z+'px'}FIT=1}
 function puAt(){document.querySelectorAll('#hook .pu').forEach(u=>{const w=u.classList.contains('pre')?u.nextElementSibling:u.previousElementSibling;u.style.opacity=w.style.opacity;u.style.transform=w.style.transform})}
 function hookAt(t,t0,out){W.forEach((w,i)=>{const p=(t-(t0+i*.13))/.38;const o=cl(p*2.2)*(1-sm((t-out)/.35));
   w.style.opacity=o;w.style.transform=\`translateY(\${(1-back(p))*70-sm((t-out)/.35)*60}px) scale(\${.75+.25*back(p)})\`;
@@ -75,10 +79,8 @@ function render(t){
   for(let i=0;i<3;i++){const e=$('#b'+i);if(!e)continue;const s=2.3+i*1.75,p=(t-s)/.45,o=cl(p*2)*(1-sm((t-(s+1.6))/.3));
    e.style.top='1290px';e.style.opacity=i===2?cl(p*2)*(1-sm((t-7.6)/.3)):o;e.style.transform=\`translateX(\${(1-back(p))*-260}px) scale(\${.85+.15*back(p)})\`}
   end.style.top='215px';['#e0','#e3'].forEach(s=>$(s).style.display='none');
-  $('#e1').style.fontSize='104px';$('#e2').style.fontSize='190px';endAt(t,7.85);
-  // "y te envío el enlace" abajo, donde estaban los beneficios
-  const e3=$('#e3');e3.style.display='block';e3.style.position='fixed';e3.style.left='70px';e3.style.right='70px';e3.style.top='1320px';e3.style.marginTop='0';
-  const p=(t-8.4)/.4;e3.style.opacity=cl(p*2);e3.style.transform=\`translateY(\${(1-back(p))*60}px)\`}
+  $('#e1').style.fontSize='104px';if(!FIT2){let z=190;const q=$('#e2 .q');$('#e2').style.fontSize=z+'px';while(q.getBoundingClientRect().width>930&&z>90){z-=6;$('#e2').style.fontSize=z+'px'}FIT2=1}endAt(t,7.85);
+  $('#e3').style.display='none'}
 }
 const SEG_=${SEG};
 </script></body></html>`}
@@ -86,8 +88,10 @@ const SEG_=${SEG};
 for(const id of lista){const d=T[id];if(!d){console.log('Sin textos:',id);continue}
  const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'kt-'));const foto=path.join(tmp,'foto.png');
  execFileSync('ffmpeg',['-v','error','-y','-i',path.join(RAIZ,'img',id+'.jpg'),'-vf','scale=1080:1920:force_original_aspect_ratio=increase:flags=lanczos,crop=1080:1920,unsharp=5:5:0.4',foto]);
- fs.writeFileSync(path.join(tmp,'p.html'),html('foto.png',d));await pg.goto('file://'+path.join(tmp,'p.html'));
+ const ci=Number.isInteger(d.cierre)?d.cierre:Object.keys(T).indexOf(id)%CIERRES.length;
+ fs.writeFileSync(path.join(tmp,'p.html'),html('foto.png',d,CIERRES[ci]));await pg.goto('file://'+path.join(tmp,'p.html'));
  await pg.evaluate(()=>document.fonts.ready);await pg.waitForTimeout(150);
+ if(process.env.CUADRO){await pg.evaluate(t=>render(t),+process.env.CUADRO);await pg.screenshot({path:path.join(salida,id+'.png'),type:'png'});fs.rmSync(tmp,{recursive:true,force:true});console.log('Cuadro',id);continue}
  for(let f=0;f<N;f++){await pg.evaluate(t=>render(t),f/FPS);await pg.screenshot({path:path.join(tmp,String(f).padStart(4,'0')+'.jpg'),type:'jpeg',quality:92})}
  const out=path.join(salida,id+'.mp4');
  execFileSync('ffmpeg',['-v','error','-y','-framerate',String(FPS),'-i',path.join(tmp,'%04d.jpg'),'-f','lavfi','-i','anullsrc=r=44100:cl=stereo',
