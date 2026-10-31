@@ -8,7 +8,7 @@
 
 **Precios:** son los de Jairo (los tres asesores tienen hoy los mismos, salvo que cambien los suyos en su panel). Descuentos: 2 unidades −$10.000; 3 o más −$25.000. Pago contraentrega (cada asesor coordina la forma de pago).
 
-**Productos publicados:** 94
+**Productos publicados:** 95
 
 **Actualizado:** 27-oct-2026
 
@@ -1693,3 +1693,20 @@ Precauciones: embarazadas, lactantes, personas que toman medicamentos o tienen a
 - **Se combina con:** Probióticos y Prebióticos Softnaf
 - **Nombre en el inventario de Leal:** DRENAJE gotas NATURES + DRENAJE gotas NATURES
 - **Enlace:** https://vidanatural-co.github.io/jairo/p/combo-2-drenaje-natures.html
+
+## Combo Drenaje Nature's Sunshine + Linfovit Cápsulas
+- **Precio:** $100.000
+- **Categoría:** Digestión, Metabolismo y peso
+- **Gancho:** Gotas y cápsulas: dos fórmulas de plantas para sentirte más liviano.
+- **Ideal para:** Personas que sienten pesadez o hinchazón y quieren combinar dos fórmulas de plantas.
+- **Qué es:** Combo de Drenaje Linfático Nature's Sunshine en gotas (60 ml) y Drenaje Linfático Linfovit en cápsulas vegetales (60 cápsulas), complementos a base de extractos de plantas.
+- **Beneficios:**
+  - Ligereza: apoyo tradicional al drenaje linfático.
+  - Dos fórmulas: 4 plantas en gotas y 8 extractos vegetales en cápsulas.
+  - Equilibrio: apoya el balance de los líquidos del cuerpo.
+  - Más tiempo de uso: dos productos seguidos, sin interrumpir.
+- **Presentación:** 1 gotero de 60 ml + 1 frasco de 60 cápsulas vegetales
+- **Modo de uso:** Toma primero uno de los dos productos y, cuando lo termines, continúa con el otro. Gotas: 20 gotas (1 ml) en un poco de agua, dos veces al día. Cápsulas: 2 al día junto a una comida.
+- **Se combina con:** Castaño de Indias 600 mg
+- **Nombre en el inventario de Leal:** DRENAJE gotas NATURES + DRENAJE CAPSULAS MANI
+- **Enlace:** https://vidanatural-co.github.io/jairo/p/combo-drenaje-natures-linfovit.html
