@@ -8,7 +8,7 @@
 
 **Precios:** son los de Jairo (los tres asesores tienen hoy los mismos, salvo que cambien los suyos en su panel). Descuentos: 2 unidades −$10.000; 3 o más −$25.000. Pago contraentrega (cada asesor coordina la forma de pago).
 
-**Productos publicados:** 92
+**Productos publicados:** 94
 
 **Actualizado:** 27-oct-2026
 
@@ -1659,3 +1659,37 @@ Precauciones: embarazadas, lactantes, personas que toman medicamentos o tienen a
 - **Se combina con:** Coll4gen M4X
 - **Nombre en el inventario de Leal:** ASHAGUANDA KSM AMER🔹️ + GLUCOSAMIN AMER🔹️
 - **Enlace:** https://vidanatural-co.github.io/jairo/p/combo-ashwagandha-glucosamina.html
+
+## Drenaje Linfático Nature's Sunshine
+- **Precio:** $60.000
+- **Categoría:** Digestión, Metabolismo y peso
+- **Gancho:** Cuerpo más liviano con 4 plantas tradicionales.
+- **Ideal para:** Personas que sienten pesadez o hinchazón y buscan un apoyo natural para su sistema linfático.
+- **Qué es:** Extractos líquidos de amor de hortelano, flor de trébol rojo, raíz de stillingia y corteza de fresno espinoso, en gotas, con base de glicerina vegetal y agua. Del laboratorio estadounidense Nature's Sunshine.
+- **Beneficios:**
+  - Ligereza: apoyo tradicional al sistema linfático.
+  - 4 plantas: amor de hortelano, trébol rojo, stillingia y fresno espinoso.
+  - Base vegetal: en glicerina vegetal y agua.
+  - Respaldo: Nature's Sunshine, expertos en plantas desde 1972.
+- **Presentación:** Gotero 60 ml · 59 porciones (te dura 1 mes)
+- **Modo de uso:** 20 gotas (1 ml) en un poco de agua, dos veces al día.
+- **Se combina con:** Probióticos y Prebióticos Softnaf
+- **Nombre en el inventario de Leal:** DRENAJE gotas NATURES
+- **Enlace:** https://vidanatural-co.github.io/jairo/p/drenaje-natures.html
+
+## Combo 2 Drenaje Linfático Nature's Sunshine
+- **Precio:** $100.000
+- **Categoría:** Digestión, Metabolismo y peso
+- **Gancho:** Dos goteros para no interrumpir tu rutina: 2 meses de apoyo linfático.
+- **Ideal para:** Personas que sienten pesadez o hinchazón y quieren continuidad por más tiempo.
+- **Qué es:** Combo de 2 goteros de Drenaje Linfático Nature's Sunshine (60 ml cada uno), extractos líquidos de 4 plantas en base de glicerina vegetal y agua.
+- **Beneficios:**
+  - Ligereza: apoyo tradicional al sistema linfático.
+  - Más tiempo de uso: 2 goteros seguidos, sin interrumpir.
+  - 4 plantas: amor de hortelano, trébol rojo, stillingia y fresno espinoso.
+  - Mejor precio: sale más económico que comprarlos por separado.
+- **Presentación:** 2 goteros de 60 ml (te duran 2 meses)
+- **Modo de uso:** 20 gotas (1 ml) en un poco de agua, dos veces al día. Cuando termines el primer gotero, sigue con el segundo.
+- **Se combina con:** Probióticos y Prebióticos Softnaf
+- **Nombre en el inventario de Leal:** DRENAJE gotas NATURES + DRENAJE gotas NATURES
+- **Enlace:** https://vidanatural-co.github.io/jairo/p/combo-2-drenaje-natures.html

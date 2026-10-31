@@ -826,5 +826,32 @@
 "Menos estrés",
 "Combo de 2"
 ]
+},
+"drenaje-natures": {
+"gancho": "Siente el cuerpo más liviano",
+"resalta": "liviano",
+"b": [
+"4 plantas tradicionales",
+"Apoyo linfático",
+"En gotas"
+]
+},
+"combo-2-drenaje-natures": {
+"gancho": "2 meses de apoyo linfático",
+"resalta": "2 meses",
+"b": [
+"2 goteros de 60 ml",
+"4 plantas tradicionales",
+"Sin interrumpir"
+]
+},
+"combo-drenaje-natures-linfovit": {
+"gancho": "Gotas y cápsulas en un solo combo",
+"resalta": "Gotas y cápsulas",
+"b": [
+"Dos fórmulas de plantas",
+"Apoyo linfático",
+"Más tiempo de uso"
+]
 }
 }

@@ -58,3 +58,6 @@ Menú de compartir: 📝 Publicación (feed), 📱 Historia, 🎬 Reel y 🔗 Co
 - Solo la tienda de Jairo es "Vida Natural" (Tienda Vida Natural · Jairo, hashtag #VidaNaturalCo). Liliana, Gladys, Pineda, Adriana y Leal son independientes: sus tiendas se llaman "Tienda de <nombre> · Productos naturales" (hashtag #ProductosNaturales) y la Vitrina es "Vitrina de Productos Naturales" (ícono de hoja, sin el sol de Jairo). build.py arma título y hashtag según el asesor.
 - La página principal (raíz) es solo de Vida Natural: un botón a la tienda de Jairo; ya no lista a Liliana y Gladys.
 - La dirección web (vidanatural-co.github.io) NO se cambia (decisión de Jairo).
+
+## Ayudante sw.js (desde 31-oct-2026)
+- Fotos y archivos: primero busca la versión nueva en internet y, si no hay conexión, usa la copia guardada. Así una foto cambiada con el mismo nombre se ve en las apps ya instaladas (antes se quedaba la vieja). Los videos .mp4 nunca se guardan.
