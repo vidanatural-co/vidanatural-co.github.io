@@ -121,11 +121,11 @@ async function prep(p,tipo){
   if(!r.ok)throw 0;const b=await r.blob();
   const name=base(p)+(tipo==='v'?'.mp4':'.jpg');
   LISTO={p,f:new File([b],name,{type:tipo==='v'?'video/mp4':(b.type||'image/jpeg')})};
-  ov(`<div class="sheet"><h2>✅ ${tipo==='v'?'Tu video':'Tu foto'} está ${tipo==='v'?'listo':'lista'}</h2><p>Toca el botón y escoge la red social o la persona a la que se lo quieres mandar.</p><button class="go" data-go>📤 Compartir ahora</button><p style="font-size:13px;color:var(--muted)">El texto también queda copiado para que lo pegues.</p></div>`)
+  ov(`<div class="sheet"><h2>✅ ${tipo==='v'?'Tu video':'Tu foto'} está ${tipo==='v'?'listo':'lista'}</h2><p>Toca el botón y escoge la red social o la persona a la que se lo quieres mandar.</p><button class="go" data-go>📤 Compartir ahora</button><p style="font-size:13px;color:var(--muted)">El texto del producto se pega solo. Si no aparece, mantén presionado donde se escribe y toca Pegar.</p></div>`)
  }catch(e){ov('<div class="sheet"><h2>No se pudo preparar</h2><p>Revisa tu internet y vuelve a intentar.</p><button class="go alt" data-close>Cerrar</button></div>')}
 }
-async function compartir(){if(!LISTO)return;const {p,f}=LISTO;const ok=copiar(texto(p));
- try{if(navigator.share&&navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f]});cerrar();toast(ok?'✅ Texto copiado. '+PEGA:'Listo.',6000);return}}
+async function compartir(){if(!LISTO)return;const {p,f}=LISTO;const tx=texto(p);const ok=copiar(tx);
+ try{if(navigator.share&&navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],text:tx});cerrar();toast(ok?'✅ Si el texto no salió solo, mantén presionado donde se escribe y toca Pegar.':'Listo.',6000);return}}
  catch(e){if(e&&e.name==='AbortError'){cerrar();return}}
  const a=document.createElement('a');a.href=URL.createObjectURL(f);a.download=f.name;document.body.appendChild(a);a.click();a.remove();cerrar();
  toast('Tu celular no deja compartir directo: el archivo quedó en tu galería o en Descargas. Ábrelo desde ahí para compartirlo.',8000)}

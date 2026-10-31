@@ -61,3 +61,6 @@ Menú de compartir: 📝 Publicación (feed), 📱 Historia, 🎬 Reel y 🔗 Co
 
 ## Ayudante sw.js (desde 31-oct-2026)
 - Fotos y archivos: primero busca la versión nueva en internet y, si no hay conexión, usa la copia guardada. Así una foto cambiada con el mismo nombre se ve en las apps ya instaladas (antes se quedaba la vieja). Los videos .mp4 nunca se guardan.
+
+## Texto pegado al compartir (31-oct-2026)
+- Al compartir video o foto (Vitrina: "Compartir ahora"; tiendas: ventana del Reel), el texto va junto con el archivo (`navigator.share({files, text})`), para que WhatsApp lo ponga solo como descripción. También se sigue copiando al portapapeles por si la app (Instagram, Facebook, estados) no lo recibe.
