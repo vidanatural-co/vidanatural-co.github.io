@@ -132,14 +132,25 @@ async function compartir(){if(!LISTO)return;const {p,f}=LISTO;const ok=copiar(te
 function descargar(p,tipo){const a=document.createElement('a');a.href=tipo==='v'?vurl(p):iurl(p);a.download=base(p)+(tipo==='v'?'.mp4':'.jpg');document.body.appendChild(a);a.click();a.remove();cerrar();toast('⬇️ Descargando… Quedará en tu galería o en Descargas.',5000)}
 
 const standalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
-const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
+const UA=navigator.userAgent;
+const ios=/iphone|ipad|ipod/i.test(UA)||(/Macintosh/.test(UA)&&navigator.maxTouchPoints>1);
+const samsung=/SamsungBrowser/i.test(UA), otroNav=/MiuiBrowser|HuaweiBrowser|HeyTapBrowser|OPR\/|Firefox|EdgA/i.test(UA), dentroApp=/FBAN|FBAV|Instagram|WhatsApp|TikTok|; wv\)/i.test(UA);
 let instP=null;
-function guiaInstalar(){ov(ios?`<div class="sheet"><h2>Instalar en iPhone</h2><ol><li>Abre esta página en <b>Safari</b>.</li><li>Toca el botón <b>Compartir</b> (cuadrito con flecha hacia arriba ⬆️), abajo en la pantalla.</li><li>Baja y toca <b>Agregar a inicio</b>.</li><li>Toca <b>Agregar</b>. Listo: queda el ícono.</li></ol><button class="go alt" data-close>Entendido</button></div>`
- :`<div class="sheet"><h2>Instalar en el celular</h2><ol><li>Abre esta página en <b>Chrome</b>.</li><li>Toca los <b>tres puntitos ⋮</b> arriba a la derecha.</li><li>Toca <b>Agregar a la pantalla principal</b> o <b>Instalar app</b>.</li><li>Toca <b>Instalar</b>. Listo: queda el ícono.</li></ol><button class="go alt" data-close>Entendido</button></div>`)}
+const LISTA=`<button class="go alt" data-close>Entendido</button></div>`;
+function guiaInstalar(){
+ if(ios){ov(`<div class="sheet"><h2>Instalar en iPhone</h2><ol><li>Abre esta página en <b>Safari</b>.</li><li>Toca el botón <b>Compartir</b> (cuadrito con flecha hacia arriba ⬆️).</li><li>Baja y toca <b>Agregar a inicio</b>.</li><li>Toca <b>Agregar</b>. Listo: queda el ícono.</li></ol>`+LISTA);return}
+ if(samsung){ov(`<div class="sheet"><h2>Instalar en tu celular Samsung</h2><ol><li>Toca las <b>tres rayitas ☰</b> abajo a la derecha.</li><li>Toca <b>Agregar página a</b>.</li><li>Toca <b>Pantalla de inicio</b> y luego <b>Agregar</b>. Listo: queda el ícono.</li></ol>`+LISTA);return}
+ ov(`<div class="sheet"><h2>Instalar en tu celular</h2>${dentroApp||otroNav?'<p><b>Primero ábrela en Chrome:</b> toca los <b>tres puntitos ⋮</b> de arriba y escoge <b>Abrir en Chrome</b> (o copia el enlace y pégalo en Chrome).</p>':''}<p>En <b>Chrome</b>:</p><ol><li>Toca los <b>tres puntitos ⋮</b> arriba a la derecha.</li><li>Toca <b>Instalar app</b> o <b>Agregar a la pantalla principal</b>.</li><li>Toca <b>Instalar</b>. Listo: queda el ícono.</li></ol>`+LISTA)}
+function ofrecerInstalar(){ov(`<div class="sheet"><h2>📲 Instalar la app</h2><p>Toca el botón y luego <b>Instalar</b>.</p><button class="go" data-instalar>Instalar ahora</button></div>`)}
+function instalar(){if(!instP){guiaInstalar();return}const p=instP;p.prompt();p.userChoice.finally(()=>{instP=null});cerrar()}
+function botonInstalar(){if(instP){instalar();return}if(ios||samsung){guiaInstalar();return}
+ ov(`<div class="sheet"><h2>Un momento…</h2><p>Preparando la instalación.</p></div>`);
+ let n=0;const t=setInterval(()=>{n++;if(instP){clearInterval(t);ofrecerInstalar()}else if(n>=12){clearInterval(t);guiaInstalar()}},250)}
 
 document.addEventListener('click',e=>{const t=e.target.closest('button');if(!t)return;const d=t.dataset;
  if(d.close!==undefined||t.id==='ov'){cerrar();return}
- if(t.id==='inst'){if(instP){instP.prompt();instP.userChoice.finally(()=>{instP=null})}else guiaInstalar();return}
+ if(t.id==='inst'){botonInstalar();return}
+ if(d.instalar!==undefined){instalar();return}
  if(d.cat){cat=d.cat;render();return}
  if(d.go!==undefined){compartir();return}
  const p=byId[d.ver||d.foto||d.shv||d.shi||d.dl||d.cp||d.dlv||d.dli];

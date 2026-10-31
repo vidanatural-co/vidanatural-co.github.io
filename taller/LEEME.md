@@ -52,4 +52,4 @@ Menú de compartir: 📝 Publicación (feed), 📱 Historia, 🎬 Reel y 🔗 Co
 - Es una página aparte, NO sale de plantilla.html ni de build.py: se edita directamente `material/index.html`.
 - Lee la misma lista que la tienda de Jairo (cartero, `v=jairo`) y oculta los agotados. Video: `img/reel/<foto>.mp4`; foto: `img/<foto>`. Se actualiza sola al cambiar la hoja o los videos.
 - Botones: Compartir video (grande), Compartir foto, Descargar (pregunta video o foto), Copiar texto (nombre + gancho + 3 beneficios + "Escríbeme y te lo envío 🚚 Pagas cuando lo recibes."). Compartir también copia el texto.
-- Botón Instalar: en Android abre la instalación; si no se puede (iPhone, otro navegador) muestra los pasos.
+- Botón Instalar (corregido 31-oct, Pineda vio pasos equivocados): si Chrome ofrece instalar, sale "Instalar ahora"; si no, espera 3 s y muestra pasos según el celular: iPhone (Safari), Samsung (☰ → Agregar página a), Android Chrome (⋮ → Instalar app); si está abierta dentro de WhatsApp/Facebook u otro navegador, primero dice "Abrir en Chrome".
