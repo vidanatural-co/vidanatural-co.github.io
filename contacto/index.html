@@ -29,11 +29,15 @@ p{color:#776d7c;font-size:16px;line-height:1.4;margin-bottom:20px}
   <svg class="sym" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="26" fill="#f4b400"/><g stroke="#f4b400" stroke-width="6" stroke-linecap="round"><line x1="50" y1="8" x2="50" y2="16"/><line x1="50" y1="84" x2="50" y2="92"/><line x1="8" y1="50" x2="16" y2="50"/><line x1="84" y1="50" x2="92" y2="50"/><line x1="20" y1="20" x2="26" y2="26"/><line x1="74" y1="74" x2="80" y2="80"/><line x1="80" y1="20" x2="74" y2="26"/><line x1="20" y1="80" x2="26" y2="74"/></g><path d="M50 66c-10-6-12-16-6-24 6 2 10 10 6 24z" fill="#5fae2e"/><path d="M50 66c10-6 12-16 6-24-6 2-10 10-6 24z" fill="#4a9322"/></svg>
   <h1>Jairo productos naturistas</h1>
   <p>Guarda mi número para ver mis novedades en mis estados, y pídeme el catálogo por WhatsApp.</p>
-  <a class="b save" href="jairo.vcf">📇 Guardar mi número</a>
+  <a class="b save" id="g" href="jairo.vcf">📇 Guardar mi número</a>
   <p class="tip">Si se descarga un archivo, ábrelo y toca <b>Guardar</b>.</p>
   <a class="b wa" href="https://wa.me/573124193061?text=Hola%20Jairo%2C%20quiero%20ver%20el%20cat%C3%A1logo%20%F0%9F%8C%BF">💬 Pedir catálogo por WhatsApp</a>
   <a class="b cat" href="../jairo/">🛒 Ver la tienda</a>
   <div class="n">312 419 3061</div>
 </div>
+<script>
+// Android: abre "Nuevo contacto" con nombre y número ya llenos; si el celular no lo permite, descarga la tarjeta .vcf (1-nov-2026)
+const g=document.getElementById('g');g.onclick=e=>{if(!/Android/i.test(navigator.userAgent))return;e.preventDefault();location.href='intent:#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.dir/raw_contact;S.name='+encodeURIComponent('Jairo productos naturistas')+';S.phone='+encodeURIComponent('+573124193061')+';S.browser_fallback_url='+encodeURIComponent(g.href)+';end'}
+</script>
 </body>
 </html>

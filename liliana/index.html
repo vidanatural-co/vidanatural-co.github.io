@@ -155,7 +155,8 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-o
 
 <script>
 const CFG={v:"liliana",nombre:"Liliana",api:"https://script.google.com/macros/s/AKfycbwGZY-vY9ELNQatTatnsdVWumyoE8nyGRQuRxBjCprunSfRgkhc__vnXUfvCmkgxkOg/exec",sitio:"https://vidanatural-co.github.io/liliana"};
-{const g=document.getElementById('guardar');g.href='../contacto/'+(CFG.v==='jairo'?'':CFG.v+'/')+CFG.v+'.vcf';g.hidden=false}
+{const g=document.getElementById('guardar');g.href='../contacto/'+(CFG.v==='jairo'?'':CFG.v+'/')+CFG.v+'.vcf';g.hidden=false;g.onclick=e=>{if(!/Android/i.test(navigator.userAgent)||!D||!D.whatsapp)return;e.preventDefault();location.href=nuevoContacto(CFG.nombre+' productos naturistas','+'+D.whatsapp,g.href)}}
+function nuevoContacto(n,t,vcf){return 'intent:#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.dir/raw_contact;S.name='+encodeURIComponent(n)+';S.phone='+encodeURIComponent(t)+';S.browser_fallback_url='+encodeURIComponent(vcf)+';end'}
 const $=s=>document.querySelector(s);
 const cop=n=>'$'+Math.round(n).toLocaleString('es-CO');
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
