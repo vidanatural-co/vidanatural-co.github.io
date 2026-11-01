@@ -64,3 +64,8 @@ Menú de compartir: 📝 Publicación (feed), 📱 Historia, 🎬 Reel y 🔗 Co
 
 ## Texto pegado al compartir (31-oct-2026)
 - Al compartir video o foto (Vitrina: "Compartir ahora"; tiendas: ventana del Reel), el texto va junto con el archivo (`navigator.share({files, text})`), para que WhatsApp lo ponga solo como descripción. También se sigue copiando al portapapeles por si la app (Instagram, Facebook, estados) no lo recibe.
+
+## Tarjeta de contacto de Jairo (1-nov-2026)
+- `contacto/index.html` (https://vidanatural-co.github.io/contacto/): página con "📇 Guardar mi número" (abre `contacto/jairo.vcf`: "Jairo productos naturistas", +57 312 419 3061), "💬 Pedir catálogo por WhatsApp" y "🛒 Ver la tienda". La abre el QR impreso pegado detrás del celular de Jairo y el enlace de su mensaje de bienvenida de WhatsApp Business.
+- Está en la raíz y no dentro de /jairo/ a propósito: el ayudante (sw.js) de la tienda guarda como copia de la tienda cualquier página que se abra dentro de /jairo/.
+- Tienda de Jairo: botón "📇 Guardar mi número en mis contactos" (id `guardar`, en plantilla.html; solo se muestra si CFG.v es 'jairo').

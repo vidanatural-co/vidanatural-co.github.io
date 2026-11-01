@@ -134,6 +134,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-o
   <header><svg class="sym" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="26" fill="#f4b400"/><g stroke="#f4b400" stroke-width="6" stroke-linecap="round"><line x1="50" y1="8" x2="50" y2="16"/><line x1="50" y1="84" x2="50" y2="92"/><line x1="8" y1="50" x2="16" y2="50"/><line x1="84" y1="50" x2="92" y2="50"/><line x1="20" y1="20" x2="26" y2="26"/><line x1="74" y1="74" x2="80" y2="80"/><line x1="80" y1="20" x2="74" y2="26"/><line x1="20" y1="80" x2="26" y2="74"/></g><path d="M50 66c-10-6-12-16-6-24 6 2 10 10 6 24z" fill="#5fae2e"/><path d="M50 66c10-6 12-16 6-24-6 2-10 10-6 24z" fill="#4a9322"/></svg></header>
   <div class="sig"><small>Te atiende tu asesor</small><b>Jairo</b></div>
   <button class="shcat" id="shcat">📲 Compartir mi catálogo</button>
+  <a class="shcat" id="guardar" href="../contacto/jairo.vcf" style="text-align:center;text-decoration:none" hidden>📇 Guardar mi número en mis contactos</a>
   <button class="shcat inst" id="inst" hidden>⬇️ Instalar app en mi celular</button>
   <input id="q" class="search" type="search" placeholder="Escribe lo que buscas…" aria-label="Buscar producto">
   <div class="cats" id="cats"></div>
@@ -154,6 +155,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-o
 
 <script>
 const CFG={v:"jairo",nombre:"Jairo",api:"https://script.google.com/macros/s/AKfycbwGZY-vY9ELNQatTatnsdVWumyoE8nyGRQuRxBjCprunSfRgkhc__vnXUfvCmkgxkOg/exec",sitio:"https://vidanatural-co.github.io/jairo"};
+if(CFG.v==='jairo')document.getElementById('guardar').hidden=false;
 const $=s=>document.querySelector(s);
 const cop=n=>'$'+Math.round(n).toLocaleString('es-CO');
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
