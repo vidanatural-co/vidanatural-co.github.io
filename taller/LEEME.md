@@ -68,4 +68,5 @@ Menú de compartir: 📝 Publicación (feed), 📱 Historia, 🎬 Reel y 🔗 Co
 ## Tarjeta de contacto de Jairo (1-nov-2026)
 - `contacto/index.html` (https://vidanatural-co.github.io/contacto/): página con "📇 Guardar mi número" (abre `contacto/jairo.vcf`: "Jairo productos naturistas", +57 312 419 3061), "💬 Pedir catálogo por WhatsApp" y "🛒 Ver la tienda". La abre el QR impreso pegado detrás del celular de Jairo y el enlace de su mensaje de bienvenida de WhatsApp Business.
 - Está en la raíz y no dentro de /jairo/ a propósito: el ayudante (sw.js) de la tienda guarda como copia de la tienda cualquier página que se abra dentro de /jairo/.
-- Tienda de Jairo: botón "📇 Guardar mi número en mis contactos" (id `guardar`, en plantilla.html; solo se muestra si CFG.v es 'jairo').
+- Liliana y Gladys tienen lo mismo (sin QR impreso): `contacto/liliana/` (liliana.vcf, "Liliana productos naturistas", 313 632 5474) y `contacto/gladys/` (gladys.vcf, "Gladys productos naturistas", 300 416 3243), con sus colores y su dibujo. Sus tarjetas no dicen "pagas cuando lo recibes" (ellas no envían).
+- Las 3 tiendas: botón "📇 Guardar mi número en mis contactos" (id `guardar`, en plantilla.html); el enlace se arma con CFG.v (jairo → contacto/jairo.vcf; otros → contacto/<v>/<v>.vcf). Asesor nuevo: crear su carpeta en contacto/.
