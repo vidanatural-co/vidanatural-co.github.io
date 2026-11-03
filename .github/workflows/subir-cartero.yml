@@ -1,0 +1,33 @@
+# Sube el cartero a Google solo, cada vez que cambia taller/script/Codigo.gs (desde 3-nov-2026).
+# Necesita el secreto CLASPRC (permiso de Google de Jairo, se crea una sola vez con "clasp login").
+# Sin ese secreto no hace nada (y el cartero se sigue pegando a mano).
+name: Subir cartero
+on:
+  push:
+    branches: [main]
+    paths: ['taller/script/Codigo.gs']
+  workflow_dispatch:
+jobs:
+  subir:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CLASPRC: ${{ secrets.CLASPRC }}
+      SCRIPT_ID: 191VKbLmgA9hvaAN2O0cjARx37ZB2X4sHYk9NwiZJch5ccqb3cB8mehuR
+      DEPLOY_ID: AKfycbwGZY-vY9ELNQatTatnsdVWumyoE8nyGRQuRxBjCprunSfRgkhc__vnXUfvCmkgxkOg
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: taller/script
+      - name: Subir y publicar nueva versión
+        run: |
+          if [ -z "$CLASPRC" ]; then echo "Todavía no hay permiso de Google (secreto CLASPRC): el cartero se pega a mano."; exit 0; fi
+          npm i -g @google/clasp@2.4.2 >/dev/null
+          printf '%s' "$CLASPRC" > ~/.clasprc.json
+          mkdir g && cd g && printf '{"scriptId":"%s"}' "$SCRIPT_ID" > .clasp.json
+          clasp pull
+          F=$(grep -l "function doGet" *.js | head -1)
+          [ -n "$F" ] || { echo "No encontré el archivo del cartero en Google"; exit 1; }
+          cp ../taller/script/Codigo.gs "$F"
+          clasp push -f
+          clasp deploy -i "$DEPLOY_ID" -d "Automático ${GITHUB_SHA::7}"
