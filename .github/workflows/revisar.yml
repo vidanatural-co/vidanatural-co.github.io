@@ -1,0 +1,24 @@
+# Revisión automática (desde 3-nov-2026): después de cada publicación y cada mañana abre las 3 tiendas
+# y la Vitrina como si fuera un cliente. Si alguna no muestra productos, la revisión sale en rojo y
+# GitHub manda un correo avisando.
+name: Revisar tiendas
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '17 12 * * *'   # 7:17 a. m. hora Colombia
+  workflow_dispatch:
+jobs:
+  revisar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: taller/build/revisar-en-vivo.js
+          sparse-checkout-cone-mode: false
+      - name: Esperar a que GitHub Pages publique
+        if: github.event_name == 'push'
+        run: sleep 120
+      - run: npm i --no-save playwright@1 && npx playwright install --with-deps chromium
+      - run: node taller/build/revisar-en-vivo.js
