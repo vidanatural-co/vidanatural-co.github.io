@@ -55,7 +55,7 @@ Menú de compartir: 📝 Publicación (feed), 📱 Historia, 🎬 Reel y 🔗 Co
 ## Página de material (desde 31-oct-2026)
 - `material/` = **Vitrina de Productos Naturales** (https://vidanatural-co.github.io/material/): videos con texto y fotos de cada producto para compartir. Para Liliana, Gladys, Pineda y Adriana (no usan la tienda). Pública, sin clave, sin precios.
 - Es una página aparte, NO sale de plantilla.html ni de build.py: se edita directamente `material/index.html`.
-- Lee la misma lista que la tienda de Jairo (cartero, `v=jairo`) y oculta los agotados. Video: `img/reel/<foto>.mp4`; foto: `img/<foto>`. Se actualiza sola al cambiar la hoja o los videos.
+- Lee la misma lista que la tienda de Jairo (cartero, `v=jairo`) y muestra también los agotados (desde 3-nov-2026, al final y con aviso "Agotado por ahora"), para tener los mismos productos que las tiendas. Video: `img/reel/<foto>.mp4`; foto: `img/<foto>`. Se actualiza sola al cambiar la hoja o los videos.
 - Botones: Compartir video (grande), Compartir foto, Descargar (pregunta video o foto), Copiar texto (nombre + gancho + 3 beneficios + "Escríbeme y pídelo 🌿"). Compartir también copia el texto.
 - Botón Instalar (corregido 31-oct, Pineda vio pasos equivocados): si Chrome ofrece instalar, sale "Instalar ahora"; si no, espera 3 s y muestra pasos según el celular: iPhone (Safari), Samsung (☰ → Agregar página a), Android Chrome (⋮ → Instalar app); si está abierta dentro de WhatsApp/Facebook u otro navegador, primero dice "Abrir en Chrome".
 

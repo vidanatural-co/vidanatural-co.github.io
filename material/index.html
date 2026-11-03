@@ -41,7 +41,8 @@ header p{margin:0;color:var(--muted);font-size:14px;text-align:center}
 .media{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .thumb{position:relative;aspect-ratio:9/16;border:0;padding:0;background:#ddd;border-radius:12px;overflow:hidden;cursor:pointer;display:block;width:100%}
 .thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.thumb .tag{position:absolute;left:8px;bottom:8px;font-weight:800;font-size:12px;padding:5px 10px;border-radius:999px;background:var(--surface);color:var(--fg);box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.thumb .agot{margin:0;font-weight:800;font-size:13px;color:#b42318;background:#fdecea;border-radius:10px;padding:6px 10px}
+.tag{position:absolute;left:8px;bottom:8px;font-weight:800;font-size:12px;padding:5px 10px;border-radius:999px;background:var(--surface);color:var(--fg);box-shadow:0 1px 4px rgba(0,0,0,.25)}
 .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center}
 .play::after{content:"";border-left:18px solid #fff;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:5px}
 .btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
@@ -86,7 +87,7 @@ let P=[],byId={},cat='Todos';
 const base=p=>String(p.img).replace(/\.[a-z]+$/i,'');
 const vurl=p=>'../img/reel/'+base(p)+'.mp4', iurl=p=>'../img/'+p.img;
 
-function setData(d){P=(d.productos||[]).filter(p=>p.s!=='agotado').slice().reverse();byId={};P.forEach(p=>byId[p.id]=p)}
+function setData(d){const L=(d.productos||[]).slice().reverse();P=L.filter(p=>p.s!=='agotado').concat(L.filter(p=>p.s==='agotado'));byId={};P.forEach(p=>byId[p.id]=p)}
 async function load(){
   const c=ls.get('mat_cat',null);if(c){setData(c);render()}
   try{const r=await fetch(CFG.api+'?accion=catalogo&v='+CFG.v);const d=await r.json();if(d.ok){ls.set('mat_cat',{productos:d.productos});setData(d);render()}else if(!c)fail()}
@@ -98,7 +99,7 @@ function cats(){const s=new Set();P.forEach(p=>(p.c||[]).forEach(c=>s.add(c)));c
  $('#cats').innerHTML=l.map(c=>`<button aria-pressed="${c===cat}" data-cat="${esc(c)}">${esc(c)}</button>`).join('')}
 function list(){const q=norm($('#q').value.trim());
  const l=P.filter(p=>(cat==='Todos'||(p.c||[]).includes(cat))&&(!q||norm(p.n+' '+(p.g||'')+' '+(p.c||[]).join(' ')).includes(q)));
- $('#list').innerHTML=l.length?l.map(p=>`<article class="card"><h2 class="name">${esc(p.n)}</h2>
+ $('#list').innerHTML=l.length?l.map(p=>`<article class="card"><h2 class="name">${esc(p.n)}</h2>${p.s==='agotado'?'<p class="agot">⚠️ Agotado por ahora: confirma antes de ofrecerlo</p>':''}
  <div class="media"><button class="thumb" data-ver="${p.id}" aria-label="Ver video de ${esc(p.n)}"><img src="${esc(iurl(p))}" alt="" loading="lazy" decoding="async"><span class="play"></span><span class="tag">🎬 Video</span></button>
  <button class="thumb" data-foto="${p.id}" aria-label="Ver foto de ${esc(p.n)}"><img src="${esc(iurl(p))}" alt="${esc(p.n)}" loading="lazy" decoding="async"><span class="tag">🖼️ Foto</span></button></div>
  <div class="btns"><button class="b big" data-shv="${p.id}">📤 Compartir video</button><button class="b" data-shi="${p.id}">📤 Compartir foto</button><button class="b" data-dl="${p.id}">⬇️ Descargar</button><button class="b full" data-cp="${p.id}">📋 Copiar texto</button></div></article>`).join(''):'<p class="empty">No encontramos productos con esa búsqueda.</p>'}
