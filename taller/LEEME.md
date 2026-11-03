@@ -20,12 +20,17 @@ La tienda publicada es el resultado; si se edita a mano un index.html publicado,
 
 ## Datos clave
 - Hoja maestra: 1Mgp6y6wbyS-ExoxDHy3buRgf-s7ir33V7DeQEwTN4lk (pestañas Productos, Vendedores, Pedidos, Faltan en catálogo, No van en catálogo, Fotos de Leal).
-- Precios: Jairo 1LGJlVNzBq0L-GBu_bOeIq7oWVzleK-jd1SjWzG36Mw8 · Liliana 1WC53lGpQ6dNMtyPSWEOtKlLBTydOVwsCR4NKTJNYPkk · Gladys 1V5mMZHrfAGV-Y7P23EawCLxcZYqEmbNYn1Ljg-ggwTc. Fila de precio = fila de la hoja maestra + 3.
+- Precios: Jairo 1LGJlVNzBq0L-GBu_bOeIq7oWVzleK-jd1SjWzG36Mw8 · Liliana 1WC53lGpQ6dNMtyPSWEOtKlLBTydOVwsCR4NKTJNYPkk · Gladys 1V5mMZHrfAGV-Y7P23EawCLxcZYqEmbNYn1Ljg-ggwTc. Desde el 3-nov-2026 el precio se busca por CÓDIGO (columna C de cada hoja de precios = nombre de la foto sin .jpg), no por posición.
 - Inventario de Leal (solo lectura): 1gDg2MgnJqCSYEhU9F9nWRpeof1gi4QeDfV9vVI4Nz_k.
 - REGLA DE ORO: nunca borrar ni mover filas de la pestaña Productos. Si cambia un producto, se edita su misma fila; para quitarlo, Mostrar = NO. Mover filas desalinea los precios de los 3 asesores.
 - En "Nombre en Distry": "+" = combo (cuenta el que tenga menos), "/" = mismo producto de varios proveedores (se suman).
 
-## Hojas de precios (regla, oct-2026)
+## Hojas de precios (desde 3-nov-2026: por código)
+- El cartero busca cada precio por el código del producto (columna C, "Código (no tocar)") = nombre del archivo de la foto sin .jpg. Mover filas ya no cambia precios. Producto nuevo: el cartero agrega su fila sola al final (sin precio) cuando el asesor abre su panel.
+- Si se cambia la foto de un producto, conservar el MISMO nombre de archivo; si el nombre cambia, el producto queda sin precio hasta ponérselo.
+- Las reglas de abajo (posición +3) eran las de antes; se dejan como historia.
+
+## Hojas de precios (regla vieja, oct-2026)
 - Fila r de la hoja maestra = fila r+3 en cada hoja de precios. El cartero lee el precio SOLO por posición (columna B); la columna A es solo una etiqueta.
 - NUNCA insertar, mover ni borrar filas en las hojas de precios. Producto nuevo: va al final de la pestaña Productos y su precio en la fila +3 de cada asesor (al final).
 - "Nuevo de primero" se logra con el orden del catálogo, no moviendo filas.
@@ -73,3 +78,11 @@ Menú de compartir: 📝 Publicación (feed), 📱 Historia, 🎬 Reel y 🔗 Co
 - Android (1-nov-2026): los botones de guardar contacto (mini páginas y tiendas) abren "Nuevo contacto" con nombre y número llenos (enlace intent: ... action INSERT). Si el celular no lo permite, Chrome usa la tarjeta .vcf (browser_fallback_url). iPhone sigue con la .vcf. Pendiente que Jairo confirme en su celular que funciona.
 
 - 1-nov-2026 (más tarde): Jairo QUITÓ el botón de guardar contacto de las 3 tiendas: en Android son 4 toques (descargar .vcf → Abrir → Importar → elegir cuenta) y el atajo intent no funcionó en su Samsung. Lo que se usa ahora: Jairo manda su contacto dentro del chat (📎 → Contacto). Tampoco quiere Canal de WhatsApp. Las páginas contacto/ siguen publicadas pero sin uso; no volver a proponer el botón.
+
+## Clientes y recordatorios (desde 3-nov-2026)
+- Panel de cada asesor con 3 pestañas: 👥 Clientes, 📊 Resumen, 💰 Precios.
+- Clientes: "Anotar venta" (WhatsApp, nombre, producto de la lista, cantidad, días que dura, de dónde llegó). Se guarda en la pestaña "Clientes" de la hoja maestra (la crea el cartero). 5 días antes de que se acabe, sale en "Para escribir hoy" con botón que abre WhatsApp con mensaje listo (al tocarlo queda "Le escribí"). Si el mismo cliente compra el mismo producto, el aviso viejo queda "Volvió a comprar".
+- Resumen: frascos, clientes, lo más vendido, de dónde llegan y productos sin ventas (7/30/90 días). Sale solo de lo anotado.
+- Cada asesor ve solo sus clientes (con su clave). Los números de clientes nunca salen en páginas públicas.
+- Origen: los enlaces que se comparten desde la tienda llevan ?de=fb|wa|hist|pub (las páginas p/ lo conservan). El botón de WhatsApp y el pedido dicen "vi tu catálogo en Facebook" etc. (vale 30 días en ese celular).
+- Prueba: `node taller/build/prueba9.js`.

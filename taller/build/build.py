@@ -46,7 +46,7 @@ for v, (nom, trato, col, col2) in V.items():
         open(f'{out}/p/{f}.html', 'w', encoding='utf-8').write(f'''<!doctype html><html lang="es"><head><meta charset="utf-8"><title>{t}</title>
 <meta property="og:title" content="{t}"><meta property="og:description" content="Mira los beneficios y el precio. Pide por WhatsApp con {nom} y paga al recibir.">
 <meta property="og:image" content="https://vidanatural-co.github.io/img/{f}.jpg"><meta property="og:type" content="product"><meta name="twitter:card" content="summary_large_image">
-<meta http-equiv="refresh" content="0;url=../?p={f}"><script>location.replace('../?p={f}')</script></head><body><a href="../?p={f}">{t}</a></body></html>''')
+<meta http-equiv="refresh" content="0;url=../?p={f}"><script>location.replace('../?p={f}'+location.search.replace('?','&'))</script></head><body><a href="../?p={f}">{t}</a></body></html>''')
 shutil.rmtree('/home/claude/catalogo/gh/img',ignore_errors=True);shutil.copytree('img','/home/claude/catalogo/gh/img')
 print('ok')
 

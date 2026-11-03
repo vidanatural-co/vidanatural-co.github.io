@@ -124,7 +124,9 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-o
 .btn{border:0;border-radius:12px;background:var(--ac);color:var(--acfg);font-weight:800;padding:12px 16px;cursor:pointer;font-size:15px}
 .btn.alt{background:var(--surface);color:var(--fg);border:1px solid var(--line)}
 .err{color:#c0392b;font-weight:700;margin:0}
-.tabs{display:flex;gap:8px}
+.tabs{display:flex;gap:8px}.tabs .btn{flex:1 1 0;min-width:0;padding:10px 4px;font-size:14px}
+.panel select{padding:11px 12px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:inherit;font-size:16px}
+.vbt{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;white-space:normal}.vbt .btn{padding:8px 10px;font-size:13px;text-decoration:none;width:auto}
 .ped{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px;white-space:pre-line}
 @media (prefers-reduced-motion:no-preference){.add,.go{transition:transform .12s}.add:active,.go:active{transform:scale(.97)}}
 </style>
@@ -158,6 +160,9 @@ const $=s=>document.querySelector(s);
 const cop=n=>'$'+Math.round(n).toLocaleString('es-CO');
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const ls={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const DEQ=new URLSearchParams(location.search).get('de');if(/^(fb|wa|hist|pub)$/.test(DEQ||''))ls.set('de',{d:DEQ,t:Date.now()});
+function deTxt(){const o=ls.get('de',null);if(!o||Date.now()-o.t>30*864e5)return '';return {fb:' en Facebook',wa:' en tu estado de WhatsApp',hist:' en tu historia',pub:' en una publicación'}[o.d]||''}
+function lk(p,de){return (p?CFG.sitio+'/p/'+p.id+'.html':CFG.sitio+'/')+'?de='+de}
 let D=ls.get('cat_'+CFG.v,null),P=[],byId={},byName={},cart={},cat='Todos',open=null;
 
 function setData(d){D=d;P=(d.productos||[]).slice().reverse();byId={};byName={};P.forEach(p=>{byId[p.id]=p;byName[p.n.toLowerCase()]=p});}
@@ -205,7 +210,7 @@ function ficha(){if(!open)return;const p=byId[open];if(!p)return;
  <a class="ask" href="${wa('Hola '+CFG.nombre+', tengo una pregunta sobre '+p.n)}" target="_blank" rel="noopener">Preguntar por este producto</a>
  <p class="legal">Este producto no es un medicamento y no reemplaza una alimentación balanceada.</p>`}
 function wfab(){const e=$('#waf');if(!e)return;if(!D||!D.whatsapp){e.hidden=true;return}const p=open&&byId[open];
- e.href=wa(p?'Hola '+CFG.nombre+', me interesa '+p.n+', ¿me das más información?':'Hola '+CFG.nombre+', vi tu catálogo y quiero información.');
+ e.href=wa(p?(deTxt()?'Hola '+CFG.nombre+', vi '+p.n+deTxt()+' y me interesa, ¿me das más información?':'Hola '+CFG.nombre+', me interesa '+p.n+', ¿me das más información?'):'Hola '+CFG.nombre+', vi tu catálogo'+deTxt()+' y quiero información.');
  const b=$('#bar');e.style.bottom=(!open&&b&&!b.hidden)?(b.offsetHeight+12)+'px':'';e.hidden=false}
 function showF(id){open=id;ficha();$('#ficha').hidden=false;$('#ficha').scrollTop=0;wfab();
  try{history.replaceState(null,'','?p='+id)}catch(e){}}
@@ -216,7 +221,7 @@ const COPIADO='✅ Tu enlace quedó copiado. En Facebook o Instagram, mantén pr
 function precopia(t){let ok=false;
  try{const a=document.createElement('textarea');a.value=t;a.setAttribute('readonly','');a.style.cssText='position:fixed;top:0;left:0;opacity:0;font-size:16px';document.body.appendChild(a);a.focus();a.select();a.setSelectionRange(0,t.length);ok=document.execCommand('copy');a.remove()}catch(e){}
  if(!ok)try{navigator.clipboard.writeText(t).then(()=>ok=true,()=>{})}catch(e){}return()=>ok}
-function msg(t,num){return 'Hola '+CFG.nombre+', me interesan:\n'+t.lines.map(([k,p])=>`• ${k} ${p.n} (${cop(k*p.p)})`).join('\n')+(t.d?`\nDescuento: –${cop(t.d)}`:'')+`\nTotal: ${cop(t.tot)}`+(num?`\nPedido #${num}`:'')}
+function msg(t,num){return 'Hola '+CFG.nombre+', me interesan:\n'+t.lines.map(([k,p])=>`• ${k} ${p.n} (${cop(k*p.p)})`).join('\n')+(t.d?`\nDescuento: –${cop(t.d)}`:'')+`\nTotal: ${cop(t.tot)}`+(num?`\nPedido #${num}`:'')+(deTxt()?`\n(Vi tu catálogo${deTxt()})`:'')}
 function summary(){const t=totals();
  $('#sumin').innerHTML='<h2>Tu pedido</h2>'+t.lines.map(([k,p])=>`<div class="row"><span>${k} × ${esc(p.n)}</span><span>${cop(k*p.p)}</span></div>`).join('')+(t.d?`<div class="row disc"><span>Descuento por ${t.u>=3?'3 o más':'2'} unidades</span><span>–${cop(t.d)}</span></div>`:'')+`<div class="row tot"><span>Total</span><span>${cop(t.tot)}</span></div><p class="sub" style="font-size:13px">Pagas cuando lo recibes. Al enviar, se abre WhatsApp con tu pedido listo.</p><button class="go" id="send"><span>Enviar a WhatsApp</span><span>→</span></button>`;
  $('#sum').hidden=false}
@@ -232,21 +237,21 @@ const HT=['__HASHTAG__','#SuplementosNaturales','#ContraentregaColombia'];functi
 function htn(n){const BR=/^(softnaf|sanaf|greensofg|toplux|danna'?s|greenworld|totaria|bmvinvol|naturalsplast|physician'?s|choice|beast|bite|natural|vitality|rainbow|nutrients|sandhus|nutrition|men'?s|liposomal|gummies|gomas|cápsulas|capsulas|crema|ksm|wild|mg|ui)$/i,CN=/^(y|de|con|en)$/i; let w=String(n).replace(/[()–\-+,&]/g,' ').split(/\s+/).filter(Boolean);if(/^combo$/i.test(w[0]))w=w.slice(1).filter(x=>!/^\d+$/.test(x)); const out=[];let k=0;for(const x of w){if(BR.test(x)){if(k)break;continue}if(/^(la|el)$/i.test(x)&&!k)continue;  if(/\d/.test(x)){if(!k&&/^[a-z]/i.test(x)){out.push(x);k++;continue}if(k&&/^(omega|vitamina|b|d|k|sen)$/i.test(out[out.length-1])&&/^[a-z]?\d{1,2}$/i.test(x)){out.push(x);k++;continue}break}  if(CN.test(x)){if(!k)continue;if(/^con$/i.test(x))break;out.push(x.toLowerCase());continue}out.push(x);k++;if(k>=3)break} while(out.length&&CN.test(out[out.length-1]))out.pop(); const t=out.map(x=>x[0].toUpperCase()+x.slice(1)).join('').replace(/[^\p{L}\p{N}]/gu,'');return t.length>2?'#'+t:''}
 const HISTORIA='✅ Enlace copiado. En tu historia toca el sticker 🔗 Enlace, mantén presionado y toca Pegar.';
 let shT=null;function pickShare(t){shT=t;$('#shm').hidden=false}
-async function share(id,h){const p=byId[id];const link=CFG.sitio+'/p/'+id+'.html';const text=h?link:`${extra(p)}${p.n} – ${cop(p.p)}. Mira los beneficios y pide aquí: ${link}${tags(p)}`;const cp=precopia(text);
+async function share(id,h){const p=byId[id];const link=lk(p,h?'hist':'pub');const text=h?link:`${extra(p)}${p.n} – ${cop(p.p)}. Mira los beneficios y pide aquí: ${link}${tags(p)}`;const cp=precopia(text);
  try{if(navigator.share){let files=[];try{const b=await (await fetch('img/'+p.img)).blob();const f=new File([b],p.img,{type:b.type||'image/jpeg'});if(navigator.canShare&&navigator.canShare({files:[f]}))files=[f]}catch(e){}
   await navigator.share(files.length?(h?{files}:{files,text}):(h?{url:link}:{text,url:link}));toast(cp()?(h?HISTORIA:COPIADO):'No pude copiar el enlace. Cópialo desde la barra de arriba.',6000);return}}catch(e){if(e&&e.name==='AbortError')return}
  try{await navigator.clipboard.writeText(text);toast(h?HISTORIA:'Enlace copiado',6000)}catch(e){prompt('Copia este enlace:',link)}}
 
-async function shareCat(h){const link=CFG.sitio+'/';const n=P.length?Math.floor(P.length/10)*10:60;
+async function shareCat(h){const link=lk(null,h?'hist':'pub');const n=P.length?Math.floor(P.length/10)*10:60;
  let text=`🌿 Te invito a ver mi catálogo de productos naturales: más de ${n} productos para energía, defensas, descanso, belleza y más.\nElige lo que te guste y pídelo por WhatsApp. Pagas cuando lo recibes.\n👉 ${link}${tags()}`;if(h)text=link;const cp=precopia(text);
  try{if(navigator.share){let files=[];try{const b=await (await fetch('historia.jpg')).blob();const f=new File([b],'catalogo.jpg',{type:'image/jpeg'});if(navigator.canShare&&navigator.canShare({files:[f]}))files=[f]}catch(e){}
   await navigator.share(files.length?(h?{files}:{files,text}):(h?{url:link}:{text,url:link}));toast(cp()?(h?HISTORIA:COPIADO):'No pude copiar el enlace. Cópialo desde la barra de arriba.',6000);return}}catch(e){if(e&&e.name==='AbortError')return}
  try{await navigator.clipboard.writeText(text);toast(h?HISTORIA:'Invitación copiada',6000)}catch(e){prompt('Copia esta invitación:',text)}}
 const REEL='✅ Descripción copiada. Al publicar el Reel, mantén presionado donde se escribe la descripción y toca Pegar. La música la eliges en Instagram o Facebook.';
-function reelText(p,fb){const link=p?CFG.sitio+'/p/'+p.id+'.html':CFG.sitio+'/';
+function reelText(p,fb){const link=lk(p,'fb');
  if(!p){const n=P.length?Math.floor(P.length/10)*10:60;return `🌿 Mi catálogo de productos naturales: más de ${n} productos para energía, defensas, descanso, belleza y más.\n${fb?`👉 Mira todos y pide aquí: ${link}`:'💬 Comenta QUIERO y te envío el enlace para pedir.'}\n🚚 Pagas cuando lo recibes.${tags()}`}
  return `🌿 ${p.n} – ${cop(p.p)}\n${extra(p)}${fb?`👉 Pídelo aquí: ${link}`:'💬 Comenta QUIERO y te envío el enlace para pedirlo.'}\n🚚 Pagas cuando lo recibes.${tags(p)}`}
-function waText(p){const link=p?CFG.sitio+'/p/'+p.id+'.html':CFG.sitio+'/';return p?`🌿 ${p.n} – ${cop(p.p)}\n👉 Mira más información aquí: ${link}\n🚚 Pagas cuando lo recibes.`:`🌿 Mi catálogo de productos naturales\n👉 Mira más información aquí: ${link}\n🚚 Pagas cuando lo recibes.`}
+function waText(p){const link=lk(p,'wa');return p?`🌿 ${p.n} – ${cop(p.p)}\n👉 Mira más información aquí: ${link}\n🚚 Pagas cuando lo recibes.`:`🌿 Mi catálogo de productos naturales\n👉 Mira más información aquí: ${link}\n🚚 Pagas cuando lo recibes.`}
 const WA='✅ Texto copiado. En WhatsApp toca Mi estado, pega el texto en "Añade un comentario" y elige tu música.';
 let RB=null;
 async function prepReel(){const cat=shT==='cat';const p=cat?null:byId[shT];const v=cat?'reel.mp4':'../img/reel/'+String(p.img).replace(/\.jpe?g$/i,'')+'.mp4';const name=cat?'catalogo-'+CFG.v+'.mp4':String(p.img).replace(/\.jpe?g$/i,'')+'.mp4';
@@ -257,7 +262,7 @@ async function prepReel(){const cat=shT==='cat';const p=cat?null:byId[shT];const
 async function reelGo(m){if(!RB)return;const fb=m==='fb';const tx=m==='wa'?waText(RB.p):reelText(RB.p,fb);const cp=precopia(tx);const f=RB.f;
  try{if(navigator.share&&navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],text:tx});$('#rl').hidden=true;toast(cp()?(m==='wa'?WA:REEL):'No pude copiar la descripción. Escríbela a mano.',8000);return}}catch(e){if(e&&e.name==='AbortError')return}
  const a=document.createElement('a');a.href=URL.createObjectURL(f);a.download=f.name;document.body.appendChild(a);a.click();a.remove();$('#rl').hidden=true;toast((cp()?'✅ Descripción copiada. ':'')+'El video quedó descargado: súbelo como Reel desde Instagram o Facebook.',8000)}
-async function copyLink(){const link=shT==='cat'?CFG.sitio+'/':CFG.sitio+'/p/'+shT+'.html';const cp=precopia(link);
+async function copyLink(){const link=lk(shT==='cat'?null:byId[shT],'fb');const cp=precopia(link);
  if(!cp())try{await navigator.clipboard.writeText(link)}catch(e){prompt('Copia este enlace:',link);return}
  toast('🔗 Enlace copiado. En Facebook pégalo en un comentario de tu publicación y fíjalo.',7000)}
 /* ---- Panel de asesores ---- */
@@ -273,19 +278,57 @@ async function panelGo(){const nuevo=!$('#fNew').hidden;const b=$('#kGo');b.disa
  try{if(nuevo){const k=$('#kNueva').value;const d=await api({accion:'entrar',codigo:$('#kCod').value,clave:k});if(!d.ok)return panelLogin(d.error);clave=k}
   else{clave=$('#kClave').value}
   const d=await api({accion:'panel',clave});if(!d.ok){clave=null;return panelLogin(d.error)}PD=d;ls.set('vendedor',true);ls.set('ultimo_'+CFG.v,null);repeat();panelShow()}catch(e){panelLogin('No hay conexión. Intenta de nuevo.')}}
-function panelShow(){const d=PD;$('#pin').innerHTML=`<h2>Hola, ${esc(d.asesor)}</h2>
- <p class="sub">Cambia tus precios y descuentos. Si dejas un precio vacío, ese producto no aparece en tu tienda.</p>
- <label>Buscar pedido por número<input id="bPed" inputmode="numeric" placeholder="Ej: 1043"></label><div id="rPed"></div>
+let PT='cli',RD=30;const DIA=864e5;
+const ORI=['Instagram','Facebook','Estado de WhatsApp','Grupo de WhatsApp','Historia','Me recomendaron','Ya era cliente','Otro'];
+function hoy0(){const x=new Date();x.setHours(0,0,0,0);return x.getTime()}
+function fch(t){return new Date(t).toLocaleDateString('es-CO',{day:'numeric',month:'short'})}
+function vMsg(v){const nom=String(v.c).trim().split(/\s+/)[0];return `Hola ${nom} 😊 ¿Cómo te ha ido con ${v.n}? Ya casi se te debe estar acabando. ¿Quieres que te aparte el del próximo mes?`}
+function panelShow(){const d=PD;const t=k=>`<button class="btn${PT===k?'':' alt'}" data-pt="${k}">${({cli:'👥 Clientes',res:'📊 Resumen',pre:'💰 Precios'})[k]}</button>`;
+ $('#pin').innerHTML=`<h2>Hola, ${esc(d.asesor)}</h2><div class="tabs">${t('cli')}${t('res')}${t('pre')}</div><div id="pv" style="display:flex;flex-direction:column;gap:12px"></div>`;
+ ({cli:pCli,res:pRes,pre:pPre})[PT]()}
+function pCli(){const V=PD.ventas||[];const fin=hoy0()+DIA;const pend=V.filter(v=>v.e==='Pendiente');
+ const ya=pend.filter(v=>v.a<fin).sort((a,b)=>a.a-b.a),luego=pend.filter(v=>v.a>=fin).sort((a,b)=>a.a-b.a).slice(0,30);
+ const card=(v,b)=>`<div class="ped"><b>${esc(v.c)}</b> · ${esc(v.n)}${v.k>1?' ×'+v.k:''}\nCompró el ${fch(v.f)}${b?'':' · aviso el '+fch(v.a)}${b?`<span class="vbt"><a class="btn" data-vwa="${v.id}" href="https://wa.me/${esc(v.w)}?text=${encodeURIComponent(vMsg(v))}" target="_blank" rel="noopener">💬 Escribirle</a><button class="btn alt" data-vre="${v.id}">🛒 Volvió a comprar</button><button class="btn alt" data-vno="${v.id}">No quiere más</button></span>`:''}</div>`;
+ $('#pv').innerHTML=`<button class="btn" id="vNew">➕ Anotar venta</button><div id="vForm"></div>
+ <h3 style="margin:8px 0 0">Para escribir hoy (${ya.length})</h3>${ya.length?ya.map(v=>card(v,1)).join(''):'<p class="sub">Hoy no tienes clientes para escribir.</p>'}
+ <h3 style="margin:8px 0 0">Próximos avisos</h3>${luego.length?luego.map(v=>card(v,0)).join(''):'<p class="sub">Cuando anotes una venta, aquí verás cuándo escribirle a cada cliente.</p>'}`}
+function vForm(pre){pre=pre||{};$('#vForm').innerHTML=`<div class="ped" style="white-space:normal;display:flex;flex-direction:column;gap:8px">
+ <label>WhatsApp del cliente<input id="vW" type="tel" inputmode="tel" placeholder="Pega aquí el número" value="${esc(pre.w?String(pre.w).replace(/^57(?=3\d{9}$)/,''):'')}"></label>
+ <label>Nombre<input id="vC" value="${esc(pre.c||'')}" autocomplete="off"></label>
+ <label>Producto<input id="vN" list="vL" value="${esc(pre.n||'')}" placeholder="Escribe y escoge de la lista" autocomplete="off"></label><datalist id="vL">${PD.productos.map(p=>`<option value="${esc(p.n)}">`).join('')}</datalist>
+ <div class="prow"><span>Cantidad (frascos)</span><input id="vK" inputmode="numeric" value="1"></div>
+ <div class="prow"><span>Días que le dura cada frasco</span><input id="vD" inputmode="numeric" value="${pre.d||30}"></div>
+ <label>¿De dónde llegó?<select id="vO">${ORI.map(o=>`<option${o===(pre.o||'')?' selected':''}>${o}</option>`).join('')}</select></label>
+ <p class="err" id="vErr"></p><button class="btn" id="vSave">Guardar venta</button></div>`;$('#vW').focus()}
+async function vSave(b){const pn=$('#vN').value.trim().toLowerCase();const p=PD.productos.find(x=>x.n.toLowerCase()===pn);if(!p){$('#vErr').textContent='Escoge el producto de la lista.';return}
+ b.disabled=true;b.textContent='Guardando…';
+ try{const d=await api({accion:'venta',clave,w:$('#vW').value,c:$('#vC').value,n:p.n,cod:p.c,k:$('#vK').value,d:$('#vD').value,o:$('#vO').value});
+  if(!d.ok){$('#vErr').textContent=d.error;b.disabled=false;b.textContent='Guardar venta';return}PD.ventas=d.ventas;toast('Venta guardada. Te aviso cuando toque escribirle.');panelShow()}
+ catch(e){$('#vErr').textContent='No hay conexión. Intenta de nuevo.';b.disabled=false;b.textContent='Guardar venta'}}
+async function vEstado(id,e){const v=(PD.ventas||[]).find(x=>String(x.id)===String(id));if(v){v.e=e;v.u=Date.now()}panelShow();
+ try{const d=await api({accion:'estadoVenta',clave,id,e});if(!d.ok)toast(d.error)}catch(x){toast('No hay conexión: no se guardó.')}}
+function pRes(){const V=PD.ventas||[],desde=Date.now()-RD*DIA,X=V.filter(v=>v.f>=desde);
+ const cnt=f=>{const m={};X.forEach(v=>{const k=f(v);m[k]=(m[k]||0)+(v.k||1)});return Object.entries(m).sort((a,b)=>b[1]-a[1])};
+ const u=X.reduce((s,v)=>s+(v.k||1),0),cl=new Set(X.map(v=>v.w)).size,rep=X.filter(v=>v.o==='Ya era cliente').length;
+ const vend=new Set(X.map(v=>v.n.toLowerCase())),sin=PD.productos.filter(p=>p.p&&!vend.has(p.n.toLowerCase()));
+ const tb=l=>l.length?l.slice(0,8).map(([k,n])=>`<div class="prow"><span>${esc(k||'Sin dato')}</span><b style="text-align:right">${n}</b></div>`).join(''):'<p class="sub">Aún no hay ventas anotadas.</p>';
+ $('#pv').innerHTML=`<div class="tabs">${[7,30,90].map(n=>`<button class="btn${RD===n?'':' alt'}" data-rd="${n}">${n} días</button>`).join('')}</div>
+ <p style="margin:0"><b>${u}</b> frascos vendidos a <b>${cl}</b> clientes en los últimos ${RD} días${rep?` · ${rep} ventas a clientes que repiten`:''}.</p>
+ <h3 style="margin:8px 0 0">Lo que más vendes (frascos)</h3>${tb(cnt(v=>v.n))}
+ <h3 style="margin:8px 0 0">De dónde llegan (frascos)</h3>${tb(cnt(v=>v.o))}
+ <h3 style="margin:8px 0 0">Sin ventas en ${RD} días (${sin.length})</h3><p class="sub">${sin.slice(0,40).map(p=>esc(p.n)).join(' · ')||'Todos tuvieron ventas.'}</p>
+ <p class="sub">Estos números salen solo de las ventas que anotas en "Clientes".</p>`}
+function pPre(){const d=PD;$('#pv').innerHTML=`<p class="sub">Cambia tus precios y descuentos. Si dejas un precio vacío, ese producto no aparece en tu tienda.</p>
  <h3 style="margin:8px 0 0">Descuentos</h3>
  <div class="prow"><span>Por 2 unidades</span><input id="d2" inputmode="numeric" value="${d.desc2||''}"></div>
  <div class="prow"><span>Por 3 o más</span><input id="d3" inputmode="numeric" value="${d.desc3||''}"></div>
  <h3 style="margin:8px 0 0">Precios</h3>
  <input id="pBus" type="search" placeholder="🔍 Buscar producto…" autocomplete="off" style="width:100%;font-size:16px;padding:10px 12px;border:1px solid #ddd;border-radius:10px;margin:6px 0">
  <p class="sub" id="pNada" hidden>No encontré ese producto.</p>
- ${d.productos.map(p=>`<div class="prow" data-n="${esc(norm(p.n))}"><span>${esc(p.n)}</span><input data-fila="${p.fila}" data-orig="${p.p||''}" inputmode="numeric" value="${p.p||''}"></div>`).join('')}
+ ${d.productos.map(p=>`<div class="prow" data-n="${esc(norm(p.n))}"><span>${esc(p.n)}</span><input data-c="${esc(p.c)}" data-orig="${p.p||''}" inputmode="numeric" value="${p.p||''}"></div>`).join('')}
  <p class="err" id="pErr"></p><button class="btn" id="pSave">Guardar cambios</button>
- <h3 style="margin:8px 0 0">Mis últimos pedidos</h3>${d.pedidos.length?d.pedidos.map(x=>`<div class="ped"><b>Pedido #${x.num}</b> · ${new Date(x.fecha).toLocaleString('es-CO')}\n${esc(x.det)}\nDescuento: ${cop(x.desc||0)} · <b>Total: ${cop(x.total)}</b></div>`).join(''):'<p class="sub">Aún no tienes pedidos.</p>'}`}
-async function panelSave(b){const cambios=[...document.querySelectorAll('[data-fila]')].filter(i=>i.value.replace(/\D/g,'')!==String(i.dataset.orig)).map(i=>({fila:+i.dataset.fila,p:i.value.replace(/\D/g,'')}));
+ ${d.pedidos.length?`<h3 style="margin:8px 0 0">Pedidos hechos desde la tienda</h3><label>Buscar pedido por número<input id="bPed" inputmode="numeric" placeholder="Ej: 1043"></label><div id="rPed"></div>`+d.pedidos.map(x=>`<div class="ped"><b>Pedido #${x.num}</b> · ${new Date(x.fecha).toLocaleString('es-CO')}\n${esc(x.det)}\nDescuento: ${cop(x.desc||0)} · <b>Total: ${cop(x.total)}</b></div>`).join(''):''}`}
+async function panelSave(b){const cambios=[...document.querySelectorAll('[data-c]')].filter(i=>i.value.replace(/\D/g,'')!==String(i.dataset.orig)).map(i=>({c:i.dataset.c,p:i.value.replace(/\D/g,'')}));
  b.disabled=true;b.textContent='Guardando…';
  try{const d=await api({accion:'guardarPrecios',clave,desc2:$('#d2').value.replace(/\D/g,'')||0,desc3:$('#d3').value.replace(/\D/g,'')||0,cambios});
   if(!d.ok){$('#pErr').textContent=d.error;b.disabled=false;b.textContent='Guardar cambios';return}
@@ -299,6 +342,13 @@ document.addEventListener('click',e=>{const b=e.target.closest('button,img[data-
  if(b.id==='tLog'||b.id==='tNew'){const n=b.id==='tNew';$('#fNew').hidden=!n;$('#fLog').hidden=n;$('#tNew').className=n?'btn':'btn alt';$('#tLog').className=n?'btn alt':'btn';return}
  if(b.id==='kGo')return panelGo();
  if(b.id==='pSave')return panelSave(b);
+ if(b.dataset&&b.dataset.pt){PT=b.dataset.pt;return panelShow()}
+ if(b.dataset&&b.dataset.rd){RD=+b.dataset.rd;return pRes()}
+ if(b.id==='vNew')return vForm();
+ if(b.id==='vSave')return vSave(b);
+ if(b.dataset&&b.dataset.vwa){const id=b.dataset.vwa;setTimeout(()=>vEstado(id,'Le escribí'),400);return}
+ if(b.dataset&&b.dataset.vno)return vEstado(b.dataset.vno,'No quiere más');
+ if(b.dataset&&b.dataset.vre){const v=PD.ventas.find(x=>String(x.id)===b.dataset.vre);if(v){vForm({w:v.w,c:v.c,n:v.n,d:v.d,o:'Ya era cliente'});$('#vForm').scrollIntoView({behavior:'smooth'})}return}
  if(b.id==='go')return summary();
  if(b.id==='send')return send(b);
  const ds=b.dataset||{};
